@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,10 +14,10 @@ public class IntroSceneManager : MonoBehaviour
 
     void Start()
     {
-        // Å¸ÀÌÆ² ¾Ö´Ï¸ŞÀÌ¼Ç ½ÃÀÛ
+        // íƒ€ì´í‹€ ì• ë‹ˆë©”ì´ì…˜ ì‹œì‘
         StartCoroutine(PlayIntroAnimation());
 
-        // ¹öÆ° ÀÌº¥Æ® µî·Ï
+        // ë²„íŠ¼ ì´ë²¤íŠ¸ ë“±ë¡
         startButton.onClick.AddListener(OnClickStart);
         exitButton.onClick.AddListener(OnClickExit);
         settingsButton.onClick.AddListener(OnClickSettings);
@@ -25,7 +25,7 @@ public class IntroSceneManager : MonoBehaviour
 
     IEnumerator PlayIntroAnimation()
     {
-        // Å¸ÀÌÆ² Å©±â 0¿¡¼­ Á¡Á¡ Å°¿ì±â
+        // íƒ€ì´í‹€ í¬ê¸° 0ì—ì„œ ì ì  í‚¤ìš°ê¸°
         float duration = 1f;
         float elapsed = 0f;
         Vector3 initialScale = Vector3.zero;
@@ -43,7 +43,7 @@ public class IntroSceneManager : MonoBehaviour
 
         titleObject.transform.localScale = targetScale;
 
-        // ¹öÆ° ÆäÀÌµå ÀÎ
+        // ë²„íŠ¼ í˜ì´ë“œ ì¸
         StartCoroutine(FadeInButtons());
     }
 
@@ -67,7 +67,7 @@ public class IntroSceneManager : MonoBehaviour
 
     void OnClickStart()
     {
-        SceneManager.LoadScene("MainScene"); // ½ÇÁ¦ ¸ŞÀÎ ¾À ÀÌ¸§À¸·Î º¯°æ
+        SceneManager.LoadScene("MainScene"); // ì‹¤ì œ ë©”ì¸ ì”¬ ì´ë¦„ìœ¼ë¡œ ë³€ê²½
     }
 
     void OnClickExit()
@@ -77,7 +77,7 @@ public class IntroSceneManager : MonoBehaviour
 
     void OnClickSettings()
     {
-        Debug.Log("¼³Á¤ ¹öÆ° Å¬¸¯µÊ");
-        // ¿É¼Ç Ã¢ ¿­±â ±¸Çö
+        Debug.Log("ì„¤ì • ë²„íŠ¼ í´ë¦­ë¨");
+        // ì˜µì…˜ ì°½ ì—´ê¸° êµ¬í˜„
     }
 }
