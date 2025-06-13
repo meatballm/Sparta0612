@@ -29,7 +29,7 @@ public class PatrolState_enemy : IEnemyState
     {
         enemy.MoveTowards(targetPos, speed);
 
-        if(Vector3.Distance(enemy.transform.position, targetPos) < 0.5f)
+        if(Vector3.Distance(enemy.transform.position, targetPos) < 0.1f)
         {
             enemy.stateMachine.ChangeState(new IdleState_enemy(enemy));
         }

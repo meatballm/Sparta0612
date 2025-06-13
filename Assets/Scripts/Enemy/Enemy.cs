@@ -39,4 +39,10 @@ public class Enemy : MonoBehaviour
         Debug.Log("플레이어를 공격함");
         //플레이어 공격
     }
+    
+    public void TakeDamaged()
+    {
+        //데미지를 입었을 때
+        Attack();
+    }
 }
