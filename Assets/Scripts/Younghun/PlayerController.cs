@@ -7,9 +7,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerController : Character
 {
-
     private Camera camera; // 마우스 위치를 월드 좌표로 변환하기 위한 메인 카메라 참조
-    private Vector2 mouseDelta;
 
     protected override void Start()
     {
