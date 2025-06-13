@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PatrolState_enemy : IEnemyState
 {
-    private Enmey enemy;
+    private Enemy enemy;
     private Vector3 targetPos;
     private float speed = 2f;
 
-    public PatrolState_enemy(Enmey enemy)
+    public PatrolState_enemy(Enemy enemy)
     {
         this.enemy = enemy;
         SetRandomTarget();
@@ -17,7 +17,7 @@ public class PatrolState_enemy : IEnemyState
     void SetRandomTarget()
     {
         float range = 3f;
-        targetPos = enemy.transform.position + new Vector3(Random.Range(-range, range), 0, Random.Range(-range, range));
+        targetPos = enemy.transform.position + new Vector3(Random.Range(-range, range), Random.Range(-range, range), 0f);
     }
 
     public void Enter()
@@ -27,7 +27,7 @@ public class PatrolState_enemy : IEnemyState
 
     public void Update()
     {
-        enemy.MoveTowards(speed);
+        enemy.MoveTowards(targetPos, speed);
 
         if(Vector3.Distance(enemy.transform.position, targetPos) < 0.5f)
         {

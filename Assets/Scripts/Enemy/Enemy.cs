@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enmey : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     public Transform player;
     public float chaseRange = 5f;
@@ -28,14 +28,15 @@ public class Enmey : MonoBehaviour
     {
         return Vector3.Distance(transform.position, player.position) < attackRange;
     }
-    public void MoveTowards(float speed)
+    public void MoveTowards(Vector3 target ,float speed)
     {
-        Vector3 dir = (player.position - transform.position).normalized;
+        Vector3 dir = (target - transform.position).normalized;
         transform.position += dir * speed * Time.deltaTime;
     }
 
     public void Attack()
     {
-
+        Debug.Log("플레이어를 공격함");
+        //플레이어 공격
     }
 }

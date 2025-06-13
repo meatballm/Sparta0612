@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class AttackState_enemy : IEnemyState
 {
-    private Enmey enemy;
+    private Enemy enemy;
     [SerializeField] private float attackCooldown = 1.5f;
     private float timer = 0f;
 
-    public AttackState_enemy(Enmey enemy)
+    public AttackState_enemy(Enemy enemy)
     {
         this.enemy = enemy;
     }

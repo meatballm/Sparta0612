@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ChaseState_enemy : IEnemyState
 {
-    private Enmey enemy;
+    private Enemy enemy;
     private float speed = 3.5f;
 
-    public ChaseState_enemy(Enmey enemy)
+    public ChaseState_enemy(Enemy enemy)
     {
         this.enemy = enemy;
     }
@@ -24,8 +24,11 @@ public class ChaseState_enemy : IEnemyState
             enemy.stateMachine.ChangeState(new IdleState_enemy(enemy));
             return;
         }
-
-        enemy.MoveTowards(speed);
+        else if (enemy.IsPlayerInAttackRange())
+        {
+            enemy.stateMachine.ChangeState(new AttackState_enemy(enemy));
+        }
+        enemy.MoveTowards(enemy.player.position, speed);
     }
 
     public void Exit()

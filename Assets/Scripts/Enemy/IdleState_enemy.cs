@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class IdleState_enemy : IEnemyState
 {
-    private Enmey enemy;
+    private Enemy enemy;
     private float idleTime = 2f;
     private float timer = 0f;
 
-    public IdleState_enemy(Enmey enemy)
+    public IdleState_enemy(Enemy enemy)
     {
         this.enemy = enemy;
     }
