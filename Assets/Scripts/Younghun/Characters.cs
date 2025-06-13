@@ -67,9 +67,9 @@ public class Character : MonoBehaviour
     private void Rotate(Vector2 direction)
     {
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bool isLeft = Mathf.Abs(rotZ) > 90f;
+        //bool isLeft = Mathf.Abs(rotZ) > 90f;
 
-        // 스프라이트 좌우 반전
+        //// 스프라이트 좌우 반전
         //characterRenderer.flipX = isLeft;
 
         if (weaponPivot != null)
