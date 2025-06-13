@@ -24,9 +24,6 @@ public class Pit : MonoBehaviour
 
     void Awake()
     {
-        // 트리거로 설정
-        var col = GetComponent<Collider2D>();
-
         SafePositions();
     }
 
@@ -49,6 +46,7 @@ public class Pit : MonoBehaviour
     void OnTriggerStay2D(Collider2D other)
     {
         if (!other.CompareTag(playerTag)) return;
+
         //플레이어 점프 상태인지 검사 필요
 
         var pitBounds = GetComponent<Collider2D>().bounds;
@@ -88,6 +86,8 @@ public class Pit : MonoBehaviour
             }
             playerGO.transform.position = best;
         }
+
+        //여기에 데미지 주는 코드 추가 필요
 
         //플레이어의 모델링만 없어지게 수정 필요
         playerGO.SetActive(true);
