@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerController : Character
 {
+
     private Camera camera; // 마우스 위치를 월드 좌표로 변환하기 위한 메인 카메라 참조
+    private Vector2 mouseDelta;
 
     protected override void Start()
     {
@@ -13,28 +17,57 @@ public class PlayerController : Character
         camera = Camera.main;
     }
 
-    protected override void HandleAction()
+    protected override void Update()
     {
-        // 키보드 입력을 통해 이동 방향 계산 (좌/우/상/하)
-        float horizontal = Input.GetAxisRaw("Horizontal"); // A/D 또는 ←/→
-        float vertical = Input.GetAxisRaw("Vertical"); // W/S 또는 ↑/↓
+        base.Update();
+        UpdateLookDirectionUniversal();
+    }
 
-        // 방향 벡터 정규화 (대각선일 때 속도 보정)
-        movementDirection = new Vector2(horizontal, vertical).normalized;
-
-        // 마우스 위치를 화면 좌표 → 월드 좌표로 변환
-        Vector2 mousePosition = Input.mousePosition;
-        Vector2 worldPos = camera.ScreenToWorldPoint(mousePosition);
-        lookDirection = (worldPos - (Vector2)transform.position);
-
-        // 현재 위치로부터 마우스 위치까지의 방향 계산
-        if (lookDirection.magnitude < .9f)
+    public void OnMoveInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
         {
-            lookDirection = Vector2.zero;
+            movementDirection = context.ReadValue<Vector2>();
         }
-        else
+        else if (context.phase == InputActionPhase.Canceled)
         {
-            lookDirection = lookDirection.normalized;
+            movementDirection = Vector2.zero;
         }
     }
+
+    private void UpdateLookDirectionUniversal()
+    {
+        Vector2 screenPos = Vector2.zero;
+        bool validInput = false;
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+        // PC 환경: 마우스 입력
+        if (Mouse.current != null)
+        {
+            screenPos = Mouse.current.position.ReadValue();
+            validInput = true;
+        }
+#elif UNITY_ANDROID || UNITY_IOS
+    // 모바일 환경: 터치 입력
+    if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
+    {
+        screenPos = Touchscreen.current.primaryTouch.position.ReadValue();
+        validInput = true;
+    }
+#endif
+
+        if (!validInput || Camera.main == null)
+            return;
+
+        // 화면 좌표를 월드 좌표로 변환
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+        worldPos.z = 0f;
+
+        // 캐릭터 위치 기준 방향 벡터 계산
+        Vector2 direction = (worldPos - transform.position).normalized;
+
+        if (direction.sqrMagnitude > 0.01f)
+            lookDirection = direction;
+    }
+
 }

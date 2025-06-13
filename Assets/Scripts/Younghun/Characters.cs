@@ -17,6 +17,8 @@ public class Character : MonoBehaviour
     private Vector2 knockback = Vector2.zero; // 넉백 방향
     private float knockbackDuration = 0.0f; // 넉백 지속 시간
 
+    [SerializeField] private float moveSpeed;
+
     protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -49,7 +51,7 @@ public class Character : MonoBehaviour
 
     private void Movment(Vector2 direction)
     {
-        direction = direction * 5f; // 이동 속도
+        direction = direction * moveSpeed; // 이동 속도
 
         // 넉백 중이면 이동 속도 감소 + 넉백 방향 적용
         if (knockbackDuration > 0.0f)
@@ -65,10 +67,10 @@ public class Character : MonoBehaviour
     private void Rotate(Vector2 direction)
     {
         float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bool isLeft = Mathf.Abs(rotZ) > 90f;
+        //bool isLeft = Mathf.Abs(rotZ) > 90f;
 
-        // 스프라이트 좌우 반전
-        characterRenderer.flipX = isLeft;
+        //// 스프라이트 좌우 반전
+        //characterRenderer.flipX = isLeft;
 
         if (weaponPivot != null)
         {
