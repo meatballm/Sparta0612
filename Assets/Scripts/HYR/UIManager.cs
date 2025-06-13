@@ -16,12 +16,6 @@ public class UIManager : MonoBehaviour
     public PauseUI Pause => pauseUI;
     public StartUI Start => startUI;
 
-    //[Header("UI요소들")]
-    //[SerializeField] private GameObject mainMenu;
-    //[SerializeField] private GameObject settings;
-    //[SerializeField] private GameObject gameUI;
-    //[SerializeField] private GameObject endPanel;
-
     private void Awake()
     {
         if (Instance == null)
@@ -31,12 +25,4 @@ public class UIManager : MonoBehaviour
         else
             Destroy(gameObject);
     }
-
-    //public void MainMenu()
-    //{
-    //    mainMenu.SetActive(true);
-    //    settings.SetActive(false);
-    //    gameUI.SetActive(false);
-    //    endPanel.SetActive(false);
-    //}
 }
