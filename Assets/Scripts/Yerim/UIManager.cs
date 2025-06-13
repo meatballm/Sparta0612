@@ -6,8 +6,15 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance {  get; private set; }
 
+    // 각 UI에 연결
+    [SerializeField] private StartUI startUI;
+    [SerializeField] private GameUI gameUI;
     [SerializeField] private PauseUI pauseUI;
+
+    // 외부 접근용 프로퍼티
+    public GameUI Game => gameUI;
     public PauseUI Pause => pauseUI;
+    public StartUI Start => startUI;
 
     //[Header("UI요소들")]
     //[SerializeField] private GameObject mainMenu;
@@ -17,8 +24,10 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
+        {
             Instance = this;
+        }
         else
             Destroy(gameObject);
     }
