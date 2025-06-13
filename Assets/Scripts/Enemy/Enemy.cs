@@ -4,6 +4,7 @@ public class Enmey : MonoBehaviour
 {
     public Transform player;
     public float chaseRange = 5f;
+    public float attackRange = 1.5f;
 
     public StateMachine_enemy stateMachine {get; private set;}
 
@@ -23,9 +24,18 @@ public class Enmey : MonoBehaviour
         return Vector3.Distance(transform.position, player.position) < chaseRange;
     }
 
-    public void MoveTowards(Vector3 target, float speed)
+    public bool IsPlayerInAttackRange()
     {
-        Vector3 dir = (target - transform.position).normalized;
+        return Vector3.Distance(transform.position, player.position) < attackRange;
+    }
+    public void MoveTowards(float speed)
+    {
+        Vector3 dir = (player.position - transform.position).normalized;
         transform.position += dir * speed * Time.deltaTime;
+    }
+
+    public void Attack()
+    {
+
     }
 }

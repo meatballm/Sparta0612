@@ -27,7 +27,7 @@ public class PatrolState_enemy : IEnemyState
 
     public void Update()
     {
-        enemy.MoveTowards(targetPos, speed);
+        enemy.MoveTowards(speed);
 
         if(Vector3.Distance(enemy.transform.position, targetPos) < 0.5f)
         {
@@ -38,6 +38,11 @@ public class PatrolState_enemy : IEnemyState
         if(enemy.IsPlayerInRange())
         {
             enemy.stateMachine.ChangeState(new ChaseState_enemy(enemy));
+        }
+
+        if(enemy.IsPlayerInAttackRange())
+        {
+            enemy.stateMachine.ChangeState(new AttackState_enemy(enemy));
         }
     }
 

@@ -25,7 +25,7 @@ public class ChaseState_enemy : IEnemyState
             return;
         }
 
-        enemy.MoveTowards(enemy.player.position, speed);
+        enemy.MoveTowards(speed);
     }
 
     public void Exit()
