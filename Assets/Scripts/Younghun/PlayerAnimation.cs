@@ -39,25 +39,5 @@ public class PlayerAnimation : MonoBehaviour
             animator.SetFloat("LastX", moveInput.x);
             animator.SetFloat("LastY", moveInput.y);
         }
-
-        else
-        {
-
-        }
     }
-
-    //// 방향 인덱스 정리 (옵션: Animator에서 DirectionIndex 사용 시)
-    //private int GetDirectionIndex(Vector2 dir)
-    //{
-    //    dir = dir.normalized;
-
-    //    if (dir.y > 0.5f && Mathf.Abs(dir.x) < 0.5f) return 0; // Up
-    //    if (dir.y < -0.5f && Mathf.Abs(dir.x) < 0.5f) return 1; // Down
-    //    if (dir.x < -0.5f && dir.y > 0.5f) return 2; // LeftUp
-    //    if (dir.x > 0.5f && dir.y > 0.5f) return 3; // RightUp
-    //    if (dir.x < -0.5f && dir.y < -0.5f) return 4; // LeftDown
-    //    if (dir.x > 0.5f && dir.y < -0.5f) return 5; // RightDown
-
-    //    return -1; // 입력 없음 (에러 처리용)
-    //}
 }
