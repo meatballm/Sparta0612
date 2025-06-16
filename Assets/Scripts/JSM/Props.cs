@@ -11,11 +11,6 @@ public class Prop : MonoBehaviour
 
     [Header("이펙트 자동 삭제 시간")]
     public float effectLifeTime = 2f;
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        var contact = collision.GetContact(0);
-        TryDestroy(collision.collider.gameObject, contact.point, contact.normal);
-    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         TryDestroy(other.gameObject, other.transform.position, Vector2.up);
