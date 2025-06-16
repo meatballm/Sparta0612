@@ -5,9 +5,11 @@ public class Snail : Enemy
     Animator animator;
     void Awake()
     {
+        enemyHP = 100f;
         chaseRange = 5f;
         attackRange = 3f;
         speed = 0.2f;
+        damage = 0f;
         defense = 10f;
         animator = GetComponentInChildren<Animator>();
     }
