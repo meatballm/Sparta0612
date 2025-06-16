@@ -2689,14 +2689,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lizard
       objectReference: {fileID: 0}
-    - target: {fileID: 364480977372290742, guid: 5c9a9ac1f0194461c8a18ffac7b5e964, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 364480977372290742, guid: 5c9a9ac1f0194461c8a18ffac7b5e964, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 3510011719047895556, guid: 5c9a9ac1f0194461c8a18ffac7b5e964, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.849
@@ -5697,14 +5689,6 @@ PrefabInstance:
     - target: {fileID: 4690582612283613858, guid: ff56144d7eeaa447d92e1d424fc6bfb7, type: 3}
       propertyPath: m_Name
       value: Bat
-      objectReference: {fileID: 0}
-    - target: {fileID: 4690582612283613858, guid: ff56144d7eeaa447d92e1d424fc6bfb7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4690582612283613858, guid: ff56144d7eeaa447d92e1d424fc6bfb7, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -42078,10 +42062,6 @@ PrefabInstance:
     - target: {fileID: 9162694089407552866, guid: 7c90ece9868e84d6b9771195dadad1fb, type: 3}
       propertyPath: m_Name
       value: Snail
-      objectReference: {fileID: 0}
-    - target: {fileID: 9162694089407552866, guid: 7c90ece9868e84d6b9771195dadad1fb, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

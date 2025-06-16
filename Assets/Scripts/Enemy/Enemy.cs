@@ -1,10 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     public Transform player;
     public SpriteRenderer spriteRenderer;
-    protected float enemyHP;
+    [SerializeField] protected float enemyHP;
     protected float chaseRange;
     protected float attackRange;
     protected float speed;
@@ -63,13 +64,29 @@ public class Enemy : MonoBehaviour
         
         if(enemyHP <= 0)
         {
-            Die();
+            StartCoroutine(Die());
         }
     }
 
     // 죽음
-    protected void Die()
+    protected IEnumerator Die()
     {
-        Destroy(gameObject, 2f);
+        float duration = 2f; // 몇 초에 걸쳐 사라질지
+        float time = 0f;
+
+        Color originalColor = spriteRenderer.color;
+
+        while (time < duration)
+        {   
+            float alpha = Mathf.Lerp(1f, 0f, time / duration); // 점점 투명해지게
+            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        // 마지막에 완전히 투명하게
+        spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
+        Destroy(gameObject);
     }
 }
