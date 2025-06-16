@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     protected float chaseRange;
     protected float attackRange;
     protected float speed;
+    protected float damage;
+    protected float defense;
     
 
     public StateMachine_enemy stateMachine {get; private set;}
@@ -43,9 +45,9 @@ public class Enemy : MonoBehaviour
     {
     }
     
-    public void TakeDamaged()
+    public void AttackDamag()
     {
+        //player.hp - damage;
         //데미지를 입었을 때
-        Attack();
     }
 }

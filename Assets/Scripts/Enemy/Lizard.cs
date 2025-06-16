@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class Lizard : Enemy
+
+public class Lizard : Enemy // 원거리 적 - Lizard
 {
     [SerializeField] private GameObject fireballPrefab; // 파이어볼 프리팹
     [SerializeField] private Transform firePoint; // 파이어볼이 나오는 위치(입)
     Animator animator;
 
-    void Awake()
+    void Awake() // Lizard 기본셋팅
     {
         enemyHP = 100f;
         chaseRange = 10f;
         attackRange = 5f;
         speed = 3f;
+        defense = 10;
         animator = GetComponentInChildren<Animator>();   
     }
 

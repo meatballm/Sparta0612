@@ -7,13 +7,31 @@ public class Bat : Enemy
     float speed = 3f;
     public override void Attack()
     {
-
-
-        Debug.Log("bat공격");
+        Vector2 direction = (player.position - target.position).normalized;
+        if ( 0 < direction.x )
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
     }
 
     public override void MoveTowards()
     {
-        base.MoveTowards();
+        Vector3 dir = (player.position - transform.position).normalized;
+        transform.position += dir * speed * Time.deltaTime;
+
+        // 움직이는 방향에 따라 sprite 반전.
+        if ( 0 < dir.x )
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
+
     }
 }
