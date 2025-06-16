@@ -4,7 +4,6 @@ public class Enemy : MonoBehaviour
 {
     public Transform player;
     public SpriteRenderer spriteRenderer;
-    public Transform target;
     protected float enemyHP;
     protected float chaseRange;
     protected float attackRange;
