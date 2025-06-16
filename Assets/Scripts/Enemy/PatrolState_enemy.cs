@@ -30,20 +30,24 @@ public class PatrolState_enemy : IEnemyState
     {
         PatrolMove();
 
-        if(Vector3.Distance(enemy.transform.position, targetPos) < 0.1f)
+        if(enemy.IsPlayerInAttackRange())
         {
-            enemy.stateMachine.ChangeState(new IdleState_enemy(enemy));
+            enemy.stateMachine.ChangeState(new AttackState_enemy(enemy));
+            return;
         }
 
         if(enemy.IsPlayerInRange())
         {
             enemy.stateMachine.ChangeState(new ChaseState_enemy(enemy));
+            return;
+        }
+        
+        if(Vector3.Distance(enemy.transform.position, targetPos) < 0.1f)
+        {
+            enemy.stateMachine.ChangeState(new IdleState_enemy(enemy));
         }
 
-        if(enemy.IsPlayerInAttackRange())
-        {
-            enemy.stateMachine.ChangeState(new AttackState_enemy(enemy));
-        }
+
     }
 
     private void PatrolMove()

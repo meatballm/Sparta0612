@@ -11,8 +11,6 @@ public class StateMachine_enemy
 
     public void ChangeState(IEnemyState newState)
     {
-        if (currentState != null && currentState.GetType() == newState.GetType()) return;
-
         currentState?.Exit();
         currentState = newState;
         currentState?.Enter();

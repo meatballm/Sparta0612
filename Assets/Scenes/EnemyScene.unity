@@ -173,8 +173,6 @@ MonoBehaviour:
   player: {fileID: 0}
   spriteRenderer: {fileID: 0}
   target: {fileID: 0}
-  chaseRange: 5
-  attackRange: 1.5
   fireballPrefab: {fileID: 690919355869815257, guid: 70512b9128d02487f9bfd847bd7b9d2e, type: 3}
   firePoint: {fileID: 1533571326}
 --- !u!114 &113617821
@@ -192,8 +190,6 @@ MonoBehaviour:
   player: {fileID: 0}
   spriteRenderer: {fileID: 0}
   target: {fileID: 0}
-  chaseRange: 5
-  attackRange: 1.5
 --- !u!1 &586198470
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +565,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1931976173
 Transform:
   m_ObjectHideFlags: 0
@@ -601,8 +597,6 @@ MonoBehaviour:
   player: {fileID: 0}
   spriteRenderer: {fileID: 0}
   target: {fileID: 0}
-  chaseRange: 5
-  attackRange: 1.5
 --- !u!1 &1937460181
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,6 +744,10 @@ PrefabInstance:
     - target: {fileID: 6113474566558939392, guid: ff56144d7eeaa447d92e1d424fc6bfb7, type: 3}
       propertyPath: m_Name
       value: Bat_Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6113474566558939392, guid: ff56144d7eeaa447d92e1d424fc6bfb7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

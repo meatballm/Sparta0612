@@ -15,6 +15,7 @@ public class Lizard : Enemy
         chaseRange = 10f;
         attackRange = 5f;
         speed = 3f;
+        animator = GetComponentInChildren<Animator>();   
     }
 
     public override void MoveTowards()
@@ -38,7 +39,6 @@ public class Lizard : Enemy
 
     public override void Attack()
     {
-        animator = GetComponentInChildren<Animator>();
         animator.SetTrigger("Attack");
 
         // 플레이어 방향 계산
