@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening.Core.Easing;
 using UnityEngine;
 
 public class NPCInteraction : MonoBehaviour
 {
     [SerializeField] private GameObject outline;
     [SerializeField] private GameObject talkIcon;
+    [SerializeField] private SubInventory inventory;
 
     private bool isPlayerNearby = false;
     private bool isTalking = false;
@@ -30,6 +32,19 @@ public class NPCInteraction : MonoBehaviour
         isTalking = true;
 
         Debug.Log("대화중");
+
+        string npcName = "고양이";
+        var lines = new List<string> { "야옹~ 냐아옹~" };
+
+        if (inventory.HasItem("Fish"))
+        {
+            lines.Add("꼬리를 바닥에 치고 있다.\n배가 고파보인다.");
+            UIManager.Instance.Game.DialogUI.StartDialog(npcName, lines, true, "생선을 준다.");
+        }
+        else
+        {
+            UIManager.Instance.Game.DialogUI.StartDialog(npcName, lines);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
