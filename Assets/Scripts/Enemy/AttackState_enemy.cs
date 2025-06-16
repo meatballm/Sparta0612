@@ -26,7 +26,6 @@ public class AttackState_enemy : IEnemyState
         if(!enemy.IsPlayerInAttackRange())
         {
             enemy.stateMachine.ChangeState(new ChaseState_enemy(enemy));
-            return;
         }
 
         if(timer >= attackCooldown)
