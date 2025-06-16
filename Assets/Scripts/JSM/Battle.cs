@@ -4,12 +4,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
-public class CorridorTrigger2D : MonoBehaviour
+public class Battle : MonoBehaviour
 {
-    [Header("플레이어 태그")]
-    [Tooltip("충돌 대상을 구분할 태그")]
-    public string playerTag = "Player";
-
     [Header("충돌 시 활성화할 방벽")]
     public GameObject barrier;
 
@@ -20,10 +16,16 @@ public class CorridorTrigger2D : MonoBehaviour
     public float fadeDuration = 2f;
 
     [System.Serializable]
+    public class WaveEntry
+    {
+        public int monsterIndex;  // BattleManager에 등록된 몬스터 프리팹 인덱스
+        public int count;         // 해당 몬스터 개수
+    }
+
+    [System.Serializable]
     public class WaveData
     {
-        public int[] monsterIndices; // 사용할 몬스터 종류 (BattleManager 프리팹 인덱스)
-        public int count;
+        public WaveEntry[] entries;  // 여러 종류 몬스터를 하나의 웨이브에 담음
     }
     [Header("충돌 타일맵")]
     public Tilemap colliderTilemap;
@@ -48,7 +50,7 @@ public class CorridorTrigger2D : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (triggered) return;
-        if (!other.CompareTag(playerTag)) return;
+        if (!other.CompareTag("Player")) return;
         triggered = true;
 
         if (barrier != null && barrierUp)
@@ -81,29 +83,42 @@ public class CorridorTrigger2D : MonoBehaviour
         {
             Debug.Log("전투 종료");
             barrier.SetActive(false);
+
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                BattleManager.Instance.SpawnReward(player.transform.position);
+            }
+
+
             yield break;
         }
 
         WaveData wave = waves[currentWave];
-        aliveCount = wave.count;
-
-        for (int i = 0; i < wave.count; i++)
+        aliveCount = 0;
+        foreach (var entry in wave.entries)
         {
-            int index = wave.monsterIndices[Random.Range(0, wave.monsterIndices.Length)];
+            aliveCount += entry.count;
+        }
 
-            Bounds bounds;
-            if (customSpawnAreas != null && customSpawnAreas.Length > 0)
+        foreach (var entry in wave.entries)
+        {
+            for (int i = 0; i < entry.count; i++)
             {
-                var selected = customSpawnAreas[Random.Range(0, customSpawnAreas.Length)];
-                bounds = selected.bounds;
-            }
-            else
-            {
-                bounds = GetComponent<Collider2D>().bounds;
-            }
+                Bounds bounds;
+                if (customSpawnAreas != null && customSpawnAreas.Length > 0)
+                {
+                    var selected = customSpawnAreas[Random.Range(0, customSpawnAreas.Length)];
+                    bounds = selected.bounds;
+                }
+                else
+                {
+                    bounds = GetComponent<Collider2D>().bounds;
+                }
 
-            Vector3 spawnPos = GetValidSpawnPosition(bounds);
-            StartCoroutine(DelayedSpawn(index, spawnPos));
+                Vector3 spawnPos = GetValidSpawnPosition(bounds);
+                StartCoroutine(DelayedSpawn(entry.monsterIndex, spawnPos));
+            }
         }
 
         Debug.Log($"Wave {currentWave + 1} 준비됨");
@@ -129,15 +144,13 @@ public class CorridorTrigger2D : MonoBehaviour
         previewSR.sortingOrder = realSR.sortingOrder;
 
         Color col = previewSR.color;
-        col.a = 0.3f; // 투명도 설정
+        col.a = 0.3f;
         previewSR.color = col;
 
-        // 1초 기다리기
         yield return new WaitForSeconds(1f);
 
-        Destroy(preview); // 실루엣 삭제
+        Destroy(preview);
 
-        // 진짜 몬스터 소환
         GameObject monster = BattleManager.Instance.SpawnMonster(monsterIndex, spawnPos);
         var enemy = monster.GetComponent<Enemy>();
         //if (enemy != null) enemy.Init(this);
