@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PatrolState_enemy : IEnemyState
@@ -27,13 +28,12 @@ public class PatrolState_enemy : IEnemyState
 
     public void Update()
     {
-        enemy.MoveTowards(targetPos, speed);
+        PatrolMove();
 
         if(Vector3.Distance(enemy.transform.position, targetPos) < 0.1f)
         {
             enemy.stateMachine.ChangeState(new IdleState_enemy(enemy));
         }
-
 
         if(enemy.IsPlayerInRange())
         {
@@ -43,6 +43,20 @@ public class PatrolState_enemy : IEnemyState
         if(enemy.IsPlayerInAttackRange())
         {
             enemy.stateMachine.ChangeState(new AttackState_enemy(enemy));
+        }
+    }
+
+    private void PatrolMove()
+    {
+        Vector3 dir = (targetPos - enemy.transform.position).normalized;
+        enemy.transform.position += dir * speed * Time.deltaTime;
+        if ( 0 < dir.x )
+        {
+            enemy.spriteRenderer.flipX = true;
+        }
+        else
+        {
+            enemy.spriteRenderer.flipX = false;
         }
     }
 

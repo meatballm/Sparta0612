@@ -3,15 +3,22 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public Transform player;
-    public float chaseRange = 5f;
-    public float attackRange = 1.5f;
+    public SpriteRenderer spriteRenderer;
+    public Transform target;
+    protected float enemyHP;
+    protected float chaseRange;
+    protected float attackRange;
+    protected float speed;
+    
 
     public StateMachine_enemy stateMachine {get; private set;}
 
     private void Start()
     {
+        player = GameObject.FindWithTag("Player").transform;
         stateMachine = new StateMachine_enemy();
         stateMachine.ChangeState(new IdleState_enemy(this));
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Update()
@@ -28,16 +35,12 @@ public class Enemy : MonoBehaviour
     {
         return Vector3.Distance(transform.position, player.position) < attackRange;
     }
-    public void MoveTowards(Vector3 target ,float speed)
+    public virtual void MoveTowards()
     {
-        Vector3 dir = (target - transform.position).normalized;
-        transform.position += dir * speed * Time.deltaTime;
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
-        Debug.Log("플레이어를 공격함");
-        //플레이어 공격
     }
     
     public void TakeDamaged()
