@@ -5,7 +5,6 @@ using UnityEngine;
 public class ChaseState_enemy : IEnemyState
 {
     private Enemy enemy;
-    private float speed = 3.5f;
 
     public ChaseState_enemy(Enemy enemy)
     {
@@ -21,14 +20,13 @@ public class ChaseState_enemy : IEnemyState
     {
         if (!enemy.IsPlayerInRange())
         {
-            enemy.stateMachine.ChangeState(new IdleState_enemy(enemy));
-            return;
+            enemy.stateMachine.ChangeState(new PatrolState_enemy(enemy));
         }
-        else if (enemy.IsPlayerInAttackRange())
+        if (enemy.IsPlayerInAttackRange())
         {
             enemy.stateMachine.ChangeState(new AttackState_enemy(enemy));
         }
-        enemy.MoveTowards(enemy.player.position, speed);
+        enemy.MoveTowards();
     }
 
     public void Exit()
