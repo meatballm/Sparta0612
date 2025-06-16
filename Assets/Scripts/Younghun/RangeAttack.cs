@@ -1,15 +1,11 @@
 ﻿using UnityEngine;
 
-
-
 // 무기를 발사하고, Bullet을 초기화하여 날림
 // WeaponData의 설정값과 추가 정보들을 이용함
 public class RangeAttack : MonoBehaviour
 {
-    [Header("Weapon Settings")]
     public WeaponData weaponData;            // ScriptableObject로 저장된 무기 데이터
 
-    [Header("Bullet Prefab & Firing")]
     public GameObject bulletPrefab;          // 발사할 탄환 프리팹
     public Transform firePoint;              // 탄환 발사 위치
 
@@ -18,15 +14,22 @@ public class RangeAttack : MonoBehaviour
     public float bulletSpeed;                // 탄환 속도
     public float bulletRange;                // 탄환 사거리
     public ushort pierceCount;               // 관통 가능 횟수
-    public string targetTag;                 // 충돌 대상 태그
+    public TargetTag targetTag;                 // 충돌 대상 태그
 
-    private float fireCooldown = 0f;
+    private float fireCooldown;
+    private RangeAttackInstance runtimeStats;
+
+    private void Start()
+    {
+        // 기준 데이터에서 복사
+        runtimeStats = new RangeAttackInstance(weaponData, this);
+    }
 
     private void Update()
     {
         fireCooldown -= Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.T) && fireCooldown <= 0f)
+        if (Input.GetMouseButton(0) && fireCooldown <= 0f)
         {
             Fire();
             fireCooldown = 1f / weaponData.fireRate;
@@ -54,7 +57,7 @@ public class RangeAttack : MonoBehaviour
                 bulletRange,
                 pierceCount,
                 direction,
-                targetTag
+                weaponData.targetTag
             );
         }
     }
