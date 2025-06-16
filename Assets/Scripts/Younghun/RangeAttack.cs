@@ -4,10 +4,11 @@ using UnityEngine;
 
 public enum WeaponType
 {
-    ARAssaultRifle = 0,
+    AssaultRifle = 0,
     Shotgun,
     SniperRifle
 }
+
 [CreateAssetMenu(fileName = "New WeaponData", menuName = "WeaponData")]
 public class RangeAttack : ScriptableObject
 {
