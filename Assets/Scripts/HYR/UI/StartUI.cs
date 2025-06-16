@@ -19,7 +19,7 @@ public class StartUI : MonoBehaviour
 
     private void OnStart()
     {
-        SceneManager.LoadScene("UIScene");
+        SceneManager.LoadScene("Yerim");
     }
 
     private void OnSettings()
