@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
 public class CorridorTrigger2D : MonoBehaviour
@@ -24,15 +25,20 @@ public class CorridorTrigger2D : MonoBehaviour
         public int[] monsterIndices; // 사용할 몬스터 종류 (BattleManager 프리팹 인덱스)
         public int count;
     }
+    [Header("충돌 타일맵")]
+    public Tilemap colliderTilemap;
 
     [Header("웨이브 데이터")]
     public WaveData[] waves;
 
     private int currentWave = 0;
     private int aliveCount = 0;
-    bool triggered = false;
-    SpriteRenderer sr;
+    private bool triggered = false;
+    private SpriteRenderer sr;
 
+    [Header("스폰 범위 (선택)")]
+    [Tooltip("비워두면 트리거 콜라이더가 기준이 됨")]
+    public Collider2D[] customSpawnAreas;
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -74,33 +80,35 @@ public class CorridorTrigger2D : MonoBehaviour
         if (currentWave >= waves.Length)
         {
             Debug.Log("전투 종료");
+            barrier.SetActive(false);
             yield break;
         }
 
         WaveData wave = waves[currentWave];
         aliveCount = wave.count;
 
-        var bounds = GetComponent<Collider2D>().bounds;
-
         for (int i = 0; i < wave.count; i++)
         {
             int index = wave.monsterIndices[Random.Range(0, wave.monsterIndices.Length)];
 
-            float x = Random.Range(bounds.min.x, bounds.max.x);
-            float y = Random.Range(bounds.min.y, bounds.max.y);
-            Vector3 spawnPos = new Vector3(x, y, 0f);
+            Bounds bounds;
+            if (customSpawnAreas != null && customSpawnAreas.Length > 0)
+            {
+                var selected = customSpawnAreas[Random.Range(0, customSpawnAreas.Length)];
+                bounds = selected.bounds;
+            }
+            else
+            {
+                bounds = GetComponent<Collider2D>().bounds;
+            }
 
-            // 기존 직접 생성 → 제거
-            // GameObject m = BattleManager.Instance.SpawnMonster(index, spawnPos);
-            // var enemy = m.GetComponent<Enemy>();
-            // if (enemy != null) enemy.Init(this);
-
-            // ✅ 새로 추가: 1초 딜레이 후 소환
+            Vector3 spawnPos = GetValidSpawnPosition(bounds);
             StartCoroutine(DelayedSpawn(index, spawnPos));
         }
 
         Debug.Log($"Wave {currentWave + 1} 준비됨");
     }
+
     private IEnumerator DelayedSpawn(int monsterIndex, Vector3 spawnPos)
     {
         // 몬스터 프리팹에서 SpriteRenderer 가져오기
@@ -145,4 +153,24 @@ public class CorridorTrigger2D : MonoBehaviour
             StartCoroutine(SpawnWave());
         }
     }
+    private Vector3 GetValidSpawnPosition(Bounds bounds)
+    {
+        const int maxAttempts = 10;
+        for (int i = 0; i < maxAttempts; i++)
+        {
+            float x = Random.Range(bounds.min.x, bounds.max.x);
+            float y = Random.Range(bounds.min.y, bounds.max.y);
+            Vector3 spawnPos = new Vector3(x, y, 0f);
+
+            Vector3Int cellPos = colliderTilemap.WorldToCell(spawnPos);
+            if (!colliderTilemap.HasTile(cellPos))
+            {
+                return spawnPos;
+            }
+        }
+
+        Debug.LogWarning("유효한 스폰 위치를 찾지 못했습니다. 마지막 시도 위치를 반환합니다.");
+        return bounds.center;
+    }
+
 }

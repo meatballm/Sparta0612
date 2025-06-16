@@ -582,6 +582,7 @@ MonoBehaviour:
   barrier: {fileID: 1107357388}
   barrierUp: 1
   fadeDuration: 0.5
+  waves: []
 --- !u!61 &255854748
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -614,7 +615,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.015402138, y: -0.06886239}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -625,7 +626,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.93352735, y: 0.7823061}
   m_EdgeRadius: 0
 --- !u!212 &255854749
 SpriteRenderer:
@@ -729,6 +730,7 @@ MonoBehaviour:
   barrier: {fileID: 1107357388}
   barrierUp: 1
   fadeDuration: 0.5
+  waves: []
 --- !u!61 &276095913
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -761,7 +763,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0079398155, y: -0.021463513}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -772,7 +774,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8782544, y: 0.7589476}
   m_EdgeRadius: 0
 --- !u!212 &276095914
 SpriteRenderer:
@@ -1193,6 +1195,7 @@ MonoBehaviour:
   barrier: {fileID: 1107357388}
   barrierUp: 1
   fadeDuration: 0.5
+  waves: []
 --- !u!61 &299511971
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1225,7 +1228,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.007242799, y: -0.04284233}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1236,7 +1239,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9243524, y: 0.8140012}
   m_EdgeRadius: 0
 --- !u!212 &299511972
 SpriteRenderer:
@@ -19594,6 +19597,7 @@ MonoBehaviour:
   barrier: {fileID: 1107357388}
   barrierUp: 1
   fadeDuration: 0.5
+  waves: []
 --- !u!61 &501084089
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19626,7 +19630,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.020550847, y: -0.023482472}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -19637,7 +19641,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8912016, y: 0.8716293}
   m_EdgeRadius: 0
 --- !u!212 &501084090
 SpriteRenderer:
@@ -20802,7 +20806,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0013792664, y: -0.024038494}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -20813,7 +20817,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9034499, y: 0.8474076}
   m_EdgeRadius: 0
 --- !u!212 &1017462602
 SpriteRenderer:
@@ -20883,6 +20887,7 @@ MonoBehaviour:
   barrier: {fileID: 1107357388}
   barrierUp: 1
   fadeDuration: 0.5
+  waves: []
 --- !u!1 &1032689338
 GameObject:
   m_ObjectHideFlags: 0
@@ -20933,6 +20938,7 @@ MonoBehaviour:
   barrier: {fileID: 1107357388}
   barrierUp: 1
   fadeDuration: 0.5
+  waves: []
 --- !u!61 &1032689341
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20965,7 +20971,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0020523071, y: -0.022074178}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -20976,7 +20982,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.94664, y: 0.8330041}
   m_EdgeRadius: 0
 --- !u!212 &1032689342
 SpriteRenderer:
@@ -21045,7 +21051,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1060601589
 Transform:
   m_ObjectHideFlags: 0
@@ -28368,6 +28374,7 @@ MonoBehaviour:
   barrier: {fileID: 1107357388}
   barrierUp: 1
   fadeDuration: 0.5
+  waves: []
 --- !u!61 &1501092470
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -28400,7 +28407,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0058409274, y: -0.029787302}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -28411,7 +28418,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.95197445, y: 0.88290524}
   m_EdgeRadius: 0
 --- !u!212 &1501092471
 SpriteRenderer:
@@ -30912,6 +30919,7 @@ MonoBehaviour:
   barrier: {fileID: 1107357388}
   barrierUp: 1
   fadeDuration: 0.5
+  waves: []
 --- !u!61 &2106779291
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30944,7 +30952,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0073658526, y: -0.03945078}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -30955,7 +30963,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.8784644, y: 0.7555976}
   m_EdgeRadius: 0
 --- !u!212 &2106779292
 SpriteRenderer:
