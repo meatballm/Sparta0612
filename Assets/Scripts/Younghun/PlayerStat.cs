@@ -14,6 +14,13 @@ public class PlayerStat
         set => cooldownDodge = Mathf.Clamp(value, 1f, 5f); // 범위 제한
     }
 
+    private int health;
+    public int Health
+    {
+        get => health;
+        set => health = value < 0 ? 0 : value; // 0보다 작으면 0으로 고정
+    }
+
     // Start is called before the first frame update
     void Start()
     {
