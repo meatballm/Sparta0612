@@ -20,5 +20,5 @@ public class RangeAttack : ScriptableObject
     public float spread;
     public float bulletSpeed;
     public ushort pierceCount;
-    public LayerMask target;
+    public string targetTag;
 }
