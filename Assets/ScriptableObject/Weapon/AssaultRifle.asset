@@ -13,11 +13,7 @@ MonoBehaviour:
   m_Name: AssaultRifle
   m_EditorClassIdentifier: 
   maxAmmo: 30
-  fireRate: 0
-  bulletsPerShot: 0
-  reloadSpeed: 0
-  damagePerShot: 0
-  spread: 0
-  bulletSpeed: 0
-  pierceCount: 0
-  targetTag: 
+  fireRate: 10
+  bulletsPerShot: 1
+  reloadSpeed: 3
+  spread: 10

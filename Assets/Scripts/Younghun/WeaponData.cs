@@ -12,14 +12,9 @@ public enum WeaponType
 [CreateAssetMenu(fileName = "New WeaponData", menuName = "WeaponData")]
 public class WeaponData : ScriptableObject
 {
-    public uint maxAmmo;
-    public float fireRate;
-    public uint bulletsPerShot;
-    public float reloadSpeed;
-    public uint damagePerShot;
-    public float spread;
-    public float range;
-    public float bulletSpeed;
-    public ushort pierceCount;
-    public string targetTag;
+    public uint maxAmmo;             // 최대 장탄 수
+    public float fireRate;           // 초당 발사 속도
+    public uint bulletsPerShot;      // 한 번에 나가는 탄 수
+    public float reloadSpeed;        // 재장전 시간
+    public float spread;             // 퍼짐 각도 (탄 퍼짐 범위)
 }
