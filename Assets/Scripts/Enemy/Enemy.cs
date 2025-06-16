@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
     // 죽음
     protected IEnumerator Die()
     {
-        float duration = 2f; // 몇 초에 걸쳐 사라질지
+        float duration = 2f; // Enemy가 사라지는데 걸리는 시간
         float time = 0f;
 
         Color originalColor = spriteRenderer.color;
@@ -89,4 +89,5 @@ public class Enemy : MonoBehaviour
         spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
         Destroy(gameObject);
     }
+
 }
