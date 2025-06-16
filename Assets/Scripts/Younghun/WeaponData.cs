@@ -10,7 +10,7 @@ public enum WeaponType
 }
 
 [CreateAssetMenu(fileName = "New WeaponData", menuName = "WeaponData")]
-public class RangeAttack : ScriptableObject
+public class WeaponData : ScriptableObject
 {
     public uint maxAmmo;
     public float fireRate;
@@ -18,6 +18,7 @@ public class RangeAttack : ScriptableObject
     public float reloadSpeed;
     public uint damagePerShot;
     public float spread;
+    public float range;
     public float bulletSpeed;
     public ushort pierceCount;
     public string targetTag;
