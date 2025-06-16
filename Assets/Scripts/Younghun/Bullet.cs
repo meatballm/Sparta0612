@@ -13,6 +13,7 @@ public enum TargetTag
 public class Bullet : MonoBehaviour
 {
     private TargetTag targetTag;
+    Enemy enemy;
 
     private uint damage;
     private float speed;
@@ -56,7 +57,7 @@ public class Bullet : MonoBehaviour
         {
             if (targetTag == TargetTag.Enemy)
             {
-
+                enemy.TakeDamage(20);
             }
 
             else if (targetTag == TargetTag.Obstacle)

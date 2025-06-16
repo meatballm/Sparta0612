@@ -14,9 +14,10 @@ public class Lizard : Enemy // 원거리 적 - Lizard
     {
         enemyHP = 100f;
         chaseRange = 10f;
-        attackRange = 5f;
-        speed = 3f;
-        defense = 10;
+        attackRange = 6f;
+        speed = 1f;
+        damage = 10f;
+        defense = 10f;
         animator = GetComponentInChildren<Animator>();   
     }
 
