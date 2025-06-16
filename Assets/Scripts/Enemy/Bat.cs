@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class Bat : Enemy
 {
-    float speed = 3f;
+    void Awake()
+    {
+        enemyHP = 50f;
+        chaseRange = 10f;
+        attackRange = 1f;
+        speed = 3f;
+        damage = 10f;
+        defense = 10f;
+
+    }
     public override void Attack()
     {
-        Vector2 direction = (player.position - target.position).normalized;
+        Vector2 direction = (player.position - transform.position).normalized;
         if ( 0 < direction.x )
         {
             spriteRenderer.flipX = true;
