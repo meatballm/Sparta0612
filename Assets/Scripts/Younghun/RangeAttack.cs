@@ -14,9 +14,10 @@ public class RangeAttack : MonoBehaviour
     public float bulletSpeed;                // 탄환 속도
     public float bulletRange;                // 탄환 사거리
     public ushort pierceCount;               // 관통 가능 횟수
-    public TargetTag targetTag;                 // 충돌 대상 태그
+    public TargetTag targetTag;              // 충돌 대상 태그
 
-    private float fireCooldown;
+    public float fireCooldown;              // 연사 속도
+
     private RangeAttackInstance runtimeStats;
 
     private void Start()
