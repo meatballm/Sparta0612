@@ -61,8 +61,7 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
-        
-
+    
         // if (other.CompareTag(targetTag.ToString()))
         // {
 
