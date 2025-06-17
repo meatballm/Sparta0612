@@ -159,6 +159,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   maxHP: 0
   enemyHP: 0
+  damageUIPrefab: {fileID: 2569034621904609710, guid: efa6484be56b013449a9dcfae35ac070, type: 3}
+  canvasTransform: {fileID: 0}
   fireballPrefab: {fileID: 690919355869815257, guid: 70512b9128d02487f9bfd847bd7b9d2e, type: 3}
   firePoint: {fileID: 6056900338545999104}
 --- !u!114 &6977088832910308912

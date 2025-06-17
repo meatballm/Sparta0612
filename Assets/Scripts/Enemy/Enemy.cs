@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     [SerializeField] protected float maxHP;
     [SerializeField] protected float enemyHP;
+    [SerializeField] private GameObject damageUIPrefab;
+    [SerializeField] private Transform canvasTransform;
     protected float chaseRange;
     protected float attackRange;
     protected float speed;
@@ -20,11 +22,13 @@ public class Enemy : MonoBehaviour
 
     private EnemyCondition enemyCondition;
 
+
     public void Init(Battle source)
     {
         Debug.Log(source);
         spawnSource = source;
     }
+
     private void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
@@ -83,6 +87,15 @@ public class Enemy : MonoBehaviour
                 enemyCondition.ShowHealthBar();
 
             enemyCondition.UpdateHealthBar((int)enemyHP, (int)maxHP);
+        }
+
+        // 데미지 UI
+        if (damageUIPrefab != null)
+        {
+            Vector3 worldPos = transform.position + Vector3.up * 1.2f;
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+            var dmgUI = Instantiate(damageUIPrefab, canvasTransform);
+            dmgUI.GetComponent<DamageUI>().Initialize((int)amount, screenPos);
         }
 
         if (enemyHP <= 0)

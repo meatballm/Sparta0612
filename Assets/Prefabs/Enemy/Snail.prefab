@@ -158,6 +158,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   maxHP: 0
   enemyHP: 0
+  damageUIPrefab: {fileID: 2569034621904609710, guid: efa6484be56b013449a9dcfae35ac070, type: 3}
+  canvasTransform: {fileID: 0}
 --- !u!114 &1434692136387519750
 MonoBehaviour:
   m_ObjectHideFlags: 0
