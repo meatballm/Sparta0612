@@ -50,10 +50,16 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         enemy = other.GetComponentInParent<Enemy>();
+        BossController boss = other.GetComponent<BossController>();
 
         if(other.CompareTag("Enemy"))
         {
             enemy.TakeDamage(20);
+            Destroy(gameObject);
+        }
+        else if (other.CompareTag("Boss"))
+        {
+            boss.TakeDamage(20);
             Destroy(gameObject);
         }
         else
