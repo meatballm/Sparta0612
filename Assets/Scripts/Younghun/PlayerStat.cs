@@ -14,22 +14,40 @@ public class PlayerStat
         set => cooldownDodge = Mathf.Clamp(value, 1f, 5f); // 범위 제한
     }
 
-    private int health;
-    public int Health
-    {
-        get => health;
-        set => health = value < 0 ? 0 : value; // 0보다 작으면 0으로 고정
-    }
+    public int maxHp = 100;
+    public int curHp; 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        curHp = maxHp;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void HealHp(int amount)
+    {
+        if (curHp + amount <= maxHp) curHp += amount;
+        else curHp = maxHp;
+    }
+
+    public void ReduceHp(int amount)
+    {
+        if (curHp - amount >= 0) curHp -= amount;
+
+        else 
+        {
+            curHp = 0;
+            Death();
+        }
+    }
+
+    public void Death()
+    {
+        Debug.Log("게임오버");
     }
 }
