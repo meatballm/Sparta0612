@@ -61,8 +61,8 @@ public class PlayerController : Character
             return;
 
         // 화면 좌표를 월드 좌표로 변환
-        Vector3 worldPos = _camera.ScreenToWorldPoint(screenPos);
-        worldPos.z = 0f;
+        Vector3 screenPos3D = new Vector3(screenPos.x, screenPos.y, _camera.WorldToScreenPoint(transform.position).z);
+        Vector3 worldPos = _camera.ScreenToWorldPoint(screenPos3D);
 
         // 캐릭터 위치 기준 방향 벡터 계산
         Vector2 direction = (worldPos - transform.position).normalized;
