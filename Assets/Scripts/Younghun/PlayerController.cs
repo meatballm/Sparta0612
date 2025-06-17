@@ -7,13 +7,13 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerController : Character
 {
-    private Camera camera; // 마우스 위치를 월드 좌표로 변환하기 위한 메인 카메라 참조
+    [SerializeField] private Camera _camera; // 마우스 위치를 월드 좌표로 변환하기 위한 메인 카메라 참조
     
     public PlayerStat stats;
     protected override void Start()
     {
         base.Start();
-        camera = Camera.main;
+        _camera = Camera.main;
         stats.Start();
     }
 
@@ -46,6 +46,7 @@ public class PlayerController : Character
         {
             screenPos = Mouse.current.position.ReadValue();
             validInput = true;
+
         }
 #elif UNITY_ANDROID || UNITY_IOS
     // 모바일 환경: 터치 입력
@@ -56,17 +57,19 @@ public class PlayerController : Character
     }
 #endif
 
-        if (!validInput || Camera.main == null)
+        if (!validInput || _camera == null || screenPos == Vector2.zero)
             return;
 
         // 화면 좌표를 월드 좌표로 변환
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+        Vector3 worldPos = _camera.ScreenToWorldPoint(screenPos);
         worldPos.z = 0f;
 
         // 캐릭터 위치 기준 방향 벡터 계산
         Vector2 direction = (worldPos - transform.position).normalized;
 
         if (direction.sqrMagnitude > 0.01f)
+        {
             lookDirection = direction;
+        }
     }
 }
