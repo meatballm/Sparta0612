@@ -18,7 +18,7 @@ public class RangeAttack : MonoBehaviour
     public ushort pierceCount;               // 관통 가능 횟수
     public TargetTag targetTag;              // 충돌 대상 태그
 
-    public float fireCooldown;               // 연사 속도
+    public float fireCooldown;               // 사격과 사격 사이 시간
     public uint curAmmo;                     // 현재 탄환 수
     public bool isReloading;                 // 재장전 중인지 확인
 
@@ -80,16 +80,14 @@ public class RangeAttack : MonoBehaviour
         {
             curAmmo--;
 
-            if (curAmmo == 0)
-                AmmoZero?.Invoke();
+            if (curAmmo == 0) AmmoZero?.Invoke();
         }
     }
 
     // curAmmo == 0 || R 누르면 이벤트 호출 하도록
     public void Reload()
     {
-        if (!isReloading)
-            StartCoroutine(Reloading());
+        if (!isReloading) StartCoroutine(Reloading());
     }
 
     private IEnumerator Reloading()
