@@ -12,7 +12,8 @@ public class Lizard : Enemy // 원거리 적 - Lizard
 
     void Awake() // Lizard 기본셋팅
     {
-        enemyHP = 100f;
+        maxHP = 100f;
+        enemyHP = maxHP;
         chaseRange = 10f;
         attackRange = 6f;
         speed = 1f;

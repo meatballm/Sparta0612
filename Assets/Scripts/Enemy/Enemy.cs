@@ -5,6 +5,7 @@ public class Enemy : MonoBehaviour
 {
     public Transform player;
     public SpriteRenderer spriteRenderer;
+    [SerializeField] protected float maxHP;
     [SerializeField] protected float enemyHP;
     protected float chaseRange;
     protected float attackRange;
@@ -16,6 +17,8 @@ public class Enemy : MonoBehaviour
     public StateMachine_enemy stateMachine {get; private set;}
 
     private Battle spawnSource;
+
+    private EnemyCondition enemyCondition;
 
     public void Init(Battle source)
     {
@@ -30,6 +33,9 @@ public class Enemy : MonoBehaviour
         stateMachine.ChangeState(new IdleState_enemy(this));
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         boxCollider = GetComponentInChildren<BoxCollider2D>();
+        enemyCondition = GetComponent<EnemyCondition>();
+        if (enemyCondition != null)
+            enemyCondition.UpdateHealthBar((int)enemyHP, (int)enemyHP); // UI 동기화
     }
 
     private void Update()
@@ -70,9 +76,20 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float amount)
     {
         enemyHP -= amount;
-        
-        if(enemyHP <= 0)
+
+        if (enemyCondition != null)
         {
+            if (!enemyCondition.IsBarActive())
+                enemyCondition.ShowHealthBar();
+
+            enemyCondition.UpdateHealthBar((int)enemyHP, (int)maxHP);
+        }
+
+        if (enemyHP <= 0)
+        {
+            if (enemyCondition != null)
+                enemyCondition.HideAndDestroyBar(); // 죽으면 체력바 삭제
+
             StartCoroutine(Die());
         }
     }

@@ -7,7 +7,8 @@ public class Snail : Enemy
 
     void Awake()
     {
-        enemyHP = 100f;
+        maxHP = 100f;
+        enemyHP = maxHP;
         chaseRange = 5f;
         attackRange = 3f;
         speed = 0.2f;

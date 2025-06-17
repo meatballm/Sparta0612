@@ -11,7 +11,7 @@ public class PassiveItem : ItemBase
         var stats = user.GetComponent<PlayerController>()?.stats;
         if (stats == null) return;
 
-        stats.maxHp += bonusMaxHP;
+        //stats.maxHp += bonusMaxHP;
         stats.CooldownDodge -= bonusMoveSpeed;
         Debug.Log($"패시브 적용: HP+{bonusMaxHP}, 이동속도+{bonusMoveSpeed}");
     }
