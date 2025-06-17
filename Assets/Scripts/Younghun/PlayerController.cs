@@ -8,11 +8,13 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class PlayerController : Character
 {
     private Camera camera; // 마우스 위치를 월드 좌표로 변환하기 위한 메인 카메라 참조
-
+    
+    public PlayerStat stats;
     protected override void Start()
     {
         base.Start();
         camera = Camera.main;
+        stats.Start();
     }
 
     protected override void Update()
@@ -67,5 +69,4 @@ public class PlayerController : Character
         if (direction.sqrMagnitude > 0.01f)
             lookDirection = direction;
     }
-
 }

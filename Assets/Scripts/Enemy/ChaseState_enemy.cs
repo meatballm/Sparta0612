@@ -13,7 +13,7 @@ public class ChaseState_enemy : IEnemyState
 
     public void Enter()
     {
-        Debug.Log("Chase 상태 진입");
+        // Debug.Log("Chase 상태 진입");
     }
 
     public void Update()
@@ -31,6 +31,6 @@ public class ChaseState_enemy : IEnemyState
 
     public void Exit()
     {
-        Debug.Log("Chase 상태 종료");
+        // Debug.Log("Chase 상태 종료");
     }
 }

@@ -5,19 +5,19 @@ using UnityEngine;
 public class Lizard_FireBall : MonoBehaviour
 {
     public float speed = 5f;
-    public int damage = 10;
-    Enemy enemy;
-
+    public int damage = 20;
     private Vector2 direction;
+    PlayerStat playerStat;
 
+    public void Start()
+    {
+        playerStat = FindObjectOfType<PlayerController>().stats;
+    }
     public void SetDirection(Vector2 dir)
     {
         direction = dir.normalized;
     }
 
-    public void Start()
-    {
-    }
     void Update()
     {
         transform.Translate(direction * speed * Time.deltaTime);
@@ -27,13 +27,8 @@ public class Lizard_FireBall : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Character characrter = FindObjectOfType<Character>();
-            //Character.hp - damage;
+            playerStat.ReduceHp(damage);
             Destroy(gameObject); // 플레이어와 부딪히면 제거
-        }
-        else
-        {
-            Destroy(gameObject); // 벽, 장애물에 부딪히면 제거
         }
     }
 }

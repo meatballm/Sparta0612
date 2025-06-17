@@ -14,9 +14,10 @@ public class Lizard : Enemy // 원거리 적 - Lizard
     {
         enemyHP = 100f;
         chaseRange = 10f;
-        attackRange = 5f;
-        speed = 3f;
-        defense = 10;
+        attackRange = 6f;
+        speed = 1f;
+        damage = 10f;
+        defense = 10f;
         animator = GetComponentInChildren<Animator>();   
     }
 
@@ -57,5 +58,13 @@ public class Lizard : Enemy // 원거리 적 - Lizard
         // 파이어볼 생성
         GameObject fireball = Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
         fireball.GetComponent<Lizard_FireBall>().SetDirection(direction);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerStat.ReduceHp(damage);
+        }
     }
 }
