@@ -2921,10 +2921,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 281224373943564289, guid: 5c9a9ac1f0194461c8a18ffac7b5e964, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 364480977372290742, guid: 5c9a9ac1f0194461c8a18ffac7b5e964, type: 3}
       propertyPath: m_Name
       value: Lizard
@@ -2968,22 +2964,6 @@ PrefabInstance:
     - target: {fileID: 3510011719047895556, guid: 5c9a9ac1f0194461c8a18ffac7b5e964, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6511605330229838631, guid: 5c9a9ac1f0194461c8a18ffac7b5e964, type: 3}
-      propertyPath: m_BodyType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6511605330229838631, guid: 5c9a9ac1f0194461c8a18ffac7b5e964, type: 3}
-      propertyPath: m_Simulated
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6511605330229838631, guid: 5c9a9ac1f0194461c8a18ffac7b5e964, type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6676342790843771035, guid: 5c9a9ac1f0194461c8a18ffac7b5e964, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3196,6 +3176,7 @@ GameObject:
   - component: {fileID: 897567452}
   - component: {fileID: 897567453}
   - component: {fileID: 897567454}
+  - component: {fileID: 897567455}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -3261,7 +3242,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -3287,6 +3268,33 @@ PolygonCollider2D:
       - {x: -0.022480369, y: 0.6312101}
       - {x: 0.90223527, y: 1.2366207}
   m_UseDelaunayMesh: 0
+--- !u!50 &897567455
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897567451}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &971499453
 GameObject:
   m_ObjectHideFlags: 0
@@ -6168,10 +6176,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2127817230462912851, guid: ff56144d7eeaa447d92e1d424fc6bfb7, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2426183110101894484, guid: ff56144d7eeaa447d92e1d424fc6bfb7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.62
@@ -6215,22 +6219,6 @@ PrefabInstance:
     - target: {fileID: 4690582612283613858, guid: ff56144d7eeaa447d92e1d424fc6bfb7, type: 3}
       propertyPath: m_Name
       value: Bat
-      objectReference: {fileID: 0}
-    - target: {fileID: 4719882809945441028, guid: ff56144d7eeaa447d92e1d424fc6bfb7, type: 3}
-      propertyPath: m_BodyType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4719882809945441028, guid: ff56144d7eeaa447d92e1d424fc6bfb7, type: 3}
-      propertyPath: m_Simulated
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4719882809945441028, guid: ff56144d7eeaa447d92e1d424fc6bfb7, type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8559887962322987438, guid: ff56144d7eeaa447d92e1d424fc6bfb7, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -42665,22 +42653,6 @@ PrefabInstance:
     - target: {fileID: 1710441848237519157, guid: 7c90ece9868e84d6b9771195dadad1fb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4729338057136780909, guid: 7c90ece9868e84d6b9771195dadad1fb, type: 3}
-      propertyPath: m_BodyType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4729338057136780909, guid: 7c90ece9868e84d6b9771195dadad1fb, type: 3}
-      propertyPath: m_Simulated
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7004725734260751547, guid: 7c90ece9868e84d6b9771195dadad1fb, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 8689574456605188360, guid: 7c90ece9868e84d6b9771195dadad1fb, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9162694089407552866, guid: 7c90ece9868e84d6b9771195dadad1fb, type: 3}
       propertyPath: m_Name
