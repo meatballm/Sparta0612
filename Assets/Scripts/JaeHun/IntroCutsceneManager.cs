@@ -49,20 +49,22 @@ public class IntroCutsceneManager : MonoBehaviour
         }
     }
 
-    IEnumerator PlayCutscene()
+    IEnumerator  PlayCutscene()    //코루틴을 만들기 위한 리턴 타입이고  StartCoroutine(PlayCutscene())에서 호출해서 작동
     {
         // 처음에 검은 화면에서 천천히 밝아짐
-        yield return StartCoroutine(FadeIn());
+        yield return StartCoroutine(FadeIn());  //코르틴 함수 실행 후(페이드 인 함수가 완전히 끝날 때 까지 기다린다)
+                                                //캔버스의 알파값을 1 >> 0으로 서서히 감소시킨다.
 
-        for (int i = 0; i < cutsceneSprites.Length; i++)
+        for (int i = 0; i < cutsceneSprites.Length; i++)  //반복문의 시작이고 컷신스프라이트의 갯수만큼 실행한다 여기서
+                                                          //i값은 0부터 해서 1씩 증가 시켜서 다음 컷 이미지로 넘김
         {
-            currentIndex = i;
-            cutsceneImage.sprite = cutsceneSprites[i];
+            currentIndex = i;            //현재 인덱스 값을 업데이트 한다.
+            cutsceneImage.sprite = cutsceneSprites[i];   // 컷신 이미지 스프라이를 i값을 받는다.(이미지 설정)
 
-            if (i < cutsceneTexts.Length && !string.IsNullOrEmpty(cutsceneTexts[i]))
+            if (i < cutsceneTexts.Length && !string.IsNullOrEmpty(cutsceneTexts[i])) //만약에 텍스트가 존재 한다면
             {
-                // 텍스트 타이핑 효과
-                yield return StartCoroutine(TypeText(cutsceneTexts[i]));
+                
+                yield return StartCoroutine(TypeText(cutsceneTexts[i])); // 
             }
             else
             {
