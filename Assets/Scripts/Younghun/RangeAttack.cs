@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 // 무기를 발사하고, Bullet을 초기화하여 날림
 // WeaponData의 설정값과 추가 정보들을 이용함
@@ -16,7 +17,9 @@ public class RangeAttack : MonoBehaviour
     public ushort pierceCount;               // 관통 가능 횟수
     public TargetTag targetTag;              // 충돌 대상 태그
 
-    public float fireCooldown;              // 연사 속도
+    public float fireCooldown;               // 연사 속도
+    public uint curAmmo;                     // 현재 탄환 수
+    public bool isReloading;                 // 재장전 중인지 확인
 
     private RangeAttackInstance runtimeStats;
 
@@ -24,6 +27,7 @@ public class RangeAttack : MonoBehaviour
     {
         // 기준 데이터에서 복사
         runtimeStats = new RangeAttackInstance(weaponData, this);
+        curAmmo = weaponData.maxAmmo;
     }
 
     private void Update()
@@ -39,6 +43,9 @@ public class RangeAttack : MonoBehaviour
 
     private void Fire()
     {
+        // 재장전 중일 때는 사격 불가
+        if (curAmmo == 0) return;
+
         for (int i = 0; i < weaponData.bulletsPerShot; i++)
         {
             // 방향에 퍼짐을 적용
@@ -61,7 +68,19 @@ public class RangeAttack : MonoBehaviour
                 weaponData.targetTag
             );
         }
+        curAmmo--;
     }
+
+    private void Reloading()
+    {
+        if (curAmmo == 0 || Input.GetKeyDown(KeyCode.R))
+        {
+            isReloading = true;
+            
+        }
+    }
+
+    //IEnumerator 
 
     // spread 값을 기반으로 랜덤 방향을 생성함
     private Vector2 GetFireDirectionWithSpread(float spread)
