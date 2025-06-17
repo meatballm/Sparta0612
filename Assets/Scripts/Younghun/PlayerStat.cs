@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 [System.Serializable]
-public class PlayerStat : IDamageable
+public class PlayerStat
 {
+    public event Action OnDeath;
+
     [SerializeField] private bool canDodge;
     [SerializeField] private float cooldownDodge;
     public float CooldownDodge
@@ -25,12 +28,12 @@ public class PlayerStat : IDamageable
         _conditionUI = UIManager.Instance.Game.Condition;
         _conditionUI.SetHP(1f); // UI 초기화
     }
-    public void TakeDamage(int damage)
-    {
-        ReduceHp(damage);
-        float ratio = (float)curHp / maxHp;
-        _conditionUI.SetHP(ratio);
-    }
+    //public void TakeDamage(int damage)
+    //{
+    //    ReduceHp(damage);
+    //    float ratio = (float)curHp / maxHp;
+    //    
+    //}
 
     public void HealHp(int amount)
     {
@@ -45,9 +48,10 @@ public class PlayerStat : IDamageable
 
         // UI 갱신
         float ratio = curHp / (float)maxHp;
+        _conditionUI.SetHP(ratio);
         UIManager.Instance.Game.Condition.SetHP(ratio);
 
-        if (curHp == 0)
+        if (curHp <= 0)
         {
             Death();
         }
@@ -55,6 +59,7 @@ public class PlayerStat : IDamageable
 
     public void Death()
     {
+        OnDeath?.Invoke();
         Debug.Log("게임오버");
     }
 
