@@ -67,5 +67,4 @@ public class PlayerController : Character
         if (direction.sqrMagnitude > 0.01f)
             lookDirection = direction;
     }
-
 }

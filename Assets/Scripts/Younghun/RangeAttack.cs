@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 // 무기를 발사하고, Bullet을 초기화하여 날림
@@ -23,11 +24,16 @@ public class RangeAttack : MonoBehaviour
 
     private RangeAttackInstance runtimeStats;
 
+    public event Action AmmoZero;            // 재장전시 호출하는 이벤트
+
     private void Start()
     {
         // 기준 데이터에서 복사
         runtimeStats = new RangeAttackInstance(weaponData, this);
         curAmmo = weaponData.maxAmmo;
+
+        // 이벤트 등록
+        AmmoZero += Reload;
     }
 
     private void Update()
@@ -38,13 +44,14 @@ public class RangeAttack : MonoBehaviour
         {
             Fire();
             fireCooldown = 1f / weaponData.fireRate;
+
         }
     }
 
     private void Fire()
     {
         // 재장전 중일 때는 사격 불가
-        if (curAmmo == 0) return;
+        if (isReloading) return;
 
         for (int i = 0; i < weaponData.bulletsPerShot; i++)
         {
@@ -54,7 +61,7 @@ public class RangeAttack : MonoBehaviour
             GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
 
             // 위치도 살짝 랜덤 오프셋
-            Vector3 offset = firePoint.up * Random.Range(-0.1f, 0.1f);
+            Vector3 offset = firePoint.up * UnityEngine.Random.Range(-0.1f, 0.1f);
             Vector3 spawnPos = firePoint.position + offset;
 
             // 탄환 생성 및 초기화
@@ -68,24 +75,37 @@ public class RangeAttack : MonoBehaviour
                 weaponData.targetTag
             );
         }
-        curAmmo--;
-    }
 
-    private void Reloading()
-    {
-        if (curAmmo == 0 || Input.GetKeyDown(KeyCode.R))
+        if (curAmmo > 0)
         {
-            isReloading = true;
-            
+            curAmmo--;
+
+            if (curAmmo == 0)
+                AmmoZero?.Invoke();
         }
     }
 
-    //IEnumerator 
+    // curAmmo == 0 || R 누르면 이벤트 호출 하도록
+    public void Reload()
+    {
+        if (!isReloading)
+            StartCoroutine(Reloading());
+    }
+
+    private IEnumerator Reloading()
+    {
+        isReloading = true;
+
+        yield return new WaitForSeconds(weaponData.reloadSpeed);
+
+        curAmmo = (uint)weaponData.maxAmmo;
+        isReloading = false;
+    }
 
     // spread 값을 기반으로 랜덤 방향을 생성함
     private Vector2 GetFireDirectionWithSpread(float spread)
     {
-        float angle = Random.Range(-spread / 2f, spread / 2f);
+        float angle = UnityEngine.Random.Range(-spread / 2f, spread / 2f);
         return Quaternion.Euler(0, 0, angle) * transform.right;
     }
 }

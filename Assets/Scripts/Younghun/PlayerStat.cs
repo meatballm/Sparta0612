@@ -38,14 +38,16 @@ public class PlayerStat
     public void ReduceHp(int amount)
     {
         if (curHp - amount >= 0) curHp -= amount;
-        else curHp = 0;
+
+        else 
+        {
+            curHp = 0;
+            Death();
+        }
     }
 
     public void Death()
     {
-        if (curHp == 0)
-        {
-
-        }
+        Debug.Log("게임오버");
     }
 }
