@@ -59,4 +59,12 @@ public class Lizard : Enemy // 원거리 적 - Lizard
         GameObject fireball = Instantiate(fireballPrefab, firePoint.position, Quaternion.identity);
         fireball.GetComponent<Lizard_FireBall>().SetDirection(direction);
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerStat.ReduceHp(damage);
+        }
+    }
 }

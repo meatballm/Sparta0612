@@ -17,7 +17,7 @@ public class IdleState_enemy : IEnemyState
     public void Enter()
     {
         timer = 0f;
-        Debug.Log("Idle 상태 진입");
+        // Debug.Log("Idle 상태 진입");
     }
     
     public void Update()
@@ -35,7 +35,7 @@ public class IdleState_enemy : IEnemyState
 
     public void Exit()
     {
-        Debug.Log("Idle 상태 종료");
+        // Debug.Log("Idle 상태 종료");
     }
 
 }

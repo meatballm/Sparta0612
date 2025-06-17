@@ -13,14 +13,12 @@ public class Enemy : MonoBehaviour
     protected float defense;
     protected BoxCollider2D boxCollider;
     protected PlayerStat playerStat;
-    
-
     public StateMachine_enemy stateMachine {get; private set;}
 
     private void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
-        playerStat = GameObject.Find("Player").GetComponent<PlayerStat>();
+        playerStat = GameObject.FindWithTag("Player").GetComponent<PlayerController>().stats;
         stateMachine = new StateMachine_enemy();
         stateMachine.ChangeState(new IdleState_enemy(this));
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -75,7 +73,7 @@ public class Enemy : MonoBehaviour
     // 죽음
     protected IEnumerator Die()
     {
-        float duration = 2f; // Enemy가 사라지는데 걸리는 시간
+        float duration = 1.2f; // Enemy가 사라지는데 걸리는 시간
         float time = 0f;
 
         Color originalColor = spriteRenderer.color;

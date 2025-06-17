@@ -23,7 +23,7 @@ public class PatrolState_enemy : IEnemyState
 
     public void Enter()
     {
-        Debug.Log("Patrol 상태 진입");
+        // Debug.Log("Patrol 상태 진입");
     }
 
     public void Update()
@@ -66,7 +66,7 @@ public class PatrolState_enemy : IEnemyState
 
     public void Exit()
     {
-        Debug.Log("Patrol 상태 종료");
+        // Debug.Log("Patrol 상태 종료");
     }
 
 }
