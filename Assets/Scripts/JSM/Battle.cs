@@ -153,13 +153,14 @@ public class Battle : MonoBehaviour
 
         GameObject monster = BattleManager.Instance.SpawnMonster(monsterIndex, spawnPos);
         var enemy = monster.GetComponent<Enemy>();
-        //if (enemy != null) enemy.Init(this);
+        if (enemy != null) enemy.Init(this);
     }
 
 
     public void OnMonsterKilled()
     {
         aliveCount--;
+        Debug.Log(aliveCount);
         if (aliveCount <= 0)
         {
             currentWave++;
