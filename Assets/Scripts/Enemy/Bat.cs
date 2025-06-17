@@ -9,10 +9,9 @@ public class Bat : Enemy
         enemyHP = 50f;
         chaseRange = 10f;
         attackRange = 1f;
-        speed = 3f;
+        speed = 2f;
         damage = 10f;
         defense = 10f;
-
     }
     public override void Attack()
     {
@@ -41,6 +40,13 @@ public class Bat : Enemy
         {
             spriteRenderer.flipX = false;
         }
+    }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerStat.ReduceHp(damage);
+        }
     }
 }

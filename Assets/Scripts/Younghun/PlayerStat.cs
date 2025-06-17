@@ -6,8 +6,6 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerStat
 {
-    private PlayerAnimation animation;
-
     [SerializeField] private bool canDodge;
     [SerializeField] private float cooldownDodge;
     public float CooldownDodge
@@ -16,16 +14,14 @@ public class PlayerStat
         set => cooldownDodge = Mathf.Clamp(value, 1f, 5f); // 범위 제한
     }
 
-    public int maxHp = 100;
-    public int curHp;
+    public float maxHp = 100;
+    public float curHp; 
 
-    // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         curHp = maxHp;
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -37,9 +33,13 @@ public class PlayerStat
         else curHp = maxHp;
     }
 
-    public void ReduceHp(int amount)
+    public void ReduceHp(float amount)
     {
-        if (curHp - amount >= 0) curHp -= amount;
+        if (curHp - amount >= 0) 
+        {
+            curHp -= amount;
+            Debug.Log(curHp);
+        }
 
         else 
         {

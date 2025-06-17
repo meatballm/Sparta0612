@@ -15,7 +15,7 @@ public class AttackState_enemy : IEnemyState
 
     public void Enter()
     {
-        Debug.Log("Attack 상태 진입");
+        // Debug.Log("Attack 상태 진입");
         timer = 0f;
     }
 
@@ -37,6 +37,6 @@ public class AttackState_enemy : IEnemyState
 
     public void Exit()
     {
-        Debug.Log("Attack 상태 종료");
+        // Debug.Log("Attack 상태 종료");
     }
 }
