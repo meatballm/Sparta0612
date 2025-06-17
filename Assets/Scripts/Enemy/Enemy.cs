@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -15,6 +15,13 @@ public class Enemy : MonoBehaviour
     protected PlayerStat playerStat;
     public StateMachine_enemy stateMachine {get; private set;}
 
+    private Battle spawnSource;
+
+    public void Init(Battle source)
+    {
+        Debug.Log(source);
+        spawnSource = source;
+    }
     private void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
@@ -90,6 +97,7 @@ public class Enemy : MonoBehaviour
 
         // 마지막에 완전히 투명하게
         spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
+        spawnSource?.OnMonsterKilled();
         Destroy(gameObject);
     }
 

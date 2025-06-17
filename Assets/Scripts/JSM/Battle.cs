@@ -143,6 +143,7 @@ public class Battle : MonoBehaviour
         previewSR.sortingLayerID = realSR.sortingLayerID;
         previewSR.sortingOrder = realSR.sortingOrder;
 
+        previewSR.sortingOrder = 101;
         Color col = previewSR.color;
         col.a = 0.3f;
         previewSR.color = col;
@@ -153,13 +154,14 @@ public class Battle : MonoBehaviour
 
         GameObject monster = BattleManager.Instance.SpawnMonster(monsterIndex, spawnPos);
         var enemy = monster.GetComponent<Enemy>();
-        //if (enemy != null) enemy.Init(this);
+        if (enemy != null) enemy.Init(this);
     }
 
 
     public void OnMonsterKilled()
     {
         aliveCount--;
+        Debug.Log(aliveCount);
         if (aliveCount <= 0)
         {
             currentWave++;
