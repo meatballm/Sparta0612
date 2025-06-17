@@ -6,6 +6,8 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerStat
 {
+    private PlayerAnimation animation;
+
     [SerializeField] private bool canDodge;
     [SerializeField] private float cooldownDodge;
     public float CooldownDodge
@@ -15,7 +17,7 @@ public class PlayerStat
     }
 
     public int maxHp = 100;
-    public int curHp; 
+    public int curHp;
 
     // Start is called before the first frame update
     void Start()
