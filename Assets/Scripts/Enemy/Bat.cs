@@ -40,6 +40,14 @@ public class Bat : Enemy
         {
             spriteRenderer.flipX = false;
         }
+    }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerStat.ReduceHp(damage);
+            Destroy(gameObject); // 플레이어와 부딪히면 제거
+        }
     }
 }

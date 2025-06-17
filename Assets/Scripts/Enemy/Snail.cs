@@ -56,4 +56,13 @@ public class Snail : Enemy
         defense = 10f;
         
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerStat.ReduceHp(damage);
+            Destroy(gameObject); // 플레이어와 부딪히면 제거
+        }
+    }
 }

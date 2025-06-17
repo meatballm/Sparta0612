@@ -12,12 +12,15 @@ public class Enemy : MonoBehaviour
     protected float damage;
     protected float defense;
     protected BoxCollider2D boxCollider;
+    protected PlayerStat playerStat;
+    
 
     public StateMachine_enemy stateMachine {get; private set;}
 
     private void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
+        playerStat = GameObject.Find("Player").GetComponent<PlayerStat>();
         stateMachine = new StateMachine_enemy();
         stateMachine.ChangeState(new IdleState_enemy(this));
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
