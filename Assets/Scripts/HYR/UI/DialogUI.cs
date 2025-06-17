@@ -16,17 +16,24 @@ public class DialogUI : MonoBehaviour
     [SerializeField] private float typingSpeed = 0.05f;
 
     private Queue<string> sentences = new Queue<string>();
+    private System.Action onDialogComplete;
     private bool isTyping = false;
     private bool isShowing = false;
 
     private void Start()
     {
-        dialogPanel.localScale = Vector3.zero;
+        dialogPanel.gameObject.SetActive(false);
+        nameText.gameObject.SetActive(false);
+        dialogText.gameObject.SetActive(false);
         choiceButton.gameObject.SetActive(false);
     }
 
-    public void StartDialog(string npcName, List<string> lines, bool showChoice = false, string choiceText = "")
+    public void StartDialog(string npcName, List<string> lines, bool showChoice = false, string choiceText = "", System.Action onComplete = null)
     {
+        dialogPanel.gameObject.SetActive(true);
+        nameText.gameObject.SetActive(true);
+        dialogText.gameObject.SetActive(true);
+
         nameText.text = npcName;
         sentences.Clear();
         foreach (string line in lines)
@@ -34,6 +41,8 @@ public class DialogUI : MonoBehaviour
 
         ShowPanel();
         ShowNextSentence();
+
+        onDialogComplete = onComplete;
 
         // 조건 만족 시 선택지 보여주기
         choiceButton.gameObject.SetActive(showChoice);
@@ -43,8 +52,8 @@ public class DialogUI : MonoBehaviour
             choiceButton.onClick.RemoveAllListeners();
             choiceButton.onClick.AddListener(() =>
             {
-                Debug.Log("선택지 클릭");
                 HidePanel();
+                onDialogComplete?.Invoke();
             });
         }
     }
@@ -83,10 +92,18 @@ public class DialogUI : MonoBehaviour
         dialogPanel.DOScale(1f, 0.3f).SetEase(Ease.OutBack);
     }
 
-    private void HidePanel()
+    private void HidePanel() // 대화 종료
     {
         isShowing = false;
-        dialogPanel.DOScale(0f, 0.2f).SetEase(Ease.InBack);
+        dialogPanel.DOScale(0f, 0.2f).SetEase(Ease.InBack).OnComplete(() =>
+        {
+            dialogPanel.gameObject.SetActive(false);
+            nameText.gameObject.SetActive(false);
+            dialogText.gameObject.SetActive(false);
+            choiceButton.gameObject.SetActive(false);
+
+            onDialogComplete?.Invoke();
+        });
     }
 
     private void Update()

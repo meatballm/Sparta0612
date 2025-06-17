@@ -39,11 +39,17 @@ public class NPCInteraction : MonoBehaviour
         if (inventory.HasItem("Fish"))
         {
             lines.Add("꼬리를 바닥에 치고 있다.\n배가 고파보인다.");
-            UIManager.Instance.Game.DialogUI.StartDialog(npcName, lines, true, "생선을 준다.");
+            UIManager.Instance.Game.Dialog.StartDialog(npcName, lines, true, "생선을 준다.", () =>
+            {
+                isTalking = false; // 선택지 클릭 후 대화 종료
+            });
         }
         else
         {
-            UIManager.Instance.Game.DialogUI.StartDialog(npcName, lines);
+            UIManager.Instance.Game.Dialog.StartDialog(npcName, lines, false, "", () =>
+            {
+                isTalking = false; // 대사 끝난 후 대화 재시작 가능
+            });
         }
     }
 

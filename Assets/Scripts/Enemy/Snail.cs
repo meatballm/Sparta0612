@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 // 가까이 가면 껍질에 숨어버리는 달팽이 몬스터
 public class Snail : Enemy 

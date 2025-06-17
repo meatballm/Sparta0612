@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
-public class PlayerStat
+public class PlayerStat : IDamageable
 {
     [SerializeField] private bool canDodge;
     [SerializeField] private float cooldownDodge;
@@ -14,17 +14,22 @@ public class PlayerStat
         set => cooldownDodge = Mathf.Clamp(value, 1f, 5f); // 범위 제한
     }
 
-    public float maxHp = 100;
-    public float curHp; 
+    public int maxHp = 100;
+    public int curHp;
+
+    private ConditionUI _conditionUI;
 
     public void Start()
     {
         curHp = maxHp;
+        _conditionUI = UIManager.Instance.Game.Condition;
+        _conditionUI.SetHP(1f); // UI 초기화
     }
-
-    void Update()
+    public void TakeDamage(int damage)
     {
-        
+        ReduceHp(damage);
+        float ratio = (float)curHp / maxHp;
+        _conditionUI.SetHP(ratio);
     }
 
     public void HealHp(int amount)
@@ -35,15 +40,15 @@ public class PlayerStat
 
     public void ReduceHp(float amount)
     {
-        if (curHp - amount >= 0) 
-        {
-            curHp -= amount;
-            Debug.Log(curHp);
-        }
+        curHp = (int)Mathf.Max(curHp - amount, 0);
+        Debug.Log($"플레이어 체력: {curHp}/{maxHp}");
 
-        else 
+        // UI 갱신
+        float ratio = curHp / (float)maxHp;
+        UIManager.Instance.Game.Condition.SetHP(ratio);
+
+        if (curHp == 0)
         {
-            curHp = 0;
             Death();
         }
     }
@@ -52,4 +57,5 @@ public class PlayerStat
     {
         Debug.Log("게임오버");
     }
+
 }
