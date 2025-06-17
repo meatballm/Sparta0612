@@ -166,7 +166,7 @@ MonoBehaviour:
   - Player
   - Enemy
   - Bullet
-  impactEffectPrefab: {fileID: 0}
+  impactEffectPrefab: {fileID: 6980259576133684760, guid: 1f58a1dea6bbd9347843e4935585e6a2, type: 3}
   effectLifeTime: 2
 --- !u!1 &2055102312182832482
 GameObject:

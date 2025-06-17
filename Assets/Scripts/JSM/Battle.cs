@@ -143,6 +143,7 @@ public class Battle : MonoBehaviour
         previewSR.sortingLayerID = realSR.sortingLayerID;
         previewSR.sortingOrder = realSR.sortingOrder;
 
+        previewSR.sortingOrder = 101;
         Color col = previewSR.color;
         col.a = 0.3f;
         previewSR.color = col;
