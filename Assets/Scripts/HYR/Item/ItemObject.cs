@@ -26,6 +26,7 @@ public class ItemObject : MonoBehaviour
     private void PickupItem()
     {
         Debug.Log($"아이템 획득: {itemData.itemName}");
+        Debug.Log($"[ItemObject] PickupItem() 호출 – 획득: {itemData.itemName}");
 
         // 아이템 획득
         SubInventory inventory = UIManager.Instance.Game.SubInventory;

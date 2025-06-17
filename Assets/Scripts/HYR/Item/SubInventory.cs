@@ -28,6 +28,7 @@ public class SubInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public bool HasItem(string itemName)
     {
+        if (items == null) return false;
         return items.Any(i => i.Data.itemName == itemName);
     }
 
@@ -40,7 +41,6 @@ public class SubInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             SubInventorySlot slot = child.GetComponent<SubInventorySlot>();
             if (slot != null) slots.Add(slot);
         }
-
     }
 
     private void Update()
@@ -113,7 +113,7 @@ public class SubInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         hoverCoroutine = null;
     }
 
-    public void AddItem(Item item)
+    public void AddItem(Item item) // 획득 아이템 반영
     {
         items.Add(item);
         SortItems();
@@ -132,12 +132,17 @@ public class SubInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     private void RefreshUI()
     {
-        for (int i = 0; i < slots.Count; i++)
+        Debug.Log($"[RefreshUI] slots.Count={slots.Count}, items.Count={items.Count}");
+
+        int displayCount = Mathf.Min(slots.Count, items.Count);
+        for (int i = 0; i < displayCount; i++)
         {
-            if (i < items.Count)
-                slots[i].SetData(items[i]);
-            else
-                slots[i].Clear();
+            slots[i].SetData(items[i]);
+        }
+
+        for (int i = displayCount; i < slots.Count; i++)
+        {
+            slots[i].Clear();
         }
     }
 
