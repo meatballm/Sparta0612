@@ -103,7 +103,7 @@ Transform:
   m_GameObject: {fileID: 1996419925770567658}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.75, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0.75, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed80284a851764f4894328d54c096dbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: df9a443a8484244408c4b1d2368fb2d4, type: 2}
+  weaponData: {fileID: 11400000, guid: b3b2f0c8da23bf344a7031afc86f3f43, type: 2}
   bulletPrefab: {fileID: 2154396310761551356, guid: 67330f4f0d44e25499c3fa77fd3fb191, type: 3}
   firePoint: {fileID: 3550051896057577508}
   damagePerShot: 1
@@ -345,10 +345,9 @@ MonoBehaviour:
   moveSpeed: 5
   _camera: {fileID: 3729617517949231363}
   stats:
-    canDodge: 0
-    cooldownDodge: 0
-    maxHp: 100
+    maxHp: 30
     curHp: 0
+  playerAnimation: {fileID: 6393277187827456828}
 --- !u!114 &8091251616149894952
 MonoBehaviour:
   m_ObjectHideFlags: 0

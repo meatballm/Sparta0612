@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8872972107525594704}
   - component: {fileID: 7316608865279439719}
   m_Layer: 0
-  m_Name: AssaultRifle
+  m_Name: SniperRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

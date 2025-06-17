@@ -12,14 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460f151edb5cd6041bd35f5a62c0de11, type: 3}
   m_Name: SniperRifle
   m_EditorClassIdentifier: 
-  maxAmmo: 0
-  fireRate: 0
-  bulletsPerShot: 0
-  reloadSpeed: 0
-  damagePerShot: 0
-  spread: 0
-  bulletSpeed: 0
-  pierceCount: 0
-  target:
-    serializedVersion: 2
-    m_Bits: 0
+  maxAmmo: 10
+  fireRate: 2
+  bulletsPerShot: 1
+  reloadSpeed: 2
+  spread: 3
+  targetTag: 0

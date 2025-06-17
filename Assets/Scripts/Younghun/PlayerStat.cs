@@ -9,8 +9,9 @@ public class PlayerStat
 {
     public event Action OnDeath;
 
-    [SerializeField] private bool canDodge;
-    [SerializeField] private float cooldownDodge;
+    private bool canDodge;
+    
+    private float cooldownDodge;
     public float CooldownDodge
     {
         get => cooldownDodge;
@@ -28,17 +29,16 @@ public class PlayerStat
         _conditionUI = UIManager.Instance.Game.Condition;
         _conditionUI.SetHP(1f); // UI 초기화
     }
-    //public void TakeDamage(int damage)
-    //{
-    //    ReduceHp(damage);
-    //    float ratio = (float)curHp / maxHp;
-    //    
-    //}
 
     public void HealHp(int amount)
     {
-        if (curHp + amount <= maxHp) curHp += amount;
-        else curHp = maxHp;
+        curHp = (int)Mathf.Max(curHp + amount, maxHp);
+        Debug.Log($"플레이어 체력: {curHp}/{maxHp}");
+
+        // UI 갱신
+        float ratio = curHp / (float)maxHp;
+        _conditionUI.SetHP(ratio);
+        UIManager.Instance.Game.Condition.SetHP(ratio);
     }
 
     public void ReduceHp(float amount)
