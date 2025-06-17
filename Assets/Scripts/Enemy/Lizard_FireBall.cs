@@ -27,9 +27,5 @@ public class Lizard_FireBall : MonoBehaviour
             //Character.hp - damage;
             Destroy(gameObject); // 플레이어와 부딪히면 제거
         }
-        else
-        {
-            Destroy(gameObject); // 벽, 장애물에 부딪히면 제거
-        }
     }
 }

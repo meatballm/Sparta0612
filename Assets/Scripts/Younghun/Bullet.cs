@@ -49,21 +49,33 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        string otherTag = other.tag;
+        enemy = other.GetComponentInParent<Enemy>();
 
-        if (otherTag != targetTag.ToString()) return; 
-
-        if (otherTag == targetTag.ToString())
+        if(other.CompareTag("Enemy"))
         {
-            if (targetTag == TargetTag.Enemy)
-            {
-                enemy.TakeDamage(20);
-            }
-
-            else if (targetTag == TargetTag.Obstacle)
-            {
-                Destroy(gameObject);
-            }
+            enemy.TakeDamage(20);
+            Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
+        
+
+        // if (other.CompareTag(targetTag.ToString()))
+        // {
+
+        //     if (targetTag == TargetTag.Enemy)
+        //     {
+        //         enemy.TakeDamage(20);
+        //         Destroy(gameObject);
+        //     }
+
+        //     else if (targetTag == TargetTag.Obstacle)
+        //     {
+        //         Destroy(gameObject);
+        //     }
+        // }
+    // }
 }

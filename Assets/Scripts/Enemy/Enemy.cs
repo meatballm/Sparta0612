@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     protected float speed;
     protected float damage;
     protected float defense;
-    
+    protected BoxCollider2D boxCollider;
 
     public StateMachine_enemy stateMachine {get; private set;}
 
@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
         stateMachine = new StateMachine_enemy();
         stateMachine.ChangeState(new IdleState_enemy(this));
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        boxCollider = GetComponentInChildren<BoxCollider2D>();
     }
 
     private void Update()
@@ -75,6 +76,7 @@ public class Enemy : MonoBehaviour
         float time = 0f;
 
         Color originalColor = spriteRenderer.color;
+        boxCollider.enabled = false;
 
         while (time < duration)
         {   
