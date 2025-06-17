@@ -6,7 +6,8 @@ public class Bat : Enemy
 {
     void Awake()
     {
-        enemyHP = 50f;
+        maxHP = 50f;
+        enemyHP = maxHP;
         chaseRange = 10f;
         attackRange = 1f;
         speed = 2f;

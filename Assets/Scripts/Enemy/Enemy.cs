@@ -5,7 +5,10 @@ public class Enemy : MonoBehaviour
 {
     public Transform player;
     public SpriteRenderer spriteRenderer;
+    [SerializeField] protected float maxHP;
     [SerializeField] protected float enemyHP;
+    [SerializeField] private GameObject damageUIPrefab;
+    [SerializeField] private Transform canvasTransform;
     protected float chaseRange;
     protected float attackRange;
     protected float speed;
@@ -17,11 +20,15 @@ public class Enemy : MonoBehaviour
 
     private Battle spawnSource;
 
+    private EnemyCondition enemyCondition;
+
+
     public void Init(Battle source)
     {
         Debug.Log(source);
         spawnSource = source;
     }
+
     private void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
@@ -30,6 +37,9 @@ public class Enemy : MonoBehaviour
         stateMachine.ChangeState(new IdleState_enemy(this));
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         boxCollider = GetComponentInChildren<BoxCollider2D>();
+        enemyCondition = GetComponent<EnemyCondition>();
+        if (enemyCondition != null)
+            enemyCondition.UpdateHealthBar((int)enemyHP, (int)enemyHP); // UI 동기화
     }
 
     private void Update()
@@ -70,9 +80,29 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float amount)
     {
         enemyHP -= amount;
-        
-        if(enemyHP <= 0)
+
+        if (enemyCondition != null)
         {
+            if (!enemyCondition.IsBarActive())
+                enemyCondition.ShowHealthBar();
+
+            enemyCondition.UpdateHealthBar((int)enemyHP, (int)maxHP);
+        }
+
+        // 데미지 UI
+        if (damageUIPrefab != null)
+        {
+            Vector3 worldPos = transform.position + Vector3.up * 1.2f;
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+            var dmgUI = Instantiate(damageUIPrefab, canvasTransform);
+            dmgUI.GetComponent<DamageUI>().Initialize((int)amount, screenPos);
+        }
+
+        if (enemyHP <= 0)
+        {
+            if (enemyCondition != null)
+                enemyCondition.HideAndDestroyBar(); // 죽으면 체력바 삭제
+
             StartCoroutine(Die());
         }
     }
