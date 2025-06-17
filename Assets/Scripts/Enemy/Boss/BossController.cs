@@ -11,11 +11,16 @@ public interface IBossPattern
 public class BossController : MonoBehaviour
 {
     public Transform player;
-    public GameObject explosionPrefab;
     public float moveSpeed = 2f;
     public int damage = 10;
     private float maxHp = 200;
     public float currentHp { get; private set;}
+
+    [Header("공격패턴 프리팹")]
+    public GameObject explosionPrefab;
+    public GameObject laserWarningPrefab;
+    public GameObject laserBeamPrefab;
+
     private IBossPattern currentPattern;
     Animator animator;
 
@@ -47,8 +52,8 @@ public class BossController : MonoBehaviour
 
         if (ratio >= 0.7f)
             currentPattern = new PatternLaser();
-        else if (ratio >= 0.4f)
-            currentPattern = new PatternExplosion();
+        // else if (ratio >= 0.4f)
+        //     currentPattern = new PatternExplosion();
         // else
         //     Debug.Log("보스 곧 죽음");
         //     // currentPattern = new PatternSummon(); // 나중에 구현
