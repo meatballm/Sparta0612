@@ -11,11 +11,18 @@ public class PlayerAnimation : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 lastDirection;
 
-    public event Action _Death;
+    [SerializeField] private PlayerStat stat;
+    private bool isDeath;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+
+        // 이벤트 등록
+        if (stat != null)
+        {
+            stat.OnDeath += Death;
+        }
 
         if (playerInput == null)
         {
@@ -23,13 +30,10 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        _Death += Death;
-    }
-
     private void Update()
     {
+        if (isDeath == true) return;
+        
         // 현재 입력값 읽기 (Input System)
         moveInput = playerInput.actions["Move"].ReadValue<Vector2>().normalized;
 
@@ -51,6 +55,16 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Death()
     {
-        animator.SetBool("IsDeath", true);
+        isDeath = true;
+        animator.SetTrigger("IsDeath");
+    }
+
+    private void OnDestroy()
+    {
+        // 이벤트 해제
+        if (stat != null)
+        {
+            stat.OnDeath -= Death;
+        }
     }
 }
