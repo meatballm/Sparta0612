@@ -6,13 +6,12 @@ public class Lizard_FireBall : MonoBehaviour
 {
     public float speed = 5f;
     public int damage = 20;
-    Enemy enemy;
-    PlayerStat playerStat;
     private Vector2 direction;
+    PlayerStat playerStat;
 
     public void Start()
     {
-        playerStat = GameObject.Find("Player").GetComponent<PlayerStat>();
+        playerStat = FindObjectOfType<PlayerController>().stats;
     }
     public void SetDirection(Vector2 dir)
     {

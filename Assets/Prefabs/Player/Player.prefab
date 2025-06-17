@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9080369936667137040}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -350,6 +350,8 @@ MonoBehaviour:
   pierceCount: 1
   targetTag: 0
   fireCooldown: 0
+  curAmmo: 0
+  isReloading: 0
 --- !u!1 &7343857719018020836
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,6 +556,11 @@ MonoBehaviour:
   weaponRenderer: {fileID: 4930199977620491417}
   weaponPivot: {fileID: 1514424351053138677}
   moveSpeed: 5
+  stats:
+    canDodge: 0
+    cooldownDodge: 0
+    maxHp: 100
+    curHp: 0
 --- !u!114 &457875012819817948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -603,6 +610,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c1a89096-6c58-4ba2-b81e-ad6a392080de
     m_ActionName: Player/Fire[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6c0e94cd-ec65-4a55-945d-da13b25f2cb7
+    m_ActionName: Player/Reload[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
