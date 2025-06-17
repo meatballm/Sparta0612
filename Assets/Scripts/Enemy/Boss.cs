@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    public float maxHP = 100f;
+    public float maxHP = 500f;
     private float currentHP;
 
     private Animator animator;

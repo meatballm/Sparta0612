@@ -9,10 +9,9 @@ public class Bat : Enemy
         enemyHP = 50f;
         chaseRange = 10f;
         attackRange = 1f;
-        speed = 3f;
+        speed = 2f;
         damage = 10f;
         defense = 10f;
-
     }
     public override void Attack()
     {

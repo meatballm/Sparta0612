@@ -15,9 +15,6 @@ public class Lizard_FireBall : MonoBehaviour
         direction = dir.normalized;
     }
 
-    public void Start()
-    {
-    }
     void Update()
     {
         transform.Translate(direction * speed * Time.deltaTime);
@@ -27,13 +24,8 @@ public class Lizard_FireBall : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Character characrter = FindObjectOfType<Character>();
             //Character.hp - damage;
             Destroy(gameObject); // 플레이어와 부딪히면 제거
-        }
-        else
-        {
-            Destroy(gameObject); // 벽, 장애물에 부딪히면 제거
         }
     }
 }
