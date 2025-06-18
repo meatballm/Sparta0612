@@ -6,6 +6,7 @@ public enum ItemType
 {
     Weapon,
     Consumable,
+    Passive,
     Etc
 }
 
@@ -16,10 +17,11 @@ public class ItemData : ScriptableObject
     public string itemName;
     public Sprite itemIcon;
     public ItemType itemType;
-    public int defaultAmmo;
+    public string description;
     public int defaultCount;
 
     // 무기
+    public int defaultAmmo;
     public int maxAmmo;
 
     // 물약

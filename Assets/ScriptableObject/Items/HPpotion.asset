@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c06e2ca0c1a50d46bf6714739d8c10f, type: 3}
-  m_Name: Fish
+  m_Name: HPpotion
   m_EditorClassIdentifier: 
-  itemName: Fish
-  itemIcon: {fileID: 21300000, guid: e86051b44603b5745adec74259c94545, type: 3}
-  itemType: 2
-  description: "\uACE0\uC591\uC774\uAC00 \uC88B\uC544\uD558\uB294 \uC0DD\uC120\uC785\uB2C8\uB2E4."
+  itemName: HPpotion
+  itemIcon: {fileID: -568996249, guid: 8063ff70793da874f906e9848b71fdef, type: 3}
+  itemType: 1
+  description: "\uCCB4\uB825\uC744 \uC77C\uC815\uB7C9 \uD68C\uBCF5\uC2DC\uCF1C\uC90D\uB2C8\uB2E4."
   defaultCount: 0
   defaultAmmo: 0
   maxAmmo: 0
