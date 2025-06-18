@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using DG.Tweening;
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class DialogUI : MonoBehaviour
@@ -21,6 +22,21 @@ public class DialogUI : MonoBehaviour
     private bool isTyping = false;
     private bool isShowing = false;
 
+    private void Awake()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (bg == null)
+        {
+            Transform bgTransform = transform.Find("BG");
+            if (bgTransform != null)
+            {
+                bg = bgTransform.GetComponent<GameObject>();
+            }
+        }
+    }
     private void Start()
     {
         dialogPanel.gameObject.SetActive(false);

@@ -4269,7 +4269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1653877925
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4307,6 +4307,7 @@ MonoBehaviour:
   nameText: {fileID: 2099869666}
   dialogText: {fileID: 1138330075}
   choiceButton: {fileID: 1731672454}
+  bg: {fileID: 1970892853}
   typingSpeed: 0.05
 --- !u!1 &1655949969
 GameObject:

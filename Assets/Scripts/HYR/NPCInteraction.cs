@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening.Core.Easing;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NPCInteraction : MonoBehaviour
 {
@@ -13,6 +15,10 @@ public class NPCInteraction : MonoBehaviour
     private bool isPlayerNearby = false;
     private bool isTalking = false;
 
+    private void Awake()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
     private void Start()
     {
         outline.SetActive(false);
@@ -85,5 +91,10 @@ public class NPCInteraction : MonoBehaviour
             talkIcon.SetActive(false);
             talkUI.SetActive(false);
         }
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        talkUI = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(go => go.name == "TalkUI");
+        inventory = FindObjectOfType<SubInventory>(true);
     }
 }

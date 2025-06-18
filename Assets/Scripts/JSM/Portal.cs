@@ -5,6 +5,7 @@ public class Portal : MonoBehaviour
 {
     [Tooltip("이동할 씬 이름")]
     public string nextSceneName;
+    public bool onlyOne=false;
     
     private void OnTriggerEnter2D(Collider2D other)
     {
