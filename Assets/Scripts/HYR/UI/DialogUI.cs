@@ -12,6 +12,7 @@ public class DialogUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogText;
     [SerializeField] private Button choiceButton;
+    [SerializeField] private GameObject bg;
 
     [SerializeField] private float typingSpeed = 0.05f;
 
@@ -26,6 +27,7 @@ public class DialogUI : MonoBehaviour
         nameText.gameObject.SetActive(false);
         dialogText.gameObject.SetActive(false);
         choiceButton.gameObject.SetActive(false);
+        bg.gameObject.SetActive(false);
     }
 
     public void StartDialog(string npcName, List<string> lines, bool showChoice = false, string choiceText = "", System.Action onComplete = null)
@@ -33,6 +35,7 @@ public class DialogUI : MonoBehaviour
         dialogPanel.gameObject.SetActive(true);
         nameText.gameObject.SetActive(true);
         dialogText.gameObject.SetActive(true);
+        bg.gameObject.SetActive(true);
 
         nameText.text = npcName;
         sentences.Clear();
@@ -101,6 +104,7 @@ public class DialogUI : MonoBehaviour
             nameText.gameObject.SetActive(false);
             dialogText.gameObject.SetActive(false);
             choiceButton.gameObject.SetActive(false);
+            bg.gameObject.SetActive(false);
 
             onDialogComplete?.Invoke();
         });

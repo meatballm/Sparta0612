@@ -35,21 +35,32 @@ public class NPCInteraction : MonoBehaviour
         Debug.Log("대화중");
 
         string npcName = "고양이";
-        var lines = new List<string> { "야옹~ 냐아옹~" };
+        var lines = new List<string> {
+        "냐오옹~ 냐아..",
+        "꼬리를 바닥에 치고 있다. 배가 고파보인다.",
+        "먹을만한걸 구해다주자."
+    };
 
+        // 특정 아이템이 있을 때만 선택지O
         if (inventory.HasItem("Fish"))
         {
-            lines.Add("꼬리를 바닥에 치고 있다.\n배가 고파보인다.");
+            lines = new List<string> {
+            "냐오옹~ 냐아..",
+            "꼬리를 바닥에 치고 있다. 배가 고파보인다."
+        };
+
             UIManager.Instance.Game.Dialog.StartDialog(npcName, lines, true, "생선을 준다.", () =>
             {
-                isTalking = false; // 선택지 클릭 후 대화 종료
+                // 엔딩씬 전환
+                UnityEngine.SceneManagement.SceneManager.LoadScene("EndingScene");
             });
         }
         else
         {
+            // 아이템 없으면 선택지 X
             UIManager.Instance.Game.Dialog.StartDialog(npcName, lines, false, "", () =>
             {
-                isTalking = false; // 대사 끝난 후 대화 재시작 가능
+                isTalking = false;
             });
         }
     }
