@@ -1,4 +1,7 @@
-🎮 Korean Tightrope - 전통 외줄타기 tvOS 게임
+<img src="https://capsule-render.vercel.app/api?type=모양&color=색상코드&height=높이&section=header&text=🎮 Unity 심화 프로젝트
+Find a fish&fontSize=25" />
+
+
 appstore
 🕵️ 프로젝트 소개
 Korean Tightrope는 한국 전통놀이인 외줄타기를 테마로 한 tvOS용 게임입니다. 외줄 위에서 캐릭터를 조종하여 균형을 잡고, 장애물을 피하며, 목표에 도달하는 도전적인 게임을 제공합니다. 캐릭터의 움직임과 점프 동작을 통해 외줄타기 고유의 긴장감과 재미를 느껴보세요.
