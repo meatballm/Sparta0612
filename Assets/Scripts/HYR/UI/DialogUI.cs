@@ -22,21 +22,6 @@ public class DialogUI : MonoBehaviour
     private bool isTyping = false;
     private bool isShowing = false;
 
-    private void Awake()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (bg == null)
-        {
-            Transform bgTransform = transform.Find("BG");
-            if (bgTransform != null)
-            {
-                bg = bgTransform.GetComponent<GameObject>();
-            }
-        }
-    }
     private void Start()
     {
         dialogPanel.gameObject.SetActive(false);

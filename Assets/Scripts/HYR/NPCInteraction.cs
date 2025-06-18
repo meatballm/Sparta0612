@@ -4,6 +4,7 @@ using System.Linq;
 using DG.Tweening.Core.Easing;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
 
 public class NPCInteraction : MonoBehaviour
 {
@@ -55,6 +56,14 @@ public class NPCInteraction : MonoBehaviour
             UIManager.Instance.Game.Dialog.StartDialog(npcName, lines, true, "생선을 준다.", () =>
             {
                 SceneManager.LoadScene("EndingScene");
+                GameObject ui = GameObject.Find("UI");
+                GameObject dot = GameObject.Find("[DOTween]");
+                GameObject character = GameObject.FindWithTag("Player");
+                AudioManager.Instance.PlayBGM(1);
+
+                if (ui != null) Destroy(ui);
+                if (dot != null) Destroy(dot);
+                if (character != null) Destroy(character);
             });
         }
         else

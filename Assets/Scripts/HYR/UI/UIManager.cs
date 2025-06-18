@@ -33,6 +33,7 @@ public class UIManager : MonoBehaviour
         startUI = FindObjectOfType<StartUI>(true);
         gameUI = FindObjectOfType<GameUI>(true);
         pauseUI = FindObjectOfType<PauseUI>(true);
+        if (scene.name == "EndingScene") return;
         if (scene.name == "StartScene")
         {
             gameUI.gameObject.SetActive(false);
