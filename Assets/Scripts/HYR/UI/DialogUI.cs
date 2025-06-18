@@ -17,7 +17,7 @@ public class DialogUI : MonoBehaviour
 
     [SerializeField] private float typingSpeed = 0.05f;
 
-    private Queue<string> sentences = new Queue<string>();
+    private Queue<DialogLine> sentences = new Queue<DialogLine>();
     private System.Action onDialogComplete;
     private bool isTyping = false;
     private bool isShowing = false;
@@ -46,7 +46,7 @@ public class DialogUI : MonoBehaviour
         bg.gameObject.SetActive(false);
     }
 
-    public void StartDialog(string npcName, List<string> lines, bool showChoice = false, string choiceText = "", System.Action onComplete = null)
+    public void StartDialog(string npcName, List<DialogLine> lines, bool showChoice = false, string choiceText = "", System.Action onComplete = null)
     {
         dialogPanel.gameObject.SetActive(true);
         nameText.gameObject.SetActive(true);
@@ -55,7 +55,7 @@ public class DialogUI : MonoBehaviour
 
         nameText.text = npcName;
         sentences.Clear();
-        foreach (string line in lines)
+        foreach (DialogLine line in lines)
             sentences.Enqueue(line);
 
         ShowPanel();
@@ -86,9 +86,13 @@ public class DialogUI : MonoBehaviour
             return;
         }
 
-        string nextLine = sentences.Dequeue();
-        StartCoroutine(TypeSentence(nextLine));
+        DialogLine nextLine = sentences.Dequeue();
+        // 이름 태그 보임/숨김 처리
+        nameText.gameObject.SetActive(nextLine.showNameTag);
+
+        StartCoroutine(TypeSentence(nextLine.text));
     }
+
 
     IEnumerator TypeSentence(string sentence)
     {

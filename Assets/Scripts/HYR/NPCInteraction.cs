@@ -23,6 +23,7 @@ public class NPCInteraction : MonoBehaviour
     {
         outline.SetActive(false);
         talkIcon.SetActive(false);
+        if (talkUI != null) talkUI.SetActive(false);
     }
 
     private void Update()
@@ -41,29 +42,24 @@ public class NPCInteraction : MonoBehaviour
         Debug.Log("대화중");
 
         string npcName = "고양이";
-        var lines = new List<string> {
-        "냐오옹~ 냐아..",
-        "꼬리를 바닥에 치고 있다. 배가 고파보인다.",
-        "먹을만한걸 구해다주자."
-    };
-
-        // 특정 아이템이 있을 때만 선택지O
-        if (inventory.HasItem("Fish"))
+        List<DialogLine> lines = new List<DialogLine>
         {
-            lines = new List<string> {
-            "냐오옹~ 냐아..",
-            "꼬리를 바닥에 치고 있다. 배가 고파보인다."
+            new DialogLine("냐오옹~ 냐아..", true),
+            new DialogLine("꼬리를 바닥에 치고 있다. 배가 고파보인다. 먹을만한걸 구해다주자.", false)
         };
 
+        if (inventory.HasItem("Fish"))
+        {
+            lines.Add(new DialogLine("꼬리를 바닥에 치고 있다.\n배가 고파보인다.", false));
+            // 선택지 버튼 활성화 및 엔딩씬 전환
             UIManager.Instance.Game.Dialog.StartDialog(npcName, lines, true, "생선을 준다.", () =>
             {
-                // 엔딩씬 전환
-                UnityEngine.SceneManagement.SceneManager.LoadScene("EndingScene");
+                SceneManager.LoadScene("EndingScene");
             });
         }
         else
         {
-            // 아이템 없으면 선택지 X
+            // 선택지 버튼 없으면
             UIManager.Instance.Game.Dialog.StartDialog(npcName, lines, false, "", () =>
             {
                 isTalking = false;
@@ -78,7 +74,7 @@ public class NPCInteraction : MonoBehaviour
             isPlayerNearby = true;
             outline.SetActive(true);
             talkIcon.SetActive(true);
-            talkUI.SetActive(true);
+            if (talkUI != null) talkUI.SetActive(true);
         }
     }
 
@@ -89,7 +85,7 @@ public class NPCInteraction : MonoBehaviour
             isPlayerNearby = false;
             outline.SetActive(false);
             talkIcon.SetActive(false);
-            talkUI.SetActive(false);
+            if (talkUI != null) talkUI.SetActive(false);
         }
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
