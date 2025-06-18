@@ -1,5 +1,5 @@
-<img src="https://capsule-render.vercel.app/api?type=모양&color=색상코드&height=높이&section=header&text=🎮 Unity 심화 프로젝트
-Find a fish&fontSize=25" />
+###🎮 Unity 심화 프로젝트
+###Find a fish&fontSize=25
 
 
 appstore
