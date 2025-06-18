@@ -23823,7 +23823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startUI: {fileID: 0}
-  gameUI: {fileID: 0}
+  gameUI: {fileID: 998687301}
   pauseUI: {fileID: 0}
 --- !u!4 &1181063176
 Transform:
@@ -24126,6 +24126,7 @@ GameObject:
   - component: {fileID: 1280490844}
   - component: {fileID: 1280490843}
   - component: {fileID: 1280490842}
+  - component: {fileID: 1280490846}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -24216,6 +24217,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1280490846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280490841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408a944bc218b1d409ef9257e7c87f9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1289658214
 PrefabInstance:
   m_ObjectHideFlags: 0

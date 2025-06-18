@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -21,9 +22,16 @@ public class UIManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
             Destroy(gameObject);
-        DontDestroyOnLoad(gameObject);
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        startUI = FindObjectOfType<StartUI>(true);
+        gameUI = FindObjectOfType<GameUI>(true);
+        pauseUI = FindObjectOfType<PauseUI>(true);
     }
 }
