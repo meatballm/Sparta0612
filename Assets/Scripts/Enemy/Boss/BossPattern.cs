@@ -85,7 +85,10 @@ public class PatternLaser : IBossPattern
         GameObject beam = GameObject.Instantiate(boss.laserBeamPrefab, spawnPosition, Quaternion.identity); // 광선(Beam) 생성
         yield return new WaitForSeconds(0.1f); // 0.1초 뒤
 
-        Collider2D[] hits = Physics2D.OverlapBoxAll(beam.transform.position, beam.transform.localScale, 0f); // 충돌 체크
+        
+        BoxCollider2D box = beam.GetComponent<BoxCollider2D>();
+
+        Collider2D[] hits = Physics2D.OverlapBoxAll(box.bounds.center, box.bounds.size, 0f); // 충돌 체크
         foreach (var hit in hits)
         {
             if (hit.CompareTag("Player"))

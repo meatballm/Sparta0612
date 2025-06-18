@@ -3161,6 +3161,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -8435245712485981826, guid: cebe10806a5ee4420aa4cbdfe80a6939, type: 3}
+--- !u!4 &282778214 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 519638856235448094, guid: 50704a7e9252b05418ab12af87069585, type: 3}
+  m_PrefabInstance: {fileID: 1604887040}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &282778216 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1344631045362311463, guid: 50704a7e9252b05418ab12af87069585, type: 3}
+  m_PrefabInstance: {fileID: 1604887040}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &288561397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3391,6 +3401,7 @@ MonoBehaviour:
   nameText: {fileID: 602327164}
   dialogText: {fileID: 1398772459}
   choiceButton: {fileID: 682941774}
+  bg: {fileID: 0}
   typingSpeed: 0.05
 --- !u!1 &299322683
 GameObject:
@@ -56561,6 +56572,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2545214978225051373, guid: 50704a7e9252b05418ab12af87069585, type: 3}
+      propertyPath: weaponPivot
+      value: 
+      objectReference: {fileID: 282778214}
+    - target: {fileID: 2545214978225051373, guid: 50704a7e9252b05418ab12af87069585, type: 3}
+      propertyPath: weaponRenderer
+      value: 
+      objectReference: {fileID: 282778216}
     - target: {fileID: 3801794280516995681, guid: 50704a7e9252b05418ab12af87069585, type: 3}
       propertyPath: m_Name
       value: Player 1
