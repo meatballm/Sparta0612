@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
         }
         SetBGMVolume(0.1f);
         SetSFXVolume(0.1f);
-        SetWalkVolume(0.5f);
+        SetWalkVolume(0.3f);
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -70,4 +70,5 @@ public class AudioManager : MonoBehaviour
 
     public float GetBGMVolume() => bgmSource.volume;
     public float GetSFXVolume() => sfxSource.volume;
+    public float GetWalkVolume() => walkSource.volume;
 }

@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     public RangeAttack rangeAttack;
 
     private Vector2 lastFootstepPos; // 마지막 발소리의 포지션
-    private float footstepDistance = 1f; // 발소리 발생 거리 기준
+    private float footstepDistance = 1.5f; // 발소리 발생 거리 기준
 
     void Awake()
     {
@@ -128,11 +128,11 @@ public class PlayerController : MonoBehaviour
         // 실제 물리 이동
         _rigidbody.velocity = direction;
 
-        // 이동 거리 검사
+        // 이동 거리 검사 후 발자국 사운드 출력
         float movedDistance = Vector2.Distance(lastFootstepPos, transform.position);
         if (movedDistance >= footstepDistance)
         {
-            AudioManager.Instance.PlaySFX(Random.Range(5, 8)); // 예: 발소리 재생
+            AudioManager.Instance.PlayWalk(Random.Range(0, 6)); // 예: 발소리 재생
             lastFootstepPos = transform.position;
         }
         

@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
+using Unity.Mathematics;
 
 [System.Serializable]
 public class PlayerStat
@@ -57,10 +55,13 @@ public class PlayerStat
     {
         curHp = (int)Mathf.Max(curHp - amount, 0);
 
+        AudioManager.Instance.PlaySFX(UnityEngine.Random.Range(9, 11));
+
         // UI 갱신
         float ratio = curHp / (float)maxHp;
         _conditionUI.SetHP(ratio);
         UIManager.Instance.Game.Condition.SetHP(ratio);
+
 
         if (curHp <= 0)
         {
