@@ -22,7 +22,15 @@ public class Portal : MonoBehaviour
                 player.transform.position = new Vector3(-3, 2, 0);
             }
         }
-        if(nextSceneName == "EndingScene")
+        if (nextSceneName == "TownMapEndingScene")
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                player.transform.position = new Vector3(2.7f, 3.6f, 0);
+            }
+        }
+        if (nextSceneName == "EndingScene")
         {
             GameObject ui = GameObject.Find("UI");
             GameObject dot = GameObject.Find("[DOTween]");
