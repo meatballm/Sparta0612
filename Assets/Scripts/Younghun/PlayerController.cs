@@ -12,6 +12,22 @@ public class PlayerController : Character
     public PlayerStat stats = new PlayerStat();
     [SerializeField] private PlayerAnimation playerAnimation;
 
+    public static PlayerController Instance;
+
+    void Awake()
+    {
+        base.Awake();
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject); // 중복 생성 방지
+        }
+    }
+
     protected override void Start()
     {
         base.Start();
