@@ -68,25 +68,14 @@ public class PlayerController : Character
         Vector2 screenPos = Vector2.zero;
         bool validInput = false;
 
-#if UNITY_EDITOR || UNITY_STANDALONE
-        // PC 환경: 마우스 입력
         if (Mouse.current != null)
         {
             screenPos = Mouse.current.position.ReadValue();
             validInput = true;
 
         }
-#elif UNITY_ANDROID || UNITY_IOS
-    // 모바일 환경: 터치 입력
-    if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
-    {
-        screenPos = Touchscreen.current.primaryTouch.position.ReadValue();
-        validInput = true;
-    }
-#endif
 
-        if (!validInput || _camera == null || screenPos == Vector2.zero)
-            return;
+        if (!validInput || _camera == null || screenPos == Vector2.zero) return;
 
         // 화면 좌표를 월드 좌표로 변환
         Vector3 screenPos3D = new Vector3(screenPos.x, screenPos.y, _camera.WorldToScreenPoint(transform.position).z);
