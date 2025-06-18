@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,15 +54,18 @@ public class BossController : MonoBehaviour
         if (ratio >= 0.8f)
             currentPattern = new PatternChase();
         else if (ratio >= 0.7f)
-            currentPattern = new PatternExplosion(); 
+            currentPattern = new PatternExplosion();
         else if (ratio >= 0.5f)
             currentPattern = new PatternLaser();
 
         // else if (ratio >= 0.2f)
         //     currentPattern = new PatternShield();
         else if (ratio <= 0f)
+        {
             currentPattern = new PatternDie();
+            GameObject.Find("Item_fish").transform.position = new Vector3(-17, -40, 0);
             return;
+        }
         //     // currentPattern = new PatternSummon(); // 나중에 구현
     }
 }

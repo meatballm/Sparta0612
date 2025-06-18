@@ -12,6 +12,7 @@ public class Lizard_FireBall : MonoBehaviour
     public void Start()
     {
         playerStat = FindObjectOfType<PlayerController>().stats;
+        Destroy(gameObject, 3f);
     }
     public void SetDirection(Vector2 dir)
     {

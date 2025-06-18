@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         boxCollider = GetComponentInChildren<BoxCollider2D>();
         enemyCondition = GetComponent<EnemyCondition>();
+        canvasTransform = GameObject.Find("UI").transform;
         if (enemyCondition != null)
             enemyCondition.UpdateHealthBar((int)enemyHP, (int)enemyHP); // UI 동기화
     }
