@@ -1,5 +1,3 @@
-# Unity 심화 프로젝트
-
 <h1>🐟 Find a fish 🐟</h1>
 
 ## 🕵️ 프로젝트 소개
@@ -66,6 +64,22 @@ NPC(고양이)와의 대화로 이 게임의 목표를 알 수 있습니다.
 몬스터 피격 시 체력바, 데미지 텍스트 UI가 활성화되어 전투 상황을 명확히 보여줍니다.
 
 *스태미너 : 플레이어가 이동하면 소모되고, 멈추면 회복됩니다. 스태미너가 0이면 이동속도가 느려집니다.
+
+
+*무기 종류 및 특징 :
+
+![샷건GIF](https://github.com/user-attachments/assets/8563cac4-6d8f-483f-bd0b-af74096bc39a)
+
+산탄총 : 적은 장탄수, 다섯 발씩 사격, 짧은 재장전 속도, 짧은 사거리
+
+![스나이퍼GIF](https://github.com/user-attachments/assets/a3f46afc-307d-4e5e-b4f2-bff84c111ff1)
+
+저격총 : 중간 장탄수, 느린 연사속도, 중간 재정전 속도, 긴 사거리, 몬스터 관통 가능
+
+![돌격소총GIF](https://github.com/user-attachments/assets/6097a53d-c061-4959-b933-69e810ef3b72)
+
+돌격소총 : 많은 장탄수, 준수한 연사속도, 긴 재장전 속도, 보통 사거리
+
 
 ### ☠몬스터 - 보스 구조
 ![enemy](https://github.com/user-attachments/assets/c688aba1-5297-4ecd-9257-da582583dcd4)
