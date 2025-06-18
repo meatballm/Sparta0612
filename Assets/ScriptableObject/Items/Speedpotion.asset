@@ -14,10 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Speedpotion
   itemIcon: {fileID: 2108943802, guid: 8063ff70793da874f906e9848b71fdef, type: 3}
-  itemType: 2
-  description: "\uC774\uB3D9\uC18D\uB3C4\uAC00 \uC77C\uC815 \uC2DC\uAC04\uB3D9\uC548
-    \uC99D\uAC00\uD569\uB2C8\uB2E4."
+  itemType: 1
+  description: "\uC774\uB3D9\uC18D\uB3C4\uAC00 3\uCD08 \uB3D9\uC548 \uC99D\uAC00\uD569\uB2C8\uB2E4."
   defaultCount: 0
+  canStack: 1
+  maxStackAmount: 50
   defaultAmmo: 0
   maxAmmo: 0
-  restoreAmount: 0
+  consumableType: 1
+  healAmount: 0
+  speedUpDuration: 3
+  speedUpValue: 10

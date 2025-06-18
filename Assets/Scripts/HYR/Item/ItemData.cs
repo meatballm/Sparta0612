@@ -6,24 +6,37 @@ public enum ItemType
 {
     Weapon,
     Consumable,
-    Passive,
     Etc
+}
+
+public enum ConsumableType
+{
+    Heal,
+    SpeedUp
 }
 
 [CreateAssetMenu(fileName = "NewItem", menuName = "Item/ItemData")]
 
 public class ItemData : ScriptableObject
 {
+    [Header("Default")]
     public string itemName;
     public Sprite itemIcon;
     public ItemType itemType;
     public string description;
     public int defaultCount;
 
-    // 무기
+    [Header("Stacking")]
+    public bool canStack;
+    public int maxStackAmount;
+
+    [Header("Ammo")]
     public int defaultAmmo;
     public int maxAmmo;
 
-    // 물약
-    public int restoreAmount;
+    [Header("Consumable")]
+    public ConsumableType consumableType;
+    public int healAmount;
+    public float speedUpDuration;
+    public float speedUpValue;
 }

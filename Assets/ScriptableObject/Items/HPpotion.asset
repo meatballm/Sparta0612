@@ -15,8 +15,13 @@ MonoBehaviour:
   itemName: HPpotion
   itemIcon: {fileID: -568996249, guid: 8063ff70793da874f906e9848b71fdef, type: 3}
   itemType: 1
-  description: "\uCCB4\uB825\uC744 \uC77C\uC815\uB7C9 \uD68C\uBCF5\uC2DC\uCF1C\uC90D\uB2C8\uB2E4."
+  description: "\uCCB4\uB825\uC744 30 \uD68C\uBCF5\uC2DC\uCF1C\uC90D\uB2C8\uB2E4."
   defaultCount: 0
+  canStack: 1
+  maxStackAmount: 50
   defaultAmmo: 0
   maxAmmo: 0
-  restoreAmount: 0
+  consumableType: 0
+  healAmount: 30
+  speedUpDuration: 0
+  speedUpValue: 0
