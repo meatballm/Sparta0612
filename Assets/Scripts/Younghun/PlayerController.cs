@@ -1,31 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.RuleTile.TilingRuleOutput;
+using System.Collections;
 
-public class PlayerController : Character
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Camera _camera; // 마우스 위치를 월드 좌표로 변환하기 위한 메인 카메라 참조
-    
+
     public PlayerStat stats = new PlayerStat();
     [SerializeField] private PlayerAnimation playerAnimation;
 
     [Header("Dodge")]
-    private bool canDodge;               // 회피 가능 여부
-    public float cooldownDodge;          // 회피 쿨타임
+    public bool canDodge;         // 회피 가능 여부
+    public bool isInvincible;            // 회피 무적 적용 여부
     public float dodgeSpeed;             // 회피 속도
     public float dodgeTime;              // 회피 시간
-    public float dodgeInvincibleTime;    // 회피 무적 시간
-    public bool isInvincible;            // 회피 무적 적용 여부
     public Vector2 dodgeDirection;       // 회피 방향
+    private Vector2 originalVelocity;    // 회피 전 속도 저장용
 
     public static PlayerController Instance;
+
+    protected Rigidbody2D _rigidbody; // 이동을 위한 물리 컴포넌트
+
+    [SerializeField] private SpriteRenderer weaponRenderer; // 좌우 반전을 위한 렌더러
+    [SerializeField] private Transform weaponPivot; // 무기를 회전시킬 기준 위치
+
+    private Vector2 movementDirection = Vector2.zero; // 현재 이동 방향
+    private Vector2 lookDirection = Vector2.zero; // 현재 바라보는 방향
+
+    [SerializeField] private float moveSpeed;
 
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+
+        //if (weaponRenderer == null) weaponRenderer = GetComponentInChildren<SpriteRenderer>();
 
         if (Instance == null)
         {
@@ -43,12 +51,75 @@ public class PlayerController : Character
         _camera = Camera.main;
         stats.Start();
         playerAnimation.SetStat(stats);
+        canDodge = true;
     }
 
-    protected override void Update()
+    void FixedUpdate()
     {
-        base.Update();
-        UpdateLookDirectionUniversal();
+        Movment(movementDirection);
+    }
+
+    protected void Update()
+    {
+        Rotate(lookDirection);
+        UpdateLookDirection();
+        stats.Updatd();
+
+        // 회피 키 입력 처리
+        if (this.canDodge && Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("회피키 입력 확인");
+            Debug.Log("canDodge 상태 확인");
+            if (stats.curStamina > stats.consumeStamina)
+            {
+                Debug.Log($"{stats.curStamina} / {stats.consumeStamina}");
+
+                Vector2 inputDir = movementDirection;
+
+                // 입력 없으면 마지막 방향 또는 앞방향 사용
+                if (inputDir != Vector2.zero) dodgeDirection = inputDir;
+                Debug.Log(dodgeDirection);
+
+                StartCoroutine(Dodge());
+
+            }
+        }
+    }
+
+    private IEnumerator Dodge()
+    {
+        canDodge = false;
+
+        originalVelocity = _rigidbody.velocity;
+        _rigidbody.velocity = dodgeDirection * dodgeSpeed;
+
+        yield return new WaitForSeconds(dodgeTime);
+
+        _rigidbody.velocity = originalVelocity;
+        canDodge = true;
+
+        stats.ReduceStamina(stats.consumeStamina);
+    }
+
+    private void Movment(Vector2 direction)
+    {
+        direction = direction * moveSpeed; // 이동 속도
+
+        // 실제 물리 이동
+        _rigidbody.velocity = direction;
+    }
+
+    private void Rotate(Vector2 direction)
+    {
+        float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        bool isLeft = Mathf.Abs(rotZ) > 90f;
+
+        if (weaponPivot != null)
+        {
+            // 무기 회전 처리
+            weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ);
+            weaponRenderer.flipY = isLeft;
+        }
     }
 
     public void OnMoveInput(InputAction.CallbackContext context)
@@ -63,7 +134,7 @@ public class PlayerController : Character
         }
     }
 
-    private void UpdateLookDirectionUniversal()
+    private void UpdateLookDirection()
     {
         Vector2 screenPos = Vector2.zero;
         bool validInput = false;
@@ -72,7 +143,6 @@ public class PlayerController : Character
         {
             screenPos = Mouse.current.position.ReadValue();
             validInput = true;
-
         }
 
         if (!validInput || _camera == null || screenPos == Vector2.zero) return;
@@ -89,6 +159,4 @@ public class PlayerController : Character
             lookDirection = direction;
         }
     }
-
-
 }

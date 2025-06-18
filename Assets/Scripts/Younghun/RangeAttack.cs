@@ -38,7 +38,7 @@ public class RangeAttack : MonoBehaviour
 
     private void Update()
     {
-        fireCooldown -= Time.deltaTime;
+        if (fireCooldown > 0) fireCooldown -= Time.deltaTime;
 
         if (Input.GetMouseButton(0) && fireCooldown <= 0f)
         {
