@@ -13,7 +13,7 @@ public class BossController : MonoBehaviour
     public Transform player;
     public float moveSpeed = 2f;
     public int damage = 10;
-    private float maxHp = 100;
+    private float maxHp = 500;
     public float currentHp { get; private set;}
 
     [Header("공격패턴 프리팹")]
@@ -27,6 +27,7 @@ public class BossController : MonoBehaviour
     void Start()
     {
         currentHp = maxHp;
+        Debug.Log($"보스 체력 : {currentHp}");
         UpdatePattern();
 
         player = GameObject.FindWithTag("Player").transform;
