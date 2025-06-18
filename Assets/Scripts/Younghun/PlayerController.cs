@@ -33,6 +33,9 @@ public class PlayerController : MonoBehaviour
 
     public RangeAttack rangeAttack;
 
+    private Vector2 lastFootstepPos; // 마지막 발소리의 포지션
+    private float footstepDistance = 1f; // 발소리 발생 거리 기준
+
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -57,6 +60,8 @@ public class PlayerController : MonoBehaviour
         stats.Start();
         playerAnimation.SetStat(stats);
         canDodge = true;
+
+        lastFootstepPos = transform.position; // 발소리 초기위치 설정
     }
 
     void FixedUpdate()
@@ -107,6 +112,7 @@ public class PlayerController : MonoBehaviour
         canDodge = true;
 
         stats.ReduceStamina(stats.consumeStamina);
+        
     }
 
     private void Movment(Vector2 direction)
@@ -121,6 +127,15 @@ public class PlayerController : MonoBehaviour
 
         // 실제 물리 이동
         _rigidbody.velocity = direction;
+
+        // 이동 거리 검사
+        float movedDistance = Vector2.Distance(lastFootstepPos, transform.position);
+        if (movedDistance >= footstepDistance)
+        {
+            AudioManager.Instance.PlaySFX(Random.Range(5, 8)); // 예: 발소리 재생
+            lastFootstepPos = transform.position;
+        }
+        
     }
 
     private void Rotate(Vector2 direction)
