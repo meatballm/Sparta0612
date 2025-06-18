@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
 
     private EnemyCondition enemyCondition;
 
+    private bool dead=false;
 
     public void Init(Battle source)
     {
@@ -79,6 +80,7 @@ public class Enemy : MonoBehaviour
     // 피격
     public void TakeDamage(float amount)
     {
+        if(dead) return;
         enemyHP -= amount;
 
         if (enemyCondition != null)
@@ -100,6 +102,7 @@ public class Enemy : MonoBehaviour
 
         if (enemyHP <= 0)
         {
+            dead = true;
             if (enemyCondition != null)
                 enemyCondition.HideAndDestroyBar(); // 죽으면 체력바 삭제
 

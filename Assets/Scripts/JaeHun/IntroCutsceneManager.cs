@@ -35,6 +35,7 @@ public class IntroCutsceneManager : MonoBehaviour
 
         // 컷씬 재생 시작
         StartCoroutine(PlayCutscene());
+        AudioManager.Instance.PlayBGM(4);
     }
 
     void Update()

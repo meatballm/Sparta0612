@@ -17,6 +17,7 @@ public class Portal : MonoBehaviour
         {
             Camera.main.backgroundColor = HexToColor("474747");
             GameObject player = GameObject.FindGameObjectWithTag("Player");
+            AudioManager.Instance.PlayBGM(2);
             if (player != null)
             {
                 player.transform.position = new Vector3(-3, 2, 0);
@@ -24,7 +25,9 @@ public class Portal : MonoBehaviour
         }
         if (nextSceneName == "TownMapEndingScene")
         {
+            Camera.main.backgroundColor = HexToColor("474747");
             GameObject player = GameObject.FindGameObjectWithTag("Player");
+            AudioManager.Instance.PlayBGM(5);
             if (player != null)
             {
                 player.transform.position = new Vector3(2.7f, 3.6f, 0);
