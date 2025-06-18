@@ -17,6 +17,11 @@ MonoBehaviour:
   itemType: 0
   description: "\uB77C\uC774\uD50C  \uACF5\uACA9\uB825 +20"
   defaultCount: 1
+  canStack: 0
+  maxStackAmount: 0
   defaultAmmo: 40
   maxAmmo: 40
-  restoreAmount: 0
+  consumableType: 0
+  healAmount: 0
+  speedUpDuration: 0
+  speedUpValue: 0

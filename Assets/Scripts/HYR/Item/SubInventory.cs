@@ -6,25 +6,22 @@ using DG.Tweening.Core.Easing;
 using UnityEngine.EventSystems;
 using System.Linq;
 
-public class SubInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class SubInventory : MonoBehaviour
 {
     [SerializeField] private RectTransform panel;
     [SerializeField] private Transform slotParent;
     [SerializeField] private List<SubInventorySlot> slots;
 
     // 인벤토리 위치 설정(두트윈)
-    [SerializeField] private float visibleY = 5f;
-    [SerializeField] private float hiddenY = -115f;
+    [SerializeField] private float visibleY = 5f; // 초기 위치
+    [SerializeField] private float hiddenY = -115f; // 화면 밖 위치
     [SerializeField] private float duration = 0.3f;
-
-    [SerializeField] private float hoverDelay = 0.3f;
     
     private List<Item> items = new List<Item>();
     private int currentSelectedIndex = -1;
+    private bool isVisible = true;
 
-    private bool isMouseOver = false;
     private bool isTabLocked = false;
-    private Coroutine hoverCoroutine;
 
     public bool HasItem(string itemName)
     {
@@ -34,7 +31,7 @@ public class SubInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     private void Start()
     {
-        panel.anchoredPosition = new Vector2(panel.anchoredPosition.x, hiddenY); // 초기 상태에는 창 숨김
+        panel.anchoredPosition = new Vector2(panel.anchoredPosition.x, visibleY);
 
         foreach (Transform child in slotParent)
         {
@@ -60,19 +57,6 @@ public class SubInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 SelectSlot(i);
             }
         }
-
-        // Tab으로 서브 인벤토리를 고정한 상황이 아닐 때
-        // 마우스 커서O 보임
-        if (isMouseOver && !isTabLocked)
-        {
-            AnimatePanel(visibleY);
-        }
-
-        // 마우스 커서X 숨김
-        if (!isMouseOver && !isTabLocked)
-        {
-            AnimatePanel(hiddenY);
-        }
     }
 
     private void AnimatePanel(float yPos)
@@ -80,42 +64,17 @@ public class SubInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         panel.DOAnchorPosY(yPos, duration).SetEase(Ease.OutQuad);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        isMouseOver = true;
-
-        if (!isTabLocked)
-        {
-            if (hoverCoroutine != null) StopCoroutine(hoverCoroutine);
-            hoverCoroutine = StartCoroutine(ShowInventoryWithDelay());
-        }
-    }
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        isMouseOver = false;
-
-        if (!isTabLocked)
-        {
-            if (hoverCoroutine != null) StopCoroutine(hoverCoroutine);
-            AnimatePanel(hiddenY);
-        }
-    }
-
-    private IEnumerator ShowInventoryWithDelay()
-    {
-        yield return new WaitForSeconds(hoverDelay);
-
-        if (isMouseOver && !isTabLocked)
-        {
-            AnimatePanel(visibleY);
-        }
-
-        hoverCoroutine = null;
-    }
-
     public void AddItem(Item item) // 획득 아이템 반영
     {
-        items.Add(item);
+        var existing = items.FirstOrDefault(i => i.Data == item.Data);
+        if (existing != null)
+        {
+            existing.AddCount(item.Count);
+        }
+        else
+        {
+            items.Add(item);
+        }
         SortItems();
         RefreshUI();
     }
@@ -132,8 +91,6 @@ public class SubInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     private void RefreshUI()
     {
-        Debug.Log($"[RefreshUI] slots.Count={slots.Count}, items.Count={items.Count}");
-
         int displayCount = Mathf.Min(slots.Count, items.Count);
         for (int i = 0; i < displayCount; i++)
         {
@@ -149,15 +106,25 @@ public class SubInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public void SelectSlot(int index)
     {
         if (index >= items.Count) return;
-
         var item = items[index];
-        if (item.Data.itemType == ItemType.Weapon)
-        {
-            EquipWeapon(item);
-        }
-
         currentSelectedIndex = index;
         UpdateSlotHighlight();
+
+        if (item.Data.itemType == ItemType.Weapon)
+            EquipWeapon(item);
+        else if (item.Data.itemType == ItemType.Consumable)
+            UseConsumable(item);
+    }
+
+    private void UseConsumable(Item item)
+    {
+        // 사용 효과
+        Debug.Log($"{item.Data.itemName} 사용");
+        // 개수 차감
+        item.AddCount(-1);
+        if (item.Count <= 0)
+            items.Remove(item);
+        RefreshUI();
     }
 
     private void EquipWeapon(Item weapon)
@@ -170,7 +137,8 @@ public class SubInventory : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         for (int i = 0; i < slots.Count; i++)
         {
-            slots[i].SetSelected(i == currentSelectedIndex);
+            bool active = (i == currentSelectedIndex);
+            slots[i].SetSelected(active);
         }
     }
 }

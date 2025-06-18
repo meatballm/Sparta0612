@@ -641,6 +641,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 457875012819817948, guid: a1ec1450df36f284e87db90e723d4433, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 457875012819817948, guid: a1ec1450df36f284e87db90e723d4433, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionId
+      value: bf8c7add-7994-4948-ad0f-67509466e385
+      objectReference: {fileID: 0}
+    - target: {fileID: 457875012819817948, guid: a1ec1450df36f284e87db90e723d4433, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionName
+      value: Player/Dodge[/Keyboard/space]
+      objectReference: {fileID: 0}
+    - target: {fileID: 562665530676792366, guid: a1ec1450df36f284e87db90e723d4433, type: 3}
+      propertyPath: _camera
+      value: 
+      objectReference: {fileID: 1434064372}
+    - target: {fileID: 562665530676792366, guid: a1ec1450df36f284e87db90e723d4433, type: 3}
+      propertyPath: playerAnimation
+      value: 
+      objectReference: {fileID: 566092789}
     - target: {fileID: 1760438862405260283, guid: a1ec1450df36f284e87db90e723d4433, type: 3}
       propertyPath: m_Name
       value: Untagged
@@ -909,6 +929,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 468974595}
   m_CullTransparentMesh: 1
+--- !u!114 &566092789 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7002366159842237426, guid: a1ec1450df36f284e87db90e723d4433, type: 3}
+  m_PrefabInstance: {fileID: 407287920}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee5be4058e14bc64e90c71069f08689f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &579689697
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1344,7 +1375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &635660748
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1798,6 +1829,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snail
       objectReference: {fileID: 0}
+    - target: {fileID: 4462762735891778436, guid: f5d00d3345d9a4043acfa4e1882d7112, type: 3}
+      propertyPath: canvasTransform
+      value: 
+      objectReference: {fileID: 1405145720}
     - target: {fileID: 8064546130945539716, guid: f5d00d3345d9a4043acfa4e1882d7112, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3
@@ -2705,7 +2740,6 @@ MonoBehaviour:
   visibleY: 5
   hiddenY: -115
   duration: 0.3
-  hoverDelay: 0.3
 --- !u!1001 &1076037559
 PrefabInstance:
   m_ObjectHideFlags: 0

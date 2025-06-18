@@ -26,7 +26,6 @@ public class DamageUI : MonoBehaviour
     {
         damageText.text = damage.ToString();
         rect.position = screenPosition;
-        Debug.Log("데미지 텍스트 생성 위치 (screenPos): " + screenPosition);
         StartCoroutine(PopupRoutine());
     }
 
