@@ -14,51 +14,21 @@ public class Character : MonoBehaviour
     protected Vector2 lookDirection = Vector2.zero; // 현재 바라보는 방향
     public Vector2 LookDirection { get { return lookDirection; } }
 
-    private Vector2 knockback = Vector2.zero; // 넉백 방향
-    private float knockbackDuration = 0.0f; // 넉백 지속 시간
-
     [SerializeField] private float moveSpeed;
-
-    protected virtual void Awake()
-    {
-        _rigidbody = GetComponent<Rigidbody2D>();
-    }
-
-    protected virtual void Start()
-    {
-
-    }
 
     protected virtual void Update()
     {
-        //HandleAction();
         Rotate(lookDirection);
     }
 
     protected virtual void FixedUpdate()
     {
         Movment(movementDirection);
-        if (knockbackDuration > 0.0f)
-        {
-            knockbackDuration -= Time.fixedDeltaTime; // 넉백 시간 감소
-        }
-    }
-
-    protected virtual void HandleAction()
-    {
-
     }
 
     private void Movment(Vector2 direction)
     {
         direction = direction * moveSpeed; // 이동 속도
-
-        // 넉백 중이면 이동 속도 감소 + 넉백 방향 적용
-        if (knockbackDuration > 0.0f)
-        {
-            direction *= 0.2f; // 이동 속도 감소
-            direction += knockback; // 넉백 방향 추가
-        }
 
         // 실제 물리 이동
         _rigidbody.velocity = direction;
@@ -75,12 +45,5 @@ public class Character : MonoBehaviour
             weaponPivot.rotation = Quaternion.Euler(0, 0, rotZ);
             weaponRenderer.flipY = isLeft;
         }
-    }
-
-    public void ApplyKnockback(Transform other, float power, float duration)
-    {
-        knockbackDuration = duration;
-        // 상대 방향을 반대로 밀어냄
-        knockback = -(other.position - transform.position).normalized * power;
     }
 }

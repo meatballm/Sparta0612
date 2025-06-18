@@ -14,12 +14,7 @@ public class PlayerController : Character
 
     [Header("Dodge")]
     private bool canDodge;               // 회피 가능 여부
-    private float cooldownDodge;         // 회피 쿨타임
-    public float CooldownDodge
-    {
-        get => cooldownDodge;
-        set => cooldownDodge = Mathf.Clamp(value, 1f, 5f); // 범위 제한
-    }
+    public float cooldownDodge;          // 회피 쿨타임
     public float dodgeSpeed;             // 회피 속도
     public float dodgeTime;              // 회피 시간
     public float dodgeInvincibleTime;    // 회피 무적 시간
@@ -30,7 +25,8 @@ public class PlayerController : Character
 
     void Awake()
     {
-        base.Awake();
+        _rigidbody = GetComponent<Rigidbody2D>();
+
         if (Instance == null)
         {
             Instance = this;
@@ -42,9 +38,8 @@ public class PlayerController : Character
         }
     }
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
         _camera = Camera.main;
         stats.Start();
         playerAnimation.SetStat(stats);
