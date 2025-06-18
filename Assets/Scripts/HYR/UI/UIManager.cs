@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private StartUI startUI;
     [SerializeField] private GameUI gameUI;
     [SerializeField] private PauseUI pauseUI;
+    [SerializeField] private GameObject gameoverUI;
 
     // 외부 접근용 프로퍼티
     public GameUI Game => gameUI;
@@ -33,24 +34,26 @@ public class UIManager : MonoBehaviour
         startUI = FindObjectOfType<StartUI>(true);
         gameUI = FindObjectOfType<GameUI>(true);
         pauseUI = FindObjectOfType<PauseUI>(true);
+        gameoverUI = GameObject.Find("GameOverUI");
         if (scene.name == "EndingScene") return;
         if (scene.name == "StartScene")
         {
             gameUI.gameObject.SetActive(false);
             pauseUI.gameObject.SetActive(false);
             startUI.gameObject.SetActive(true);
+            return;
         }
-        else if(scene.name == "IntroScene")
+        if (scene.name == "IntroScene")
         {
+            Destroy(GameObject.FindWithTag("Player")?.gameObject);
             gameUI.gameObject.SetActive(false);
             pauseUI.gameObject.SetActive(false);
             startUI.gameObject.SetActive(false);
+            gameoverUI.SetActive(false);
+            return;
         }
-        else
-        {
-            gameUI.gameObject.SetActive(true);
-            pauseUI.gameObject.SetActive(true);
-            startUI.gameObject.SetActive(false);
-        }
+        gameUI.gameObject.SetActive(true);
+        pauseUI.gameObject.SetActive(true);
+        startUI.gameObject.SetActive(false);
     }
 }

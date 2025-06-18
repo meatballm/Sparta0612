@@ -22,6 +22,9 @@ public class UIScript : MonoBehaviour
     }
     public void Gameover()
     {
+        GameObject player = GameObject.FindWithTag("Player");
+        player.GetComponent<PlayerController>().enabled = false;
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GameoverPanel.SetActive(true);
     }
 }
