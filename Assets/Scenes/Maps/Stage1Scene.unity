@@ -35026,8 +35026,10 @@ MonoBehaviour:
   - {fileID: 364480977372290742, guid: 5c9a9ac1f0194461c8a18ffac7b5e964, type: 3}
   - {fileID: 9162694089407552866, guid: f5d00d3345d9a4043acfa4e1882d7112, type: 3}
   - {fileID: 6318797958925645875, guid: 3391aceac62f5404891cfa7fbf78219e, type: 3}
-  rewardItemPrefabs: []
-  rewardChance: 1
+  rewardItemPrefabs:
+  - {fileID: 1237345276209807851, guid: 2058287d026c24e41bf4982ec78937d6, type: 3}
+  - {fileID: 2192272575000095507, guid: c9a3fa24c6553b740bcabf958d468219, type: 3}
+  rewardChance: 0.5
 --- !u!4 &807318709
 Transform:
   m_ObjectHideFlags: 0
@@ -37363,7 +37365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &984000801
 Transform:
   m_ObjectHideFlags: 0
@@ -58132,7 +58134,7 @@ PrefabInstance:
     - target: {fileID: 5624854234229174330, guid: 88f72776b1ca4304ea887538a243998f, type: 3}
       propertyPath: itemPrefab
       value: 
-      objectReference: {fileID: 3459484460112783270, guid: 36dd7c2c255dc9447a1480765412a835, type: 3}
+      objectReference: {fileID: 1237345276209807851, guid: 2058287d026c24e41bf4982ec78937d6, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

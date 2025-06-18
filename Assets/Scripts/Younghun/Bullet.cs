@@ -54,12 +54,12 @@ public class Bullet : MonoBehaviour
 
         if(other.CompareTag("Enemy"))
         {
-            enemy.TakeDamage(20);
+            enemy.TakeDamage(damage);
             Destroy(gameObject);
         }
         else if (other.CompareTag("Boss"))
         {
-            boss.TakeDamage(20);
+            boss.TakeDamage(damage);
             Destroy(gameObject);
         }
         else

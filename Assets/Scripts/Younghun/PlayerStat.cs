@@ -97,6 +97,7 @@ public class PlayerStat
     public void Death()
     {
         OnDeath?.Invoke();
+        UIScript.Instance.Gameover();
         Debug.Log("게임오버");
     }
 }

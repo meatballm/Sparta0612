@@ -11,6 +11,7 @@ public class Gameover : MonoBehaviour, IPointerClickHandler
         if (!string.IsNullOrEmpty(sceneName))
         {
             SceneManager.LoadScene(sceneName);
+            UIScript.Instance.gameover = false;
         }
         else
         {

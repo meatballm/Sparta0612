@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 2108943802, guid: 8063ff70793da874f906e9848b71fdef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 6bddb3e823def594c876769ee97fb259, type: 2}
   pickupIcon: {fileID: 0}
+  weaponData: {fileID: 0}
 --- !u!61 &2088066247051775579
 BoxCollider2D:
   m_ObjectHideFlags: 0

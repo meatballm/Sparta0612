@@ -30,6 +30,14 @@ public class EnemyCondition : MonoBehaviour
         hpBarCanvas = hpBarInstance.GetComponentInParent<Canvas>();
     }
 
+    private void Update() 
+    {
+        if (UIScript.Instance.gameover)
+        {
+            HideAndDestroyBar();
+        }
+    }
+
     // 체력바 갱신
     public void UpdateHealthBar(int currentHP, int maxHP)
     {

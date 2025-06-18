@@ -7,9 +7,11 @@ public class UIScript : MonoBehaviour
 {
     public static UIScript Instance;
     public GameObject GameoverPanel;
+    public bool gameover;
 
     private void Awake()
     {
+        gameover = false;
         if (Instance == null)
         {
             Instance = this;
@@ -22,6 +24,7 @@ public class UIScript : MonoBehaviour
     }
     public void Gameover()
     {
+        gameover = true;
         GameObject player = GameObject.FindWithTag("Player");
         player.GetComponent<PlayerController>().enabled = false;
         player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
