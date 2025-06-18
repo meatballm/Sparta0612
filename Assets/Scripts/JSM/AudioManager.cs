@@ -19,8 +19,8 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        SetBGMVolume(0.2f);
-        SetSFXVolume(0.2f);
+        SetBGMVolume(0.1f);
+        SetSFXVolume(0.1f);
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }

@@ -53,7 +53,7 @@ public class IntroCutsceneManager : MonoBehaviour
     IEnumerator PlayCutscene()    //코루틴을 만들기 위한 리턴 타입이고  StartCoroutine(PlayCutscene())에서 호출해서 작동
     {
         // 처음에 검은 화면에서 천천히 밝아짐
-        yield return StartCoroutine(FadeIn());  //코르틴 함수 실행 후(페이드 인 함수가 완전히 끝날 때 까지 기다린다)
+        //yield return StartCoroutine(FadeIn());  //코르틴 함수 실행 후(페이드 인 함수가 완전히 끝날 때 까지 기다린다)
                                                 //캔버스의 알파값을 1 >> 0으로 서서히 감소시킨다.
 
         for (int i = 0; i < cutsceneSprites.Length; i++)  //반복문의 시작이고 컷신스프라이트의 갯수만큼 실행한다 여기서
@@ -81,7 +81,7 @@ public class IntroCutsceneManager : MonoBehaviour
         }
 
         // 끝나면 다시 천천히 어두워짐
-        yield return StartCoroutine(FadeOut());
+        //yield return StartCoroutine(FadeOut());
 
         // 인트로 끝나고 StartScene으로 넘어감
         SceneManager.LoadScene("StartScene");

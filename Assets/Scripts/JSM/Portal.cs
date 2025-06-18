@@ -38,6 +38,7 @@ public class Portal : MonoBehaviour
             GameObject ui = GameObject.Find("UI");
             GameObject dot = GameObject.Find("[DOTween]");
             GameObject character = GameObject.FindWithTag("Player");
+            AudioManager.Instance.PlayBGM(1);
 
             if (ui != null) Destroy(ui);
             if (dot != null) Destroy(dot);
