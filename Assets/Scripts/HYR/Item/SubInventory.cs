@@ -7,6 +7,18 @@ using UnityEngine.EventSystems;
 using System.Linq;
 using static UnityEditor.Progress;
 
+public class InventoryItem
+{
+    public ItemData Data { get; private set; }
+    public int Count { get; private set; }
+
+    public InventoryItem(ItemData data, int count = 1)
+    {
+        Data = data;
+        Count = count;
+    }
+}
+
 public class SubInventory : MonoBehaviour
 {
     [SerializeField] private RectTransform panel;
@@ -139,10 +151,17 @@ public class SubInventory : MonoBehaviour
         RefreshUI();
     }
 
-    private void EquipWeapon(Item weapon)
+    private void EquipWeapon(Item item)
     {
-        // 무기 장착 호출
-        //GameManager.Instance.Player.EquipWeapon(weapon);
+        // 무기 데이터 연결
+        WeaponData weaponData = Resources.Load<WeaponData>("WeaponData/" + item.Data.itemName);
+        if (weaponData == null)
+        {
+            Debug.LogWarning("무기 데이터가 없습니다: " + item.Data.itemName);
+            return;
+        }
+
+        PlayerController.Instance.rangeAttack.SetWeaponData(weaponData);
     }
 
     private void UpdateSlotHighlight()

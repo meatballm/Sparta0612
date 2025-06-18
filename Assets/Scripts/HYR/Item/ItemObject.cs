@@ -8,6 +8,9 @@ public class ItemObject : MonoBehaviour
     [SerializeField] private GameObject pickupIcon;
     private RectTransform iconRect;
 
+    [Header("Weapon")]
+    public WeaponData weaponData;
+
     private bool isPlayerNearby = false;
 
     private void Start()

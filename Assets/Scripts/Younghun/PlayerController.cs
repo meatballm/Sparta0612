@@ -31,9 +31,12 @@ public class PlayerController : MonoBehaviour
 
     private Coroutine speedBuffCoroutine;
 
+    public RangeAttack rangeAttack;
+
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        rangeAttack = GetComponentInChildren<RangeAttack>();
 
         //if (weaponRenderer == null) weaponRenderer = GetComponentInChildren<SpriteRenderer>();
 
@@ -66,6 +69,9 @@ public class PlayerController : MonoBehaviour
         Rotate(lookDirection);
         UpdateLookDirection();
         stats.Updatd();
+
+        // 스테미나 하락/회복
+        stats.UpdateStamina(movementDirection.magnitude, Time.deltaTime);
 
         // 회피 키 입력 처리
         if (this.canDodge && Input.GetKeyDown(KeyCode.Space))
@@ -105,6 +111,12 @@ public class PlayerController : MonoBehaviour
 
     private void Movment(Vector2 direction)
     {
+        float speed = moveSpeed;
+
+        // 스태미너 0이면 이속 줄어듬
+        if (stats.curStamina <= 0)
+            speed *= 0.6f;
+
         direction = direction * moveSpeed; // 이동 속도
 
         // 실제 물리 이동

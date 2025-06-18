@@ -105,4 +105,19 @@ public class RangeAttack : MonoBehaviour
         float angle = UnityEngine.Random.Range(-spread / 2f, spread / 2f);
         return Quaternion.Euler(0, 0, angle) * transform.right;
     }
+
+    public void SetWeaponData(WeaponData weaponData)
+    {
+        this.weaponData = weaponData;
+
+        // 무기 데이터의 값을 RangeAttack에 반영
+        this.damagePerShot = weaponData.maxAmmo;
+        this.bulletSpeed = weaponData.fireRate;
+        this.bulletRange = weaponData.reloadSpeed;
+        this.pierceCount = (ushort)weaponData.bulletsPerShot;
+        this.targetTag = weaponData.targetTag;
+        this.curAmmo = weaponData.maxAmmo;
+
+        Debug.Log($"무기 교체: damage={damagePerShot}, speed={bulletSpeed}, range={bulletRange}, pierce={pierceCount}, tag={targetTag}, ammo={curAmmo}");
+    }
 }

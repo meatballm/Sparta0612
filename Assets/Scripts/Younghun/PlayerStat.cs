@@ -16,6 +16,9 @@ public class PlayerStat
     public int consumeStamina = 40;         // 스테미나 사용량
     public float reproductionStamina = 2;   // 스테미나 회복력
 
+    public float staminaDecreaseRate = 15f; // 스테미나 감소
+    public float staminaRecoverRate = 20f;  // 스테미나 회복
+
     private ConditionUI _conditionUI;
 
     public void Start()
@@ -23,7 +26,8 @@ public class PlayerStat
         curHp = maxHp;
         curStamina = maxStamina;
         _conditionUI = UIManager.Instance.Game.Condition;
-        _conditionUI.SetHP(1f); // UI 초기화
+        _conditionUI.SetHP(1f);
+        _conditionUI.SetStamina(1f);
     }
 
     public void Updatd()
@@ -42,7 +46,6 @@ public class PlayerStat
     public void HealHp(int amount)
     {
         curHp = (int)Mathf.Max(curHp + amount, maxHp);
-        Debug.Log($"플레이어 체력: {curHp}/{maxHp}");
 
         // UI 갱신
         float ratio = curHp / (float)maxHp;
@@ -53,7 +56,6 @@ public class PlayerStat
     public void ReduceHp(float amount)
     {
         curHp = (int)Mathf.Max(curHp - amount, 0);
-        Debug.Log($"플레이어 체력: {curHp}/{maxHp}");
 
         // UI 갱신
         float ratio = curHp / (float)maxHp;
@@ -74,13 +76,27 @@ public class PlayerStat
     public void ReduceStamina(float amount)
     {
         curStamina = (int)Mathf.Max(curStamina - amount, 0);
-        Debug.Log($"플레이어 스테미나: {curStamina}/{maxStamina}");
+    }
+
+    public void UpdateStamina(float moveInputMagnitude, float deltaTime)
+    {
+        if (moveInputMagnitude > 0.1f)
+        {
+            curStamina = Mathf.Max(curStamina - (staminaDecreaseRate * deltaTime), 0f);
+        }
+        else
+        {
+            curStamina = Mathf.Min(curStamina + (staminaRecoverRate * deltaTime), maxStamina);
+        }
+
+        // UI 연동
+        float ratio = curStamina / maxStamina;
+        _conditionUI.SetStamina(ratio);
     }
 
     public void Death()
     {
         OnDeath?.Invoke();
         Debug.Log("게임오버");
-        UIScript.Instance.Gameover();
     }
 }
