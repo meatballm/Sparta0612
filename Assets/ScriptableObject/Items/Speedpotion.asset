@@ -18,10 +18,10 @@ MonoBehaviour:
   description: "\uC774\uB3D9\uC18D\uB3C4\uAC00 3\uCD08 \uB3D9\uC548 \uC99D\uAC00\uD569\uB2C8\uB2E4."
   defaultCount: 0
   canStack: 1
-  maxStackAmount: 50
+  maxStackAmount: 30
   defaultAmmo: 0
   maxAmmo: 0
   consumableType: 1
   healAmount: 0
   speedUpDuration: 3
-  speedUpValue: 10
+  speedUpValue: 5

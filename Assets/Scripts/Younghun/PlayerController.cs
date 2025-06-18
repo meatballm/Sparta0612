@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float moveSpeed;
 
+    private Coroutine speedBuffCoroutine;
+
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -158,5 +160,21 @@ public class PlayerController : MonoBehaviour
         {
             lookDirection = direction;
         }
+    }
+
+    public void BuffMoveSpeed(float value, float duration)
+    {
+        if (speedBuffCoroutine != null)
+            StopCoroutine(speedBuffCoroutine);
+
+        speedBuffCoroutine = StartCoroutine(BuffMoveSpeedRoutine(value, duration));
+    }
+
+    private IEnumerator BuffMoveSpeedRoutine(float value, float duration)
+    {
+        moveSpeed += value;
+        yield return new WaitForSeconds(duration);
+        moveSpeed -= value;
+        speedBuffCoroutine = null;
     }
 }

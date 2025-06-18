@@ -5,6 +5,7 @@ using DG.Tweening;
 using DG.Tweening.Core.Easing;
 using UnityEngine.EventSystems;
 using System.Linq;
+using static UnityEditor.Progress;
 
 public class SubInventory : MonoBehaviour
 {
@@ -118,9 +119,20 @@ public class SubInventory : MonoBehaviour
 
     private void UseConsumable(Item item)
     {
-        // 사용 효과
-        Debug.Log($"{item.Data.itemName} 사용");
-        // 개수 차감
+        var player = FindObjectOfType<PlayerController>();
+
+        // 효과 적용
+        if (item.Data.consumableType == ConsumableType.Heal)
+        {
+            player.stats.HealHp(item.Data.healAmount);
+            Debug.Log($"{item.Data.itemName} 사용 체력 +{item.Data.healAmount}");
+        }
+        else if (item.Data.consumableType == ConsumableType.SpeedUp)
+        {
+            player.BuffMoveSpeed(item.Data.speedUpValue, item.Data.speedUpDuration);
+            Debug.Log($"{item.Data.itemName} 사용 이동속도 증가");
+        }
+
         item.AddCount(-1);
         if (item.Count <= 0)
             items.Remove(item);
