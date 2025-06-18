@@ -13,7 +13,7 @@ public class BossController : MonoBehaviour
     public Transform player;
     public float moveSpeed = 2f;
     public int damage = 10;
-    private float maxHp = 200;
+    private float maxHp = 100;
     public float currentHp { get; private set;}
 
     [Header("공격패턴 프리팹")]
@@ -22,7 +22,7 @@ public class BossController : MonoBehaviour
     public GameObject laserBeamPrefab;
 
     private IBossPattern currentPattern;
-    Animator animator;
+    public Animator animator;
 
     void Start()
     {
@@ -50,12 +50,18 @@ public class BossController : MonoBehaviour
     {
         float ratio = currentHp / maxHp;
 
-        if (ratio >= 0.7f)
+        if (ratio >= 0.8f)
+            currentPattern = new PatternChase();
+        else if (ratio >= 0.7f)
+            currentPattern = new PatternExplosion(); 
+        else if (ratio >= 0.5f)
             currentPattern = new PatternLaser();
-        // else if (ratio >= 0.4f)
-        //     currentPattern = new PatternExplosion();
-        // else
-        //     Debug.Log("보스 곧 죽음");
+
+        // else if (ratio >= 0.2f)
+        //     currentPattern = new PatternShield();
+        else if (ratio <= 0f)
+            currentPattern = new PatternDie();
+            return;
         //     // currentPattern = new PatternSummon(); // 나중에 구현
     }
 }

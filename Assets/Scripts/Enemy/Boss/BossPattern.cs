@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 // 보스 패턴 모음
@@ -49,7 +50,7 @@ public class PatternExplosion : IBossPattern
 // 레이저 =================================================================================================================================
 public class PatternLaser : IBossPattern
 {
-    private float interval = 2f; // 레이저 생성 주기
+    private float interval = 2f; // 광선 생성 주기
     private float elapsed = 0f; // 생성 주기 맞추는 타이머
     private int laserCount = 10; // 한 번에 떨어질 광선 개수
 
@@ -64,7 +65,7 @@ public class PatternLaser : IBossPattern
             for (int i = 0; i < laserCount; i++)
             {
                 Vector3 targetPos = boss.player.position;
-                targetPos.x = Random.Range(targetPos.x - 20, targetPos.x + 20); // x 값은 랜덤
+                targetPos.x = Random.Range(targetPos.x - 15, targetPos.x +15); // x 값은 랜덤
                 targetPos.y = targetPos.y + 6; // 플레이어보다 위쪽에서 떨어지도록 조정
 
                 boss.StartCoroutine(LaserRoutine(boss, targetPos));
@@ -76,15 +77,15 @@ public class PatternLaser : IBossPattern
     private IEnumerator LaserRoutine(BossController boss, Vector3 spawnPosition)
     {
         // 1. 경고 표시
-        GameObject warning = GameObject.Instantiate(boss.laserWarningPrefab, spawnPosition, Quaternion.identity);
-        yield return new WaitForSeconds(0.5f);
-        GameObject.Destroy(warning);
+        GameObject warning = GameObject.Instantiate(boss.laserWarningPrefab, spawnPosition, Quaternion.identity); // Warning 생성
+        yield return new WaitForSeconds(0.5f); // 0.5초 뒤
+        GameObject.Destroy(warning); // 파괴
 
         // 2. 광선 발사
-        GameObject beam = GameObject.Instantiate(boss.laserBeamPrefab, spawnPosition, Quaternion.identity);
-        yield return new WaitForSeconds(0.1f); // 딜레이 후 충돌 체크
+        GameObject beam = GameObject.Instantiate(boss.laserBeamPrefab, spawnPosition, Quaternion.identity); // 광선(Beam) 생성
+        yield return new WaitForSeconds(0.1f); // 0.1초 뒤
 
-        Collider2D[] hits = Physics2D.OverlapBoxAll(beam.transform.position, beam.transform.localScale, 0f);
+        Collider2D[] hits = Physics2D.OverlapBoxAll(beam.transform.position, beam.transform.localScale, 0f); // 충돌 체크
         foreach (var hit in hits)
         {
             if (hit.CompareTag("Player"))
@@ -96,4 +97,21 @@ public class PatternLaser : IBossPattern
         yield return new WaitForSeconds(0.5f);
         GameObject.Destroy(beam);
     }
+}
+
+// 죽음 =================================================================================================================================
+public class PatternDie : IBossPattern
+{
+    private float delay = 1f;
+    public void Execute(BossController boss)
+    {
+        boss.animator.SetBool("Destroy", true);
+        boss.StartCoroutine(Die(boss, delay));
+    }
+
+    private IEnumerator Die(BossController boss, float delay)
+{
+    yield return new WaitForSeconds(delay);
+    boss.gameObject.SetActive(false);
+}
 }
