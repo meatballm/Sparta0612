@@ -12,6 +12,7 @@ public class Portal : MonoBehaviour
         {
             return;
         }
+        SceneManager.LoadScene(nextSceneName);
         if (nextSceneName == "Stage1Scene")
         {
             Camera.main.backgroundColor = HexToColor("474747");
@@ -21,7 +22,16 @@ public class Portal : MonoBehaviour
                 player.transform.position = new Vector3(-3, 2, 0);
             }
         }
-        SceneManager.LoadScene(nextSceneName);
+        if(nextSceneName == "EndingScene")
+        {
+            GameObject ui = GameObject.Find("UI");
+            GameObject dot = GameObject.Find("[DOTween]");
+            GameObject character = GameObject.FindWithTag("Player");
+
+            if (ui != null) Destroy(ui);
+            if (dot != null) Destroy(dot);
+            if (character != null) Destroy(character);
+        }
     }
     Color HexToColor(string hex)
     {
