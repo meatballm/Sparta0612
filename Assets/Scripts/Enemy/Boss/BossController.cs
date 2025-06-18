@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // 보스 패턴 인터페이스
@@ -21,23 +22,42 @@ public class BossController : MonoBehaviour
     public GameObject laserWarningPrefab;
     public GameObject laserBeamPrefab;
 
-    private IBossPattern currentPattern;
+    // 공격패턴
+    private IBossPattern patternChase;
+    private IBossPattern patternExplosion;
+    private IBossPattern patternLaser;
+    private IBossPattern patternDie;
+
+    private List<IBossPattern> currentPattern = new List<IBossPattern>();
     public Animator animator;
+    PlayerStat playerStat;
 
     void Start()
     {
         currentHp = maxHp;
         Debug.Log($"보스 체력 : {currentHp}");
-        UpdatePattern();
-
+        
         player = GameObject.FindWithTag("Player").transform;
         animator = GetComponentInChildren<Animator>();
+        playerStat =  GameObject.FindWithTag("Player").GetComponent<PlayerController>().stats;
+
+        patternChase = new PatternChase();
+        patternExplosion = new PatternExplosion();
+        patternLaser = new PatternLaser();
+        patternDie = new PatternDie();
+
+        UpdatePattern();
     }
 
     void Update()
     {
         UpdatePattern(); // 체력 기준으로 패턴 갱신
-        currentPattern?.Execute(this);
+
+        Debug.Log("CurrentPattern Count: " + currentPattern.Count);
+        foreach ( var pattern in currentPattern)
+        {
+            pattern.Execute(this);
+        }
     }
 
     public void TakeDamage(float dmg)
@@ -49,24 +69,38 @@ public class BossController : MonoBehaviour
 
     private void UpdatePattern()
     {
+        currentPattern.Clear();
+
         float ratio = currentHp / maxHp;
 
         if (ratio >= 0.8f)
-            currentPattern = new PatternChase();
+            currentPattern.Add(patternChase);
         else if (ratio >= 0.7f)
-            currentPattern = new PatternExplosion();
+            currentPattern.Add(patternExplosion);
         else if (ratio >= 0.5f)
-            currentPattern = new PatternLaser();
+            currentPattern.Add(patternLaser);
+        // else if (ratio >= 0.2f) // 체력 20% 남았을 때 폭주모드. 모든 공격패턴 일어남.
+        // {
+        //     currentPattern.Add(patternChase);
+        //     currentPattern.Add(patternExplosion);
+        //     currentPattern.Add(patternLaser);
+        // } 
 
-        // else if (ratio >= 0.2f)
-        //     currentPattern = new PatternShield();
         else if (ratio <= 0f)
         {
-            currentPattern = new PatternDie();
+            currentPattern.Add(patternDie);
             GameObject.Find("Item_fish").transform.position = new Vector3(-17, -40, 0);
             return;
         }
-        //     // currentPattern = new PatternSummon(); // 나중에 구현
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerStat.ReduceHp(damage);
+        }
+
     }
 }
 
