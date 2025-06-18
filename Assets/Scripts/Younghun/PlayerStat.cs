@@ -9,9 +9,9 @@ public class PlayerStat
 {
     public event Action OnDeath;
 
-    private bool canDodge;
-    
-    private float cooldownDodge;
+    [Header("Dodge")]
+    private bool canDodge;               // 회피 가능 여부
+    private float cooldownDodge;         // 회피 쿨타임
     public float CooldownDodge
     {
         get => cooldownDodge;

@@ -10,7 +10,7 @@
     public float bulletSpeed;
     public float bulletRange;
     public ushort pierceCount;
-    public TargetTag targetTag;
+    public string targetTag;
 
     public RangeAttackInstance(WeaponData baseData, RangeAttack rangeAttack)
     {

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SniperRifle
   m_EditorClassIdentifier: 
   maxAmmo: 10
-  fireRate: 2
+  fireRate: 0.75
   bulletsPerShot: 1
   reloadSpeed: 2
   spread: 3
-  targetTag: 0
+  targetTag: Enemy

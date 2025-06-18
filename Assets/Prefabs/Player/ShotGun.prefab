@@ -161,14 +161,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed80284a851764f4894328d54c096dbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: df9a443a8484244408c4b1d2368fb2d4, type: 2}
+  weaponData: {fileID: 11400000, guid: 4c11b72de38fc30468f066a2bbe6cd44, type: 2}
   bulletPrefab: {fileID: 2154396310761551356, guid: 67330f4f0d44e25499c3fa77fd3fb191, type: 3}
   firePoint: {fileID: 5592010858912906656}
   damagePerShot: 3
-  bulletSpeed: 10
+  bulletSpeed: 20
   bulletRange: 5
   pierceCount: 1
-  targetTag: 0
+  targetTag: Enemy
   fireCooldown: 0
   curAmmo: 0
   isReloading: 0
