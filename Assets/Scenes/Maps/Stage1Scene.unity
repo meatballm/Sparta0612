@@ -36820,7 +36820,7 @@ MonoBehaviour:
   monsterPrefabs:
   - {fileID: 4690582612283613858, guid: ff56144d7eeaa447d92e1d424fc6bfb7, type: 3}
   - {fileID: 364480977372290742, guid: 5c9a9ac1f0194461c8a18ffac7b5e964, type: 3}
-  - {fileID: 9162694089407552866, guid: 7c90ece9868e84d6b9771195dadad1fb, type: 3}
+  - {fileID: 4251050430282563430, guid: f5d00d3345d9a4043acfa4e1882d7112, type: 3}
   rewardItemPrefabs: []
   rewardChance: 1
 --- !u!4 &807318709
