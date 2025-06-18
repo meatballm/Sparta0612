@@ -9,20 +9,6 @@ public class PlayerStat
 {
     public event Action OnDeath;
 
-    [Header("Dodge")]
-    private bool canDodge;               // 회피 가능 여부
-    private float cooldownDodge;         // 회피 쿨타임
-    public float CooldownDodge
-    {
-        get => cooldownDodge;
-        set => cooldownDodge = Mathf.Clamp(value, 1f, 5f); // 범위 제한
-    }
-    public float dodgeSpeed;             // 회피 속도
-    public float dodgeTime;              // 회피 시간
-    public float dodgeInvincibleTime;    // 회피 무적 시간
-    public bool isInvincible;            // 회피 무적 적용 여부
-    public Vector2 dodgeDirection;       // 회피 방향
-
     public int maxHp = 100;
     public int curHp;
 
@@ -67,5 +53,4 @@ public class PlayerStat
         OnDeath?.Invoke();
         Debug.Log("게임오버");
     }
-
 }
