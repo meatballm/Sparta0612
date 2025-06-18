@@ -159,7 +159,7 @@ MonoBehaviour:
   maxHP: 0
   enemyHP: 0
   damageUIPrefab: {fileID: 2569034621904609710, guid: efa6484be56b013449a9dcfae35ac070, type: 3}
-  canvasTransform: {fileID: 0}
+  canvasTransform: {fileID: 8849106709070132177, guid: 1094e9510250be84d8226cf6e445b804, type: 3}
 --- !u!114 &1434692136387519750
 MonoBehaviour:
   m_ObjectHideFlags: 0
