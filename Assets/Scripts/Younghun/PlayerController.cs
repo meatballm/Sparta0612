@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
         if (stats.curStamina <= 0)
             speed *= 0.6f;
 
-        direction = direction * moveSpeed; // 이동 속도
+        direction = direction * speed; // 이동 속도
 
         // 실제 물리 이동
         _rigidbody.velocity = direction;
