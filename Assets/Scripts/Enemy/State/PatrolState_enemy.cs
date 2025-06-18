@@ -7,7 +7,7 @@ public class PatrolState_enemy : IEnemyState
 {
     private Enemy enemy;
     private Vector3 targetPos;
-    private float speed = 2f;
+    private float speed = 1f;
 
     public PatrolState_enemy(Enemy enemy)
     {
