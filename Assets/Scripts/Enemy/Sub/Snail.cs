@@ -4,17 +4,21 @@
 public class Snail : Enemy 
 {
     Animator animator;
+    private Vector3 moveDir;
+    // private float knockback = 3f;
+
 
     void Awake()
     {
         maxHP = 100f;
         enemyHP = maxHP;
-        chaseRange = 5f;
+        chaseRange = 10f;
         attackRange = 3f;
         speed = 0.2f;
         damage = 0f;
         defense = 10f;
         animator = GetComponentInChildren<Animator>();
+        // rb = GetComponent<Rigidbody2D>();
     }
 
     // 공격x 껍질에 숨음. 방어력 높아짐.
@@ -28,18 +32,14 @@ public class Snail : Enemy
     // 플레이어와 반대방향으로 이동
     public override void MoveTowards()
     {
-        Vector3 dir = (player.position - transform.position).normalized;
-        transform.position += -dir * speed * Time.deltaTime;
+        moveDir = (player.position - transform.position).normalized;
+        // rb.MovePosition(rb.position + (-moveDir * speed * Time.deltaTime));
+        transform.position += -moveDir * speed * Time.deltaTime;
 
-        // 움직이는 방향에 따라 sprite 반전.
-        if ( 0 < -dir.x )
-        {
+        if ( 0 < moveDir.x )
             spriteRenderer.flipX = true;
-        }
         else
-        {
             spriteRenderer.flipX = false;
-        }
 
     }
     
@@ -63,6 +63,11 @@ public class Snail : Enemy
         if (collision.CompareTag("Player"))
         {
             playerStat.ReduceHp(damage);
+        }
+        else if( collision.CompareTag("Wall"))
+        {
+            // Vector3 dirToPlayer = (player.position - transform.position).normalized;
+            // transform.position -= dirToPlayer * knockback;
         }
     }
 }

@@ -12,16 +12,38 @@ public class Portal : MonoBehaviour
         {
             return;
         }
+        SceneManager.LoadScene(nextSceneName);
         if (nextSceneName == "Stage1Scene")
         {
             Camera.main.backgroundColor = HexToColor("474747");
             GameObject player = GameObject.FindGameObjectWithTag("Player");
+            AudioManager.Instance.PlayBGM(2);
             if (player != null)
             {
                 player.transform.position = new Vector3(-3, 2, 0);
             }
         }
-        SceneManager.LoadScene(nextSceneName);
+        if (nextSceneName == "TownMapEndingScene")
+        {
+            Camera.main.backgroundColor = HexToColor("474747");
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            AudioManager.Instance.PlayBGM(5);
+            if (player != null)
+            {
+                player.transform.position = new Vector3(2.7f, 3.6f, 0);
+            }
+        }
+        if (nextSceneName == "EndingScene")
+        {
+            GameObject ui = GameObject.Find("UI");
+            GameObject dot = GameObject.Find("[DOTween]");
+            GameObject character = GameObject.FindWithTag("Player");
+            AudioManager.Instance.PlayBGM(1);
+
+            if (ui != null) Destroy(ui);
+            if (dot != null) Destroy(dot);
+            if (character != null) Destroy(character);
+        }
     }
     Color HexToColor(string hex)
     {

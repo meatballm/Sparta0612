@@ -7,6 +7,7 @@ public class NPCInteraction : MonoBehaviour
 {
     [SerializeField] private GameObject outline;
     [SerializeField] private GameObject talkIcon;
+    [SerializeField] private GameObject talkUI;
     [SerializeField] private SubInventory inventory;
 
     private bool isPlayerNearby = false;
@@ -60,6 +61,7 @@ public class NPCInteraction : MonoBehaviour
             isPlayerNearby = true;
             outline.SetActive(true);
             talkIcon.SetActive(true);
+            talkUI.SetActive(true);
         }
     }
 
@@ -70,6 +72,7 @@ public class NPCInteraction : MonoBehaviour
             isPlayerNearby = false;
             outline.SetActive(false);
             talkIcon.SetActive(false);
+            talkUI.SetActive(false);
         }
     }
 }
