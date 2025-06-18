@@ -11,18 +11,12 @@ public class PlayerAnimation : MonoBehaviour
     private Vector2 moveInput;
     private Vector2 lastDirection;
 
-    [SerializeField] private PlayerStat stat;
+    private PlayerStat stat;
     private bool isDeath;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-
-        // 이벤트 등록
-        if (stat != null)
-        {
-            stat.OnDeath += Death;
-        }
 
         if (playerInput == null)
         {
@@ -53,10 +47,21 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+    public void SetStat(PlayerStat stat)
+    {
+        this.stat = stat;
+
+        // 이벤트 등록
+        stat.OnDeath += Death;
+    }
+
     private void Death()
     {
         isDeath = true;
-        animator.SetTrigger("IsDeath");
+        if (animator != null)
+        {
+            animator.SetTrigger("IsDeath");
+        }
     }
 
     private void OnDestroy()

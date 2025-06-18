@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
 
     protected virtual void Update()
     {
-        HandleAction();
+        //HandleAction();
         Rotate(lookDirection);
     }
 

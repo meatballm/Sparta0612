@@ -21,6 +21,7 @@ public class Pit : MonoBehaviour
     public Tilemap safeTilemap;
 
     private List<Vector3> _safeWorldPositions;
+    private bool inpit = false;
 
     void Awake()
     {
@@ -51,7 +52,7 @@ public class Pit : MonoBehaviour
 
         var pitBounds = GetComponent<Collider2D>().bounds;
         var playerBounds = other.bounds;
-        if (pitBounds.Contains(playerBounds.min) && pitBounds.Contains(playerBounds.max))
+        if (pitBounds.Contains(playerBounds.min) && pitBounds.Contains(playerBounds.max)&&!inpit)
         {
             Vector3 fallPoint = other.transform.position;
             StartCoroutine(HandlePit(other.gameObject, fallPoint));
@@ -65,9 +66,11 @@ public class Pit : MonoBehaviour
             var fx = Instantiate(effectPrefab, playerGO.transform.position, Quaternion.identity);
             Destroy(fx, effectLifeTime);
         }
-
-        //플레이어의 모델링만 없어지게 수정 필요
-        playerGO.SetActive(false);
+        inpit = true;
+        foreach (var sr in playerGO.GetComponentsInChildren<SpriteRenderer>())
+            sr.enabled = false;
+        playerGO.GetComponent<PlayerController>().enabled = false;
+        playerGO.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
         yield return new WaitForSeconds(effectLifeTime);
 
@@ -87,9 +90,10 @@ public class Pit : MonoBehaviour
             playerGO.transform.position = best;
         }
 
-        //여기에 데미지 주는 코드 추가 필요
-
-        //플레이어의 모델링만 없어지게 수정 필요
-        playerGO.SetActive(true);
+        inpit = false;
+        playerGO.GetComponent<PlayerController>().stats.ReduceHp(10);
+        foreach (var sr in playerGO.GetComponentsInChildren<SpriteRenderer>())
+            sr.enabled = true;
+        playerGO.GetComponent<PlayerController>().enabled = true;
     }
 }

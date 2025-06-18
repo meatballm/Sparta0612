@@ -9,12 +9,31 @@ public class PlayerController : Character
 {
     [SerializeField] private Camera _camera; // 마우스 위치를 월드 좌표로 변환하기 위한 메인 카메라 참조
     
-    public PlayerStat stats;
+    public PlayerStat stats = new PlayerStat();
+    [SerializeField] private PlayerAnimation playerAnimation;
+
+    public static PlayerController Instance;
+
+    void Awake()
+    {
+        base.Awake();
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject); // 중복 생성 방지
+        }
+    }
+
     protected override void Start()
     {
         base.Start();
         _camera = Camera.main;
         stats.Start();
+        playerAnimation.SetStat(stats);
     }
 
     protected override void Update()
@@ -72,4 +91,6 @@ public class PlayerController : Character
             lookDirection = direction;
         }
     }
+
+
 }

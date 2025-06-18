@@ -9,13 +9,19 @@ public class PlayerStat
 {
     public event Action OnDeath;
 
-    [SerializeField] private bool canDodge;
-    [SerializeField] private float cooldownDodge;
+    [Header("Dodge")]
+    private bool canDodge;               // 회피 가능 여부
+    private float cooldownDodge;         // 회피 쿨타임
     public float CooldownDodge
     {
         get => cooldownDodge;
         set => cooldownDodge = Mathf.Clamp(value, 1f, 5f); // 범위 제한
     }
+    public float dodgeSpeed;             // 회피 속도
+    public float dodgeTime;              // 회피 시간
+    public float dodgeInvincibleTime;    // 회피 무적 시간
+    public bool isInvincible;            // 회피 무적 적용 여부
+    public Vector2 dodgeDirection;       // 회피 방향
 
     public int maxHp = 100;
     public int curHp;
@@ -28,17 +34,16 @@ public class PlayerStat
         _conditionUI = UIManager.Instance.Game.Condition;
         _conditionUI.SetHP(1f); // UI 초기화
     }
-    //public void TakeDamage(int damage)
-    //{
-    //    ReduceHp(damage);
-    //    float ratio = (float)curHp / maxHp;
-    //    
-    //}
 
     public void HealHp(int amount)
     {
-        if (curHp + amount <= maxHp) curHp += amount;
-        else curHp = maxHp;
+        curHp = (int)Mathf.Max(curHp + amount, maxHp);
+        Debug.Log($"플레이어 체력: {curHp}/{maxHp}");
+
+        // UI 갱신
+        float ratio = curHp / (float)maxHp;
+        _conditionUI.SetHP(ratio);
+        UIManager.Instance.Game.Condition.SetHP(ratio);
     }
 
     public void ReduceHp(float amount)
