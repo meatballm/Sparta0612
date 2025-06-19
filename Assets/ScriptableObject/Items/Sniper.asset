@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c06e2ca0c1a50d46bf6714739d8c10f, type: 3}
   m_Name: Sniper
   m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: b3b2f0c8da23bf344a7031afc86f3f43, type: 2}
   itemName: Sniper
   itemIcon: {fileID: -1332121342, guid: b55ae5113f996624fac2596f06c67517, type: 3}
   itemType: 0
   description: "\uC2A4\uB098\uC774\uD37C \uACF5\uACA9\uB825 +35"
   defaultCount: 1
+  canStack: 0
+  maxStackAmount: 0
   defaultAmmo: 20
   maxAmmo: 30
-  restoreAmount: 0
+  consumableType: 0
+  healAmount: 0
+  speedUpDuration: 0
+  speedUpValue: 0

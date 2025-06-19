@@ -28,6 +28,9 @@ public class RangeAttack : MonoBehaviour
 
     private void Start()
     {
+        if (weaponData != null)
+            ApplyWeaponData(weaponData);
+
         // 기준 데이터에서 복사
         runtimeStats = new RangeAttackInstance(weaponData, this);
         curAmmo = weaponData.maxAmmo;
@@ -45,6 +48,13 @@ public class RangeAttack : MonoBehaviour
             Fire();
             fireCooldown = 1f / weaponData.fireRate;
         }
+    }
+
+    public void ApplyWeaponData(WeaponData newWeapon)
+    {
+        weaponData = newWeapon;
+        curAmmo = weaponData.maxAmmo;
+        fireCooldown = 0f;
     }
 
     private void Fire()
@@ -66,13 +76,13 @@ public class RangeAttack : MonoBehaviour
             // 탄환 생성 및 초기화
             Bullet bullet = bulletGO.GetComponent<Bullet>();
             bullet.Initialize(
-                damagePerShot,
-                bulletSpeed,
-                bulletRange,
-                pierceCount,
-                direction,
-                targetTag
-            );
+     weaponData.damagePerShot,
+     weaponData.bulletSpeed,
+     weaponData.bulletRange,
+     (ushort)weaponData.bulletsPerShot,
+     direction,
+     weaponData.targetTag
+ );
         }
 
         if (curAmmo > 0)
@@ -95,7 +105,7 @@ public class RangeAttack : MonoBehaviour
 
         yield return new WaitForSeconds(weaponData.reloadSpeed);
 
-        curAmmo = (uint)weaponData.maxAmmo;
+        curAmmo = weaponData.maxAmmo;
         isReloading = false;
     }
 

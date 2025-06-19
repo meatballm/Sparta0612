@@ -1,4 +1,5 @@
-﻿using System.Transactions;
+﻿using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
 
 public enum TargetTag
@@ -20,11 +21,18 @@ public class Bullet : MonoBehaviour
     private float range;
     private ushort pierceCount;
     private Vector2 direction;
+    private float traveled;
 
     private float traveledDistance = 0f;
 
     // RangeAttack에서 발사 시 넘겨주는 초기값 설정
-    public void Initialize(uint damage, float speed, float range, ushort pierceCount, Vector2 direction, string targetTag)
+    public void Initialize(
+    uint damage,
+    float speed,
+    float range,
+    ushort pierceCount,
+    Vector2 direction,
+    string targetTag)
     {
         this.damage = damage;
         this.speed = speed;
@@ -32,6 +40,7 @@ public class Bullet : MonoBehaviour
         this.pierceCount = pierceCount;
         this.direction = direction.normalized;
         this.targetTag = targetTag;
+        this.traveled = 0f;
     }
 
     private void Update()
@@ -39,12 +48,9 @@ public class Bullet : MonoBehaviour
         float distance = speed * Time.deltaTime;
         transform.Translate(direction * distance, Space.World);
         traveledDistance += distance;
-
+        traveled += distance;
         // 사거리 초과 시 파괴
-        if (traveledDistance >= range)
-        {
-            Destroy(gameObject);
-        }
+        if (traveled >= range) Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

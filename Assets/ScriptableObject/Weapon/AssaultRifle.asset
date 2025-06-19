@@ -12,9 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460f151edb5cd6041bd35f5a62c0de11, type: 3}
   m_Name: AssaultRifle
   m_EditorClassIdentifier: 
+  weaponType: 0
   maxAmmo: 30
   fireRate: 10
   bulletsPerShot: 1
   reloadSpeed: 3
   spread: 10
   targetTag: Enemy
+  damagePerShot: 20
+  bulletSpeed: 5
+  bulletRange: 10
+  pierceCount: 3

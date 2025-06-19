@@ -202,24 +202,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3966be99de17c624ab93db91573cb831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponRenderer: {fileID: 0}
-  weaponPivot: {fileID: 4643933882478689227}
-  moveSpeed: 5
   _camera: {fileID: 3729617517949231363}
   stats:
-    maxHp: 30
+    maxHp: 100
     curHp: 0
     maxStamina: 100
     curStamina: 0
     consumeStamina: 40
     reproductionStamina: 2
+    staminaDecreaseRate: 15
+    staminaRecoverRate: 20
   playerAnimation: {fileID: 6393277187827456828}
   canDodge: 0
   isInvincible: 0
   dodgeSpeed: 10
   dodgeTime: 1
-  dodgeInvincibleTime: 0.1
   dodgeDirection: {x: 0, y: 0}
+  weaponRenderer: {fileID: 1344631045362311463}
+  weaponPivot: {fileID: 4643933882478689227}
+  moveSpeed: 5
+  rangeAttack: {fileID: 0}
+  weaponPiv: {fileID: 4643933882478689227}
 --- !u!114 &8091251616149894952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,7 +324,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.43137258, g: 0.9686275, b: 0.69803923, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -616,6 +619,11 @@ PrefabInstance:
 --- !u!4 &519638856235448094 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7979278033564207209, guid: 12c97fa3867cfaa408719090629007d2, type: 3}
+  m_PrefabInstance: {fileID: 7604952292358061943}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1344631045362311463 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8872972107525594704, guid: 12c97fa3867cfaa408719090629007d2, type: 3}
   m_PrefabInstance: {fileID: 7604952292358061943}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8569563110678060570

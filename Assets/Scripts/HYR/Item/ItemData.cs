@@ -19,6 +19,9 @@ public enum ConsumableType
 
 public class ItemData : ScriptableObject
 {
+    [Header("Weapon")]
+    public WeaponData weaponData;
+
     [Header("Default")]
     public string itemName;
     public Sprite itemIcon;
@@ -32,7 +35,6 @@ public class ItemData : ScriptableObject
 
     [Header("Ammo")]
     public int defaultAmmo;
-    public int maxAmmo;
 
     [Header("Consumable")]
     public ConsumableType consumableType;

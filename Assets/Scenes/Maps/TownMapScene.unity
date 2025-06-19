@@ -131,25 +131,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2545214978225051373, guid: 50704a7e9252b05418ab12af87069585, type: 3}
-      propertyPath: stats.maxHp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2545214978225051373, guid: 50704a7e9252b05418ab12af87069585, type: 3}
-      propertyPath: weaponRenderer
-      value: 
-      objectReference: {fileID: 119406956}
-    - target: {fileID: 3729617517949231363, guid: 50704a7e9252b05418ab12af87069585, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0.69803923
-      objectReference: {fileID: 0}
-    - target: {fileID: 3729617517949231363, guid: 50704a7e9252b05418ab12af87069585, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0.9686275
-      objectReference: {fileID: 0}
-    - target: {fileID: 3729617517949231363, guid: 50704a7e9252b05418ab12af87069585, type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0.43137258
+    - target: {fileID: 1244135695153020749, guid: 50704a7e9252b05418ab12af87069585, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3801794280516995681, guid: 50704a7e9252b05418ab12af87069585, type: 3}
       propertyPath: m_Name
@@ -200,11 +184,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50704a7e9252b05418ab12af87069585, type: 3}
---- !u!212 &119406956 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 1344631045362311463, guid: 50704a7e9252b05418ab12af87069585, type: 3}
-  m_PrefabInstance: {fileID: 119406955}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &143723237
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24761,6 +24740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameoverPanel: {fileID: 1896635327}
+  gameover: 0
 --- !u!1001 &1289658214
 PrefabInstance:
   m_ObjectHideFlags: 0

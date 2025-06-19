@@ -86,4 +86,33 @@ public class SubInventorySlot : MonoBehaviour
 
         SetSelected(true);
     }
+
+    public void Refresh(Item item)
+    {
+        itemIcon.sprite = item.Data.itemIcon;
+        itemIcon.gameObject.SetActive(true);
+
+        // 무기일 경우 탄환 수를 표시
+        if (item.Data.itemType == ItemType.Weapon)
+        {
+            PlayerController player = PlayerController.Instance;
+            RangeAttack equippedWeapon = player.GetEquippedWeapon();
+            if (equippedWeapon != null && equippedWeapon.weaponData == item.Data.weaponData)
+            {
+                countText.text = equippedWeapon.curAmmo.ToString();
+            }
+            else
+            {
+                if (item.Data is WeaponData weaponData)
+                    countText.text = weaponData.maxAmmo.ToString();
+                else
+                    countText.text = "";
+            }
+        }
+        else
+        {
+            // 소모품/기타 아이템은 아이템 개수 표시
+            countText.text = item.Count > 1 ? item.Count.ToString() : "";
+        }
+    }
 }

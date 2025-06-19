@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
 
     public RangeAttack rangeAttack;
 
+    [SerializeField] private Transform weaponPiv;
+
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -188,5 +190,40 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(duration);
         moveSpeed -= value;
         speedBuffCoroutine = null;
+    }
+
+    public void EquipWeaponVisual(string weaponName)
+    {
+        // WeaponPivot 아래 모든 무기 비활성화
+        foreach (Transform child in weaponPivot)
+        {
+            child.gameObject.SetActive(false);
+        }
+        // 무기 이름에 맞는 무기만 활성화
+        Transform weapon = weaponPivot.Find(weaponName);
+        if (weapon != null)
+        {
+            weapon.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning($"Weapon {weaponName} not found!");
+        }
+    }
+
+    public RangeAttack GetEquippedWeapon()
+    {
+        foreach (Transform child in weaponPivot)
+        {
+            if (child.gameObject.activeSelf)
+            {
+                RangeAttack rangeAttack = child.GetComponent<RangeAttack>();
+                if (rangeAttack != null)
+                {
+                    return rangeAttack;
+                }
+            }
+        }
+        return null;
     }
 }

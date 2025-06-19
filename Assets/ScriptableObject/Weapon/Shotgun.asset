@@ -12,9 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460f151edb5cd6041bd35f5a62c0de11, type: 3}
   m_Name: ShotGun
   m_EditorClassIdentifier: 
+  weaponType: 0
   maxAmmo: 3
   fireRate: 7
   bulletsPerShot: 5
   reloadSpeed: 1.5
   spread: 50
   targetTag: Enemy
+  damagePerShot: 30
+  bulletSpeed: 10
+  bulletRange: 5
+  pierceCount: 5

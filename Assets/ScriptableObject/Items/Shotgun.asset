@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c06e2ca0c1a50d46bf6714739d8c10f, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: 4c11b72de38fc30468f066a2bbe6cd44, type: 2}
   itemName: Shotgun
   itemIcon: {fileID: -188043702, guid: b55ae5113f996624fac2596f06c67517, type: 3}
   itemType: 0
   description: "\uC0F7\uAC74 \uACF5\uACA9\uB825 +30"
   defaultCount: 1
+  canStack: 0
+  maxStackAmount: 0
   defaultAmmo: 30
   maxAmmo: 30
-  restoreAmount: 0
+  consumableType: 0
+  healAmount: 0
+  speedUpDuration: 0
+  speedUpValue: 0

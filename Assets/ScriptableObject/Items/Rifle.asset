@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c06e2ca0c1a50d46bf6714739d8c10f, type: 3}
   m_Name: Rifle
   m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: df9a443a8484244408c4b1d2368fb2d4, type: 2}
   itemName: Rifle
   itemIcon: {fileID: -830952979, guid: b55ae5113f996624fac2596f06c67517, type: 3}
   itemType: 0

@@ -144,5 +144,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 8bf7df0af7d428b42a744142321fef15, type: 2}
-  pickupIcon: {fileID: 0}
+  pickupIcon: {fileID: 941310567926553482, guid: 89f16979810bc724cb9210ef795f646a, type: 3}
   weaponData: {fileID: 0}

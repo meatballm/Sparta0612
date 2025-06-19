@@ -29,8 +29,9 @@ public class SubInventory : MonoBehaviour
     [SerializeField] private float visibleY = 5f; // 초기 위치
     [SerializeField] private float hiddenY = -115f; // 화면 밖 위치
     [SerializeField] private float duration = 0.3f;
-    
+
     private List<Item> items = new List<Item>();
+    public List<Item> slot = new List<Item>();
     private int currentSelectedIndex = -1;
     private bool isVisible = true;
 
@@ -154,14 +155,13 @@ public class SubInventory : MonoBehaviour
     private void EquipWeapon(Item item)
     {
         // 무기 데이터 연결
-        WeaponData weaponData = Resources.Load<WeaponData>("WeaponData/" + item.Data.itemName);
-        if (weaponData == null)
+        if (item.Data.itemType == ItemType.Weapon && item.Data.weaponData != null)
         {
-            Debug.LogWarning("무기 데이터가 없습니다: " + item.Data.itemName);
-            return;
+            // 플레이어 RangeAttack 컴포넌트에 연결
+            PlayerController.Instance.rangeAttack.SetWeaponData(item.Data.weaponData);
+            PlayerController.Instance.EquipWeaponVisual(item.Data.weaponData.name);
+            Debug.Log($"{item.Data.itemName} 장착됨!");
         }
-
-        PlayerController.Instance.rangeAttack.SetWeaponData(weaponData);
     }
 
     private void UpdateSlotHighlight()
@@ -171,5 +171,10 @@ public class SubInventory : MonoBehaviour
             bool active = (i == currentSelectedIndex);
             slots[i].SetSelected(active);
         }
+    }
+
+    public void AddItem(ItemData data, int count = 1, int ammo = 0)
+    {
+        slot.Add(new Item(data, count, ammo));
     }
 }
