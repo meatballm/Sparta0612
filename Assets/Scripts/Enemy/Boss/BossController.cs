@@ -11,10 +11,12 @@ public interface IBossPattern
 
 public class BossController : MonoBehaviour
 {
+    public BossCondition bossCondition;
     public Transform player;
     public float moveSpeed = 2f;
     public int damage = 10;
     private float maxHp = 500;
+
     public float currentHp { get; private set;}
 
     [Header("공격패턴 프리팹")]
@@ -36,7 +38,13 @@ public class BossController : MonoBehaviour
     {
         currentHp = maxHp;
         Debug.Log($"보스 체력 : {currentHp}");
-        
+
+        if (bossCondition != null)
+        {
+            bossCondition.SetMaxHp(maxHp);
+            bossCondition.Show(true); // 보스 시작할 때 켜기
+        }
+
         player = GameObject.FindWithTag("Player").transform;
         animator = GetComponentInChildren<Animator>();
         playerStat =  GameObject.FindWithTag("Player").GetComponent<PlayerController>().stats;
@@ -65,6 +73,11 @@ public class BossController : MonoBehaviour
         currentHp -= dmg;
         Debug.Log($"보스체력{currentHp}");
         if (currentHp < 0) currentHp = 0;
+        if (bossCondition != null)
+            bossCondition.UpdateHp(currentHp);
+
+        if (currentHp <= 0 && bossCondition != null)
+            bossCondition.Show(false);
     }
 
     private void UpdatePattern()

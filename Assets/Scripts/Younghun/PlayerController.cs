@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private SpriteRenderer weaponRenderer; // 좌우 반전을 위한 렌더러
     [SerializeField] private Transform weaponPivot; // 무기를 회전시킬 기준 위치
+    [SerializeField] private Transform weaponPiv;
 
     private Vector2 movementDirection = Vector2.zero; // 현재 이동 방향
     private Vector2 lookDirection = Vector2.zero; // 현재 바라보는 방향
@@ -33,7 +34,8 @@ public class PlayerController : MonoBehaviour
 
     public RangeAttack rangeAttack;
 
-    [SerializeField] private Transform weaponPiv;
+    private Vector2 lastFootstepPos; // 마지막 발소리의 포지션
+    private float footstepDistance = 1.5f; // 발소리 발생 거리 기준
 
     void Awake()
     {
@@ -59,6 +61,8 @@ public class PlayerController : MonoBehaviour
         stats.Start();
         playerAnimation.SetStat(stats);
         canDodge = true;
+
+        lastFootstepPos = transform.position; // 발소리 초기위치 설정
     }
 
     void FixedUpdate()
@@ -109,6 +113,7 @@ public class PlayerController : MonoBehaviour
         canDodge = true;
 
         stats.ReduceStamina(stats.consumeStamina);
+        
     }
 
     private void Movment(Vector2 direction)
@@ -123,6 +128,15 @@ public class PlayerController : MonoBehaviour
 
         // 실제 물리 이동
         _rigidbody.velocity = direction;
+
+        // 이동 거리 검사 후 발자국 사운드 출력
+        float movedDistance = Vector2.Distance(lastFootstepPos, transform.position);
+        if (movedDistance >= footstepDistance)
+        {
+            AudioManager.Instance.PlayWalk(Random.Range(0, 6)); // 예: 발소리 재생
+            lastFootstepPos = transform.position;
+        }
+        
     }
 
     private void Rotate(Vector2 direction)
