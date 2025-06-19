@@ -91,7 +91,7 @@ public class RangeAttack : MonoBehaviour
     {
         
         if (!isReloading) StartCoroutine(Reloading());
-        AudioManager.Instance.PlaySFX(8);
+        AudioManager.Instance.PlaySFX(5);
         
     }
 

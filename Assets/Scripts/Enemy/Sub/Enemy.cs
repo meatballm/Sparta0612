@@ -83,6 +83,7 @@ public class Enemy : MonoBehaviour
     {
         if(dead) return;
         enemyHP -= amount;
+        AudioManager.Instance.PlaySFX(Random.Range(6, 9));
 
         if (enemyCondition != null)
         {
