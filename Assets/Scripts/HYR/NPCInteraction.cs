@@ -1,21 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening.Core.Easing;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
 
 public class NPCInteraction : MonoBehaviour
 {
     [SerializeField] private GameObject outline;
     [SerializeField] private GameObject talkIcon;
+    [SerializeField] private GameObject talkUI;
     [SerializeField] private SubInventory inventory;
 
     private bool isPlayerNearby = false;
     private bool isTalking = false;
 
+    private void Awake()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
     private void Start()
     {
         outline.SetActive(false);
         talkIcon.SetActive(false);
+        if (talkUI != null) talkUI.SetActive(false);
     }
 
     private void Update()
@@ -34,21 +43,31 @@ public class NPCInteraction : MonoBehaviour
         Debug.Log("대화중");
 
         string npcName = "고양이";
-        var lines = new List<string> { "야옹~ 냐아옹~" };
+        List<DialogLine> lines = new List<DialogLine>
+        {
+            new DialogLine("냐오옹~ 냐아..", true),
+            new DialogLine("꼬리를 바닥에 치고 있다. 배가 고파보인다. 먹을만한걸 구해다주자.", false)
+        };
 
         if (inventory.HasItem("Fish"))
         {
-            lines.Add("꼬리를 바닥에 치고 있다.\n배가 고파보인다.");
+            lines.Add(new DialogLine("꼬리를 바닥에 치고 있다.\n배가 고파보인다.", false));
+            // 선택지 버튼 활성화 및 엔딩씬 전환
             UIManager.Instance.Game.Dialog.StartDialog(npcName, lines, true, "생선을 준다.", () =>
             {
-                isTalking = false; // 선택지 클릭 후 대화 종료
+                SceneManager.LoadScene("EndingScene");
+                AudioManager.Instance.PlayBGM(1);
+                //GameObject.Find("GameUI").SetActive(false);
+                Destroy(GameObject.Find("UI"));
+                Destroy(GameObject.FindWithTag("Player"));
             });
         }
         else
         {
+            // 선택지 버튼 없으면
             UIManager.Instance.Game.Dialog.StartDialog(npcName, lines, false, "", () =>
             {
-                isTalking = false; // 대사 끝난 후 대화 재시작 가능
+                isTalking = false;
             });
         }
     }
@@ -60,6 +79,7 @@ public class NPCInteraction : MonoBehaviour
             isPlayerNearby = true;
             outline.SetActive(true);
             talkIcon.SetActive(true);
+            if (talkUI != null) talkUI.SetActive(true);
         }
     }
 
@@ -70,6 +90,12 @@ public class NPCInteraction : MonoBehaviour
             isPlayerNearby = false;
             outline.SetActive(false);
             talkIcon.SetActive(false);
+            if (talkUI != null) talkUI.SetActive(false);
         }
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        talkUI = Resources.FindObjectsOfTypeAll<GameObject>().FirstOrDefault(go => go.name == "TalkUI");
+        inventory = FindObjectOfType<SubInventory>(true);
     }
 }

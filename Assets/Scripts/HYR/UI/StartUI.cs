@@ -19,7 +19,8 @@ public class StartUI : MonoBehaviour
 
     private void OnStart()
     {
-        SceneManager.LoadScene("Yerim");
+        SceneManager.LoadScene("TownMapScene");
+        AudioManager.Instance.PlayBGM(5);
     }
 
     private void OnSettings()

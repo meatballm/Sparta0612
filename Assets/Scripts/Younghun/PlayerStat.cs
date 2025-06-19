@@ -1,61 +1,104 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
+using System;
+using Unity.Mathematics;
 
 [System.Serializable]
-public class PlayerStat : IDamageable
+public class PlayerStat
 {
-    [SerializeField] private bool canDodge;
-    [SerializeField] private float cooldownDodge;
-    public float CooldownDodge
-    {
-        get => cooldownDodge;
-        set => cooldownDodge = Mathf.Clamp(value, 1f, 5f); // 범위 제한
-    }
+    public event Action OnDeath;
 
-    public int maxHp = 100;
-    public int curHp;
+    public int maxHp = 100;                 // 최대 체력
+    public int curHp;                       // 현재 체력
+    public float maxStamina = 100;          // 최대 스테미나
+    public float curStamina;                // 현재 스테미나
+    public int consumeStamina = 40;         // 스테미나 사용량
+    public float reproductionStamina = 2;   // 스테미나 회복력
+
+    public float staminaDecreaseRate = 15f; // 스테미나 감소
+    public float staminaRecoverRate = 20f;  // 스테미나 회복
 
     private ConditionUI _conditionUI;
 
     public void Start()
     {
         curHp = maxHp;
+        curStamina = maxStamina;
         _conditionUI = UIManager.Instance.Game.Condition;
-        _conditionUI.SetHP(1f); // UI 초기화
+        _conditionUI.SetHP(1f);
+        _conditionUI.SetStamina(1f);
     }
-    public void TakeDamage(int damage)
+
+    public void Updatd()
     {
-        ReduceHp(damage);
-        float ratio = (float)curHp / maxHp;
-        _conditionUI.SetHP(ratio);
+        if (curStamina < maxStamina)
+        {
+            RecoverStamina(reproductionStamina * Time.deltaTime);
+            
+            if (curStamina > maxStamina)
+            {
+                curStamina = maxStamina;
+            }
+        } 
     }
 
     public void HealHp(int amount)
     {
-        if (curHp + amount <= maxHp) curHp += amount;
-        else curHp = maxHp;
+        curHp = (int)Mathf.Max(curHp + amount, maxHp);
+
+        // UI 갱신
+        float ratio = curHp / (float)maxHp;
+        _conditionUI.SetHP(ratio);
+        UIManager.Instance.Game.Condition.SetHP(ratio);
     }
 
     public void ReduceHp(float amount)
     {
         curHp = (int)Mathf.Max(curHp - amount, 0);
-        Debug.Log($"플레이어 체력: {curHp}/{maxHp}");
+
+        AudioManager.Instance.PlaySFX(UnityEngine.Random.Range(9, 11));
 
         // UI 갱신
         float ratio = curHp / (float)maxHp;
+        _conditionUI.SetHP(ratio);
         UIManager.Instance.Game.Condition.SetHP(ratio);
 
-        if (curHp == 0)
+
+        if (curHp <= 0)
         {
             Death();
         }
     }
 
-    public void Death()
+    public void RecoverStamina(float amount)
     {
-        Debug.Log("게임오버");
+        curStamina += amount;
     }
 
+    public void ReduceStamina(float amount)
+    {
+        curStamina = (int)Mathf.Max(curStamina - amount, 0);
+    }
+
+    public void UpdateStamina(float moveInputMagnitude, float deltaTime)
+    {
+        if (moveInputMagnitude > 0.1f)
+        {
+            curStamina = Mathf.Max(curStamina - (staminaDecreaseRate * deltaTime), 0f);
+        }
+        else
+        {
+            curStamina = Mathf.Min(curStamina + (staminaRecoverRate * deltaTime), maxStamina);
+        }
+
+        // UI 연동
+        float ratio = curStamina / maxStamina;
+        _conditionUI.SetStamina(ratio);
+    }
+
+    public void Death()
+    {
+        OnDeath?.Invoke();
+        UIScript.Instance.Gameover();
+        Debug.Log("게임오버");
+    }
 }

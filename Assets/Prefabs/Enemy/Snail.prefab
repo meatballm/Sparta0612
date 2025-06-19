@@ -116,6 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1710441848237519157}
   - component: {fileID: 5319040980347063682}
+  - component: {fileID: 1434692136387519750}
   - component: {fileID: 8689574456605188360}
   - component: {fileID: 4729338057136780909}
   m_Layer: 0
@@ -155,7 +156,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  maxHP: 0
   enemyHP: 0
+  damageUIPrefab: {fileID: 2569034621904609710, guid: efa6484be56b013449a9dcfae35ac070, type: 3}
+  canvasTransform: {fileID: 8849106709070132177, guid: 1094e9510250be84d8226cf6e445b804, type: 3}
+--- !u!114 &1434692136387519750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9162694089407552866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22049623a166de48b4e2b13ae64285e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBarPrefab: {fileID: 7308710296128370688, guid: f7f164dbd102bd6458609a01dd33573f, type: 3}
+  offsetY: -1
 --- !u!61 &8689574456605188360
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -188,7 +206,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.010459125, y: 0.3582261}
+  m_Offset: {x: -0.013382137, y: 0.34356362}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -199,7 +217,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6809958, y: 0.7228325}
+  m_Size: {x: 0.7566016, y: 0.7518953}
   m_EdgeRadius: 0
 --- !u!50 &4729338057136780909
 Rigidbody2D:
@@ -227,4 +245,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

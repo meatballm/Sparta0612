@@ -12,7 +12,7 @@ public enum TargetTag
 // 탄환의 움직임, 충돌 처리 및 생존 시간 관리를 담당
 public class Bullet : MonoBehaviour
 {
-    private TargetTag targetTag;
+    private string targetTag;
     Enemy enemy;
 
     private uint damage;
@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
     private float traveledDistance = 0f;
 
     // RangeAttack에서 발사 시 넘겨주는 초기값 설정
-    public void Initialize(uint damage, float speed, float range, ushort pierceCount, Vector2 direction, TargetTag targetTag)
+    public void Initialize(uint damage, float speed, float range, ushort pierceCount, Vector2 direction, string targetTag)
     {
         this.damage = damage;
         this.speed = speed;
@@ -50,10 +50,16 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         enemy = other.GetComponentInParent<Enemy>();
+        BossController boss = other.GetComponent<BossController>();
 
         if(other.CompareTag("Enemy"))
         {
-            enemy.TakeDamage(20);
+            enemy.TakeDamage(damage);
+            Destroy(gameObject);
+        }
+        else if (other.CompareTag("Boss"))
+        {
+            boss.TakeDamage(damage);
             Destroy(gameObject);
         }
         else

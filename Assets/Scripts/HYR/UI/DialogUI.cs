@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using DG.Tweening;
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class DialogUI : MonoBehaviour
@@ -12,10 +13,11 @@ public class DialogUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogText;
     [SerializeField] private Button choiceButton;
+    [SerializeField] private GameObject bg;
 
     [SerializeField] private float typingSpeed = 0.05f;
 
-    private Queue<string> sentences = new Queue<string>();
+    private Queue<DialogLine> sentences = new Queue<DialogLine>();
     private System.Action onDialogComplete;
     private bool isTyping = false;
     private bool isShowing = false;
@@ -26,17 +28,19 @@ public class DialogUI : MonoBehaviour
         nameText.gameObject.SetActive(false);
         dialogText.gameObject.SetActive(false);
         choiceButton.gameObject.SetActive(false);
+        bg.gameObject.SetActive(false);
     }
 
-    public void StartDialog(string npcName, List<string> lines, bool showChoice = false, string choiceText = "", System.Action onComplete = null)
+    public void StartDialog(string npcName, List<DialogLine> lines, bool showChoice = false, string choiceText = "", System.Action onComplete = null)
     {
         dialogPanel.gameObject.SetActive(true);
         nameText.gameObject.SetActive(true);
         dialogText.gameObject.SetActive(true);
+        bg.gameObject.SetActive(true);
 
         nameText.text = npcName;
         sentences.Clear();
-        foreach (string line in lines)
+        foreach (DialogLine line in lines)
             sentences.Enqueue(line);
 
         ShowPanel();
@@ -67,9 +71,13 @@ public class DialogUI : MonoBehaviour
             return;
         }
 
-        string nextLine = sentences.Dequeue();
-        StartCoroutine(TypeSentence(nextLine));
+        DialogLine nextLine = sentences.Dequeue();
+        // 이름 태그 보임/숨김 처리
+        nameText.gameObject.SetActive(nextLine.showNameTag);
+
+        StartCoroutine(TypeSentence(nextLine.text));
     }
+
 
     IEnumerator TypeSentence(string sentence)
     {
@@ -101,6 +109,7 @@ public class DialogUI : MonoBehaviour
             nameText.gameObject.SetActive(false);
             dialogText.gameObject.SetActive(false);
             choiceButton.gameObject.SetActive(false);
+            bg.gameObject.SetActive(false);
 
             onDialogComplete?.Invoke();
         });

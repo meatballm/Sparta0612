@@ -16,7 +16,7 @@ public class DamageUI : MonoBehaviour
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
-        canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        canvasGroup = GetComponent<CanvasGroup>();
     }
 
     /// <summary>

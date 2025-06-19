@@ -14,22 +14,28 @@ public class EnemyCondition : MonoBehaviour
 
     private void Start()
     {
-        // Canvas 하위 프리팹 인스턴스 생성
+        // C하위 프리팹 인스턴스 생성
         hpBarInstance = Instantiate(
             hpBarPrefab,
             Vector3.zero,
             Quaternion.identity,
-            GameObject.Find("Canvas").transform
+            GameObject.Find("UI").transform
         );
 
         // fillAmount로 체력바 이미지 연결
-        hpFillImage = hpBarInstance.transform.Find("Bar/Fill_H").GetComponent<Image>();
-        if (hpFillImage == null)
-            Debug.LogError("Fill_H 이미지를 찾지 못했습니다!");
+        hpFillImage = hpBarInstance.transform.Find("Fill_H").GetComponent<Image>();
 
         hpBarInstance.SetActive(false);
 
         hpBarCanvas = hpBarInstance.GetComponentInParent<Canvas>();
+    }
+
+    private void Update() 
+    {
+        if (UIScript.Instance.gameover)
+        {
+            HideAndDestroyBar();
+        }
     }
 
     // 체력바 갱신
@@ -39,10 +45,6 @@ public class EnemyCondition : MonoBehaviour
         {
             float ratio = (float)currentHP / maxHP;
             hpFillImage.fillAmount = Mathf.Clamp01(ratio);
-
-            // 처음 데미지 입으면 체력바 활성화
-            if (!hpBarInstance.activeSelf)
-                hpBarInstance.SetActive(true);
         }
     }
 
@@ -60,7 +62,18 @@ public class EnemyCondition : MonoBehaviour
         {
             Vector3 worldPos = transform.position + new Vector3(0, offsetY, 0);
             Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
-            hpBarInstance.transform.position = screenPos;
+            hpBarInstance.GetComponent<RectTransform>().position = screenPos;
         }
+    }
+
+    public void ShowHealthBar()
+    {
+        if (hpBarInstance != null && !hpBarInstance.activeSelf)
+            hpBarInstance.SetActive(true);
+    }
+
+    public bool IsBarActive()
+    {
+        return hpBarInstance != null && hpBarInstance.activeSelf;
     }
 }

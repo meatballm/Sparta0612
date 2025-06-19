@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2426183110101894484}
   - component: {fileID: 3381177816772410467}
+  - component: {fileID: 7092563885009010694}
   - component: {fileID: 2127817230462912851}
   - component: {fileID: 4719882809945441028}
   m_Layer: 0
@@ -49,7 +50,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  maxHP: 0
   enemyHP: 0
+  damageUIPrefab: {fileID: 2569034621904609710, guid: efa6484be56b013449a9dcfae35ac070, type: 3}
+  canvasTransform: {fileID: 8849106709070132177, guid: 1094e9510250be84d8226cf6e445b804, type: 3}
+--- !u!114 &7092563885009010694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4690582612283613858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22049623a166de48b4e2b13ae64285e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBarPrefab: {fileID: 7308710296128370688, guid: f7f164dbd102bd6458609a01dd33573f, type: 3}
+  offsetY: -1
 --- !u!61 &2127817230462912851
 BoxCollider2D:
   m_ObjectHideFlags: 0

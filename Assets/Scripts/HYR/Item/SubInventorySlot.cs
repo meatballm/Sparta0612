@@ -17,6 +17,11 @@ public class SubInventorySlot : MonoBehaviour
     {
         // 인덱스 기반으로 숫자 1부터
         selectText.text = (transform.GetSiblingIndex() + 1).ToString();
+
+        // 초기 상태! 아이콘, 개수, 하이라이트 비활성화
+        if (itemIcon != null) itemIcon.enabled = false;
+        if (countText != null) countText.enabled = false;
+        if (highlight != null) highlight.enabled = false;
     }
 
     // 슬롯 버튼 이벤트 등록(클릭 선택)
@@ -37,10 +42,11 @@ public class SubInventorySlot : MonoBehaviour
 
             // 무기일 경우: 탄환 수, 기타 아이템은 개수 표시
             countText.text = item.Data.itemType == ItemType.Weapon
-           ? item.Ammo.ToString()
-           : item.Count.ToString();
+            ? item.Ammo.ToString()
+            : item.Count.ToString();
 
             countText.enabled = true;
+            highlight.enabled = false;
         }
         else
         {
@@ -78,6 +84,6 @@ public class SubInventorySlot : MonoBehaviour
         int index = transform.GetSiblingIndex();
         inventory.SelectSlot(index);
 
-        //SetSelected(true);
+        SetSelected(true);
     }
 }

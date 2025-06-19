@@ -15,7 +15,13 @@ MonoBehaviour:
   itemName: Fish
   itemIcon: {fileID: 21300000, guid: e86051b44603b5745adec74259c94545, type: 3}
   itemType: 2
-  defaultAmmo: 0
+  description: "\uACE0\uC591\uC774\uAC00 \uC88B\uC544\uD558\uB294 \uC0DD\uC120\uC785\uB2C8\uB2E4."
   defaultCount: 0
+  canStack: 0
+  maxStackAmount: 1
+  defaultAmmo: 0
   maxAmmo: 0
-  restoreAmount: 0
+  consumableType: 0
+  healAmount: 0
+  speedUpDuration: 0
+  speedUpValue: 0

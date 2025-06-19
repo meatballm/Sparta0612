@@ -17,3 +17,4 @@ MonoBehaviour:
   bulletsPerShot: 1
   reloadSpeed: 3
   spread: 10
+  targetTag: Enemy

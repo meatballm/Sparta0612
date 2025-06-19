@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimation : MonoBehaviour
@@ -9,6 +10,9 @@ public class PlayerAnimation : MonoBehaviour
 
     private Vector2 moveInput;
     private Vector2 lastDirection;
+
+    private PlayerStat stat;
+    private bool isDeath;
 
     private void Awake()
     {
@@ -22,6 +26,8 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Update()
     {
+        if (isDeath == true) return;
+        
         // 현재 입력값 읽기 (Input System)
         moveInput = playerInput.actions["Move"].ReadValue<Vector2>().normalized;
 
@@ -38,6 +44,32 @@ public class PlayerAnimation : MonoBehaviour
 
             animator.SetFloat("LastX", moveInput.x);
             animator.SetFloat("LastY", moveInput.y);
+        }
+    }
+
+    public void SetStat(PlayerStat stat)
+    {
+        this.stat = stat;
+
+        // 이벤트 등록
+        stat.OnDeath += Death;
+    }
+
+    private void Death()
+    {
+        isDeath = true;
+        if (animator != null)
+        {
+            animator.SetTrigger("IsDeath");
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // 이벤트 해제
+        if (stat != null)
+        {
+            stat.OnDeath -= Death;
         }
     }
 }
