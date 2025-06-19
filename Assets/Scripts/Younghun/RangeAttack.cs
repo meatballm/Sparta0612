@@ -45,6 +45,7 @@ public class RangeAttack : MonoBehaviour
 
         if (Input.GetMouseButton(0) && fireCooldown <= 0f)
         {
+            
             Fire();
             fireCooldown = 1f / weaponData.fireRate;
         }
@@ -68,6 +69,7 @@ public class RangeAttack : MonoBehaviour
             Vector2 direction = GetFireDirectionWithSpread(weaponData.spread);
 
             GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+            
 
             // 위치도 살짝 랜덤 오프셋
             Vector3 offset = firePoint.up * UnityEngine.Random.Range(-0.1f, 0.1f);
@@ -84,6 +86,7 @@ public class RangeAttack : MonoBehaviour
      weaponData.targetTag
  );
         }
+        AudioManager.Instance.PlaySFX(0);
 
         if (curAmmo > 0)
         {
@@ -96,12 +99,16 @@ public class RangeAttack : MonoBehaviour
     // curAmmo == 0 || R 누르면 재장전 코루틴 작동
     public void Reload()
     {
+        
         if (!isReloading) StartCoroutine(Reloading());
+        AudioManager.Instance.PlaySFX(5);
+        
     }
 
     private IEnumerator Reloading()
     {
         isReloading = true;
+        
 
         yield return new WaitForSeconds(weaponData.reloadSpeed);
 

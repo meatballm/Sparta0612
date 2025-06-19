@@ -34,6 +34,7 @@ public class ItemObject : MonoBehaviour
         // 아이템 획득
         SubInventory inventory = UIManager.Instance.Game.SubInventory;
         inventory.AddItem(new Item(itemData));
+        AudioManager.Instance.PlaySFX(2);
         Destroy(gameObject); // 획득 후 오브젝트 삭제
 
         if (pickupIcon != null)

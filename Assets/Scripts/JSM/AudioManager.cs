@@ -7,10 +7,12 @@ public class AudioManager : MonoBehaviour
     [Header("Audio Sources")]
     public AudioSource bgmSource;
     public AudioSource sfxSource;
+    public AudioSource walkSource;
 
     [Header("Audio Clips")]
     public AudioClip[] bgmClips;
     public AudioClip[] sfxClips;
+    public AudioClip[] walkClips;
 
     void Awake()
     {
@@ -21,6 +23,7 @@ public class AudioManager : MonoBehaviour
         }
         SetBGMVolume(0.1f);
         SetSFXVolume(0.1f);
+        SetWalkVolume(0.3f);
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -44,6 +47,12 @@ public class AudioManager : MonoBehaviour
         sfxSource.PlayOneShot(sfxClips[index]);
     }
 
+    public void PlayWalk(int index)
+    {
+        if (index < 0 || index >= walkClips.Length) return;
+        walkSource.PlayOneShot(walkClips[index]);
+    }
+
     public void SetBGMVolume(float volume)
     {
         bgmSource.volume = Mathf.Clamp01(volume); // 0~1로 제한
@@ -54,6 +63,12 @@ public class AudioManager : MonoBehaviour
         sfxSource.volume = Mathf.Clamp01(volume);
     }
 
+    public void SetWalkVolume(float volume)
+    {
+        walkSource.volume = Mathf.Clamp01(volume);
+    }
+
     public float GetBGMVolume() => bgmSource.volume;
     public float GetSFXVolume() => sfxSource.volume;
+    public float GetWalkVolume() => walkSource.volume;
 }

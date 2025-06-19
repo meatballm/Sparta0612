@@ -146,6 +146,7 @@ public class SubInventory : MonoBehaviour
             Debug.Log($"{item.Data.itemName} 사용 이동속도 증가");
         }
 
+        AudioManager.Instance.PlaySFX(3);
         item.AddCount(-1);
         if (item.Count <= 0)
             items.Remove(item);
